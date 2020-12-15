@@ -1,0 +1,21 @@
+<resources>
+  <string name="app_name">Wall Street</string>
+  <string name="logo">Logo</string>
+  <string name="login">Login</string>
+  <string name="version">version</string>
+  <string name="username">Username</string>
+  <string name="password">Password</string>
+  <string name="new_app">new app is ready</string>
+  <string name="reload_app">Reload App</string>
+  <string name="register">Register</string>
+  <string name="dont_have_account">Dont have Account ?</string>
+  <string name="forgot_password">Forgot password ?</string>
+  <string name="sponsor">Sponsor</string>
+  <string name="name">Name</string>
+  <string name="email_address">Email Address</string>
+  <string name="phone_number">Phone Number</string>
+  <string name="confirmation_password">Confirmation Password</string>
+  <string name="secondary_password">Secondary Password</string>
+  <string name="confirmation_secondary_password">Confirmation Secondary Password</string>
+  <string name="do_you_have_account">do you have account?</string>
+</resources>

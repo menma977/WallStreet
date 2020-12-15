@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="background">#BF303030</color>
+
+  <color name="colorPrimary">#fb8d10</color>
+  <color name="colorPrimaryLight">#ffbe4b</color>
+  <color name="colorPrimaryDark">#c25f00</color>
+
+  <color name="colorSecondary">#303030</color>
+  <color name="colorSecondaryLight">#595959</color>
+  <color name="colorSecondaryDark">#070707</color>
+
+  <color name="colorAccent">#fb8d10</color>
+
+  <color name="textPrimary">#ffbe4b</color>
+  <color name="textSecondary">#303030</color>
+
+  <color name="textBox">#f7f7f7</color>
+
+  <color name="Success">#26B89A</color>
+  <color name="WarningClick">#976C2F</color>
+  <color name="Danger">#D7524F</color>
+
+  <color name="White">#ffffff</color>
+
+  <color name="Dark">#4A5E71</color>
+  <color name="Link">#00FDFDFE</color>
+</resources>
