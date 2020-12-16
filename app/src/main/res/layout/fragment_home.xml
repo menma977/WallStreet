@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,15 +13,15 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="15dp"/>
+        android:layout_height="15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
       <LinearLayout
           android:id="@+id/buttonUpgrade"
@@ -38,7 +37,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/upgrade_active"/>
+            app:srcCompat="@drawable/upgrade_active" />
 
         <TextView
             android:layout_width="match_parent"
@@ -46,7 +45,7 @@
             android:text="@string/top_up"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
       </LinearLayout>
 
@@ -63,7 +62,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/ratio"/>
+            app:srcCompat="@drawable/ratio" />
 
         <TextView
             android:layout_width="match_parent"
@@ -71,7 +70,7 @@
             android:text="History"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
       </LinearLayout>
 
@@ -88,7 +87,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/history_doge"/>
+            app:srcCompat="@drawable/history_doge" />
 
         <TextView
             android:layout_width="match_parent"
@@ -96,7 +95,7 @@
             android:text="History"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
       </LinearLayout>
 
@@ -113,7 +112,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/history_boge"/>
+            app:srcCompat="@drawable/history_boge" />
 
         <TextView
             android:layout_width="match_parent"
@@ -121,7 +120,7 @@
             android:text="History"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
       </LinearLayout>
 
@@ -129,72 +128,72 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:id="@+id/notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/background"
-        android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
-        android:padding="5dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/background"
+        android:elevation="5dp"
         android:gravity="center"
-        android:elevation="5dp">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
       <ImageView
           android:layout_width="30dp"
           android:layout_height="30dp"
-          android:contentDescription="@string/icon"
           android:layout_marginEnd="10dp"
-          app:srcCompat="@android:drawable/stat_sys_warning"/>
+          android:contentDescription="@string/icon"
+          app:srcCompat="@android:drawable/stat_sys_warning" />
 
       <TextView
+          android:id="@+id/textViewNotification"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:id="@+id/textViewNotification"
           android:layout_weight="1"
-          android:textColor="@color/White"/>
+          android:textColor="@color/White" />
 
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
 
       <TextView
-          android:text="@string/app_name"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:id="@+id/textViewLevel"
-          android:textColor="@color/textSecondary"
-          android:textStyle="bold"
-          android:textAlignment="textStart"/>
-
-      <TextView
-          android:text="@string/app_name"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:id="@+id/textViewUsername"
+          android:text="@string/app_name"
+          android:textAlignment="textStart"
           android:textColor="@color/textSecondary"
-          android:textStyle="bold"
-          android:textAlignment="textEnd"/>
+          android:textStyle="bold" />
+
+      <TextView
+          android:id="@+id/textViewUsername"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/app_name"
+          android:textAlignment="textEnd"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold" />
 
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="15dp"/>
+        android:layout_height="15dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -203,147 +202,456 @@
         android:layout_marginEnd="20dp">
 
       <ProgressBar
+          android:id="@+id/progressBar"
           style="?android:attr/progressBarStyleHorizontal"
           android:layout_width="match_parent"
           android:layout_height="20dp"
-          android:id="@+id/progressBar"
-          android:progressDrawable="@drawable/progress_bar"
+          android:indeterminate="false"
           android:max="100"
           android:progress="0"
-          android:indeterminate="false"/>
+          android:progressDrawable="@drawable/progress_bar" />
 
       <TextView
           android:id="@+id/textViewProgressBar"
-          android:text="@string/zero"
-          android:background="@color/Link"
-          android:textColor="@color/White"
-          android:textStyle="bold"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:gravity="center"
-          android:textSize="10sp"
-          tools:ignore="SmallSp"
-          android:layout_alignParentBottom="true"
           android:layout_alignParentStart="true"
           android:layout_alignParentTop="true"
-          android:layout_marginBottom="5dp"
-          android:layout_marginTop="0dp"
+          android:layout_alignParentBottom="true"
           android:layout_marginStart="20dp"
-          android:layout_marginEnd="0dp"/>
+          android:layout_marginTop="0dp"
+          android:layout_marginEnd="0dp"
+          android:layout_marginBottom="5dp"
+          android:background="@color/Link"
+          android:gravity="center"
+          android:text="@string/zero"
+          android:textColor="@color/White"
+          android:textSize="10sp"
+          android:textStyle="bold"
+          tools:ignore="SmallSp" />
 
       <TextView
           android:id="@+id/textViewTarget"
-          android:text="@string/zero"
-          android:background="@color/Link"
-          android:textColor="@color/White"
-          android:textStyle="bold"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:gravity="center"
-          android:textSize="10sp"
-          tools:ignore="RelativeOverlap,SmallSp"
           android:layout_alignParentTop="true"
-          android:layout_alignParentBottom="true"
           android:layout_alignParentEnd="true"
-          android:layout_marginBottom="5dp"
-          android:layout_marginTop="0dp"
+          android:layout_alignParentBottom="true"
           android:layout_marginStart="0dp"
-          android:layout_marginEnd="20dp"/>
+          android:layout_marginTop="0dp"
+          android:layout_marginEnd="20dp"
+          android:layout_marginBottom="5dp"
+          android:background="@color/Link"
+          android:gravity="center"
+          android:text="@string/zero"
+          android:textColor="@color/White"
+          android:textSize="10sp"
+          android:textStyle="bold"
+          tools:ignore="RelativeOverlap,SmallSp" />
 
     </RelativeLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/card2"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:padding="10dp"
-        android:elevation="15dp">
+        android:background="@drawable/card2"
+        android:elevation="15dp"
+        android:orientation="vertical"
+        android:padding="10dp">
 
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center"
+          android:layout_height="match_parent"
           android:layout_marginStart="10dp"
           android:layout_marginEnd="10dp"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:padding="10dp"
+          android:weightSum="5"
           tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/wallet_doge_view"
+            android:id="@+id/wallet_bitcoin_view"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/outgo"/>
+            app:srcCompat="@drawable/ic_btc" />
 
         <TextView
-            android:hint="@string/zero"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewDogeBalance"
             android:layout_weight="1"
-            android:textColor="@color/colorSecondaryDark"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:text="@string/btc"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="4"
+            android:gravity="end"
+            android:orientation="vertical">
+
+          <TextView
+              android:id="@+id/textViewBitcoinBalance"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:hint="@string/zero"
+              android:textColor="@color/colorSecondaryDark"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ic_dollar"
+                android:textColor="@color/colorSecondaryLight" />
+
+            <TextView
+                android:id="@+id/btc_dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/zero"
+                android:textColor="@color/colorSecondaryLight" />
+          </LinearLayout>
+
+        </LinearLayout>
 
       </LinearLayout>
 
       <Space
           android:layout_width="match_parent"
-          android:layout_height="10dp"/>
+          android:layout_height="10dp" />
 
       <View
+          android:id="@+id/view4"
           android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/colorSecondaryDark"
+          android:layout_height="0dp"
           android:layout_marginStart="5dp"
-          android:layout_marginEnd="5dp"/>
+          android:layout_marginEnd="5dp"
+          android:background="@color/colorSecondaryDark" />
 
       <Space
           android:layout_width="match_parent"
-          android:layout_height="10dp"/>
+          android:layout_height="10dp" />
 
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center"
+          android:layout_height="match_parent"
           android:layout_marginStart="10dp"
           android:layout_marginEnd="10dp"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:padding="10dp"
+          android:weightSum="5"
           tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/wallet_dogebug_view"
+            android:id="@+id/wallet_ethereum_view"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/income"/>
+            app:srcCompat="@drawable/ic_eth" />
 
         <TextView
-            android:hint="@string/zero"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewDogeBugBalance"
             android:layout_weight="1"
-            android:textColor="@color/colorSecondaryDark"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:text="@string/eth"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="4"
+            android:gravity="end"
+            android:orientation="vertical">
+
+          <TextView
+              android:id="@+id/textViewEthereumBalance"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:hint="@string/zero"
+              android:textColor="@color/colorSecondaryDark"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ic_dollar"
+                android:textColor="@color/colorSecondaryLight" />
+
+            <TextView
+                android:id="@+id/eth_dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/zero"
+                android:textColor="@color/colorSecondaryLight" />
+          </LinearLayout>
+
+        </LinearLayout>
 
       </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
+
+      <View
+          android:id="@+id/view3"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_marginStart="5dp"
+          android:layout_marginEnd="5dp"
+          android:background="@color/colorSecondaryDark" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:padding="10dp"
+          android:weightSum="5"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/wallet_litecoin_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/ic_ltc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ltc"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="4"
+            android:gravity="end"
+            android:orientation="vertical">
+
+          <TextView
+              android:id="@+id/textViewLitecoinBalance"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:hint="@string/zero"
+              android:textColor="@color/colorSecondaryDark"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ic_dollar"
+                android:textColor="@color/colorSecondaryLight" />
+
+            <TextView
+                android:id="@+id/ltc_dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/zero"
+                android:textColor="@color/colorSecondaryLight" />
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
+
+      <View
+          android:id="@+id/view2"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_marginStart="5dp"
+          android:layout_marginEnd="5dp"
+          android:background="@color/colorSecondaryDark" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:padding="10dp"
+          android:weightSum="5"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/wallet_dogecoin_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/ic_doge" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/doge"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="4"
+            android:gravity="end"
+            android:orientation="vertical">
+
+          <TextView
+              android:id="@+id/textViewDogecoinBalance"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:hint="@string/zero"
+              android:textColor="@color/colorSecondaryDark"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ic_dollar"
+                android:textColor="@color/colorSecondaryLight" />
+
+            <TextView
+                android:id="@+id/doge_dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/zero"
+                android:textColor="@color/colorSecondaryLight" />
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
+
+      <View
+          android:id="@+id/view"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_marginStart="5dp"
+          android:layout_marginEnd="5dp"
+          android:background="@color/colorSecondaryDark" />
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
 
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/card2"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/add_new_user"
+          android:textSize="14sp"
+          android:textStyle="bold" />
+
+      <Button
+          android:id="@+id/invite"
+          android:layout_width="134dp"
+          android:layout_height="27dp"
+          android:layout_marginStart="70dp"
+          android:layout_marginEnd="70dp"
+          android:background="@drawable/button"
+          android:text="@string/invite"
+          android:textSize="10sp" />
+
+    </LinearLayout>
 
   </LinearLayout>
 
