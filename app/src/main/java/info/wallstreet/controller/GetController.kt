@@ -33,11 +33,11 @@ class GetController(private var targetUrl: String, private var token: String?, p
         }
       } else {
         return when {
-          jsonObject.toString().contains("message") -> {
-            JSONObject().put("code", 500).put("data", jsonObject.getString("message")).put("logout", false)
-          }
           jsonObject.toString().contains("errors") -> {
             JSONObject().put("code", 500).put("data", jsonObject.getJSONObject("errors").getJSONArray(jsonObject.getJSONObject("errors").names()[0].toString())[0]).put("logout", false)
+          }
+          jsonObject.toString().contains("message") -> {
+            JSONObject().put("code", 500).put("data", jsonObject.getString("message")).put("logout", false)
           }
           else -> {
             JSONObject().put("code", 500).put("data", jsonObject).put("logout", false)

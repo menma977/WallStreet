@@ -48,30 +48,33 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun onMove(token: Boolean, update: Boolean, mt: Boolean, error: Boolean) {
-    user.clear()
     when {
       token -> {
         move = Intent(applicationContext, NavigationActivity::class.java)
       }
       update -> {
+        user.clear()
         move = Intent(applicationContext, LoginActivity::class.java)
         move.putExtra("update", true)
         move.putExtra("mt", false)
         move.putExtra("lock", false)
       }
       mt -> {
+        user.clear()
         move = Intent(applicationContext, LoginActivity::class.java)
         move.putExtra("update", false)
         move.putExtra("mt", true)
         move.putExtra("lock", false)
       }
       error -> {
+        user.clear()
         move = Intent(applicationContext, LoginActivity::class.java)
         move.putExtra("update", false)
         move.putExtra("mt", false)
         move.putExtra("lock", true)
       }
       else -> {
+        user.clear()
         move = Intent(applicationContext, LoginActivity::class.java)
         move.putExtra("update", false)
         move.putExtra("mt", false)

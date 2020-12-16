@@ -1,48 +1,37 @@
 package info.wallstreet.view
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Patterns
-import android.view.View
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import info.wallstreet.R
 import info.wallstreet.config.Loading
 import info.wallstreet.controller.PostController
-import info.wallstreet.model.User
 import okhttp3.FormBody
 import java.util.*
 import kotlin.concurrent.schedule
-import kotlin.properties.Delegates
 
 open class RegistrationActivity : AppCompatActivity() {
-  private lateinit var login: Intent
-
-  protected lateinit var sponsor: EditText
-  protected lateinit var password: EditText
-  protected lateinit var password_confirm: EditText
-  protected lateinit var second_password: EditText
-  protected lateinit var second_password_confirm: EditText
-
-  protected lateinit var username: EditText
-  protected lateinit var name: EditText
-  protected lateinit var email: EditText
-  protected lateinit var phone: EditText
-
-  protected lateinit var user: User
-  protected lateinit var loading: Loading
-
-  protected var insideRegistration = false
+  private lateinit var loading: Loading
+  private lateinit var sponsor: EditText
+  private lateinit var username: EditText
+  private lateinit var name: EditText
+  private lateinit var email: EditText
+  private lateinit var phone: EditText
+  private lateinit var password: EditText
+  private lateinit var confirmPassword: EditText
+  private lateinit var secondaryPassword: EditText
+  private lateinit var confirmSecondaryPassword: EditText
+  private lateinit var register: Button
+  private lateinit var login: TextView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_registration)
 
-    user = User(this)
     loading = Loading(this)
 
     sponsor = findViewById(R.id.editTextSponsor)
@@ -51,57 +40,76 @@ open class RegistrationActivity : AppCompatActivity() {
     email = findViewById(R.id.editTextEmail)
     phone = findViewById(R.id.editTextPhone)
     password = findViewById(R.id.editTextPassword)
-    password_confirm = findViewById(R.id.editTextConfirmationPassword)
-    second_password = findViewById(R.id.editTextSecondaryPassword)
-    second_password_confirm = findViewById(R.id.editTextConfirmationSecondaryPassword)
+    confirmPassword = findViewById(R.id.editTextConfirmationPassword)
+    secondaryPassword = findViewById(R.id.editTextSecondaryPassword)
+    confirmSecondaryPassword = findViewById(R.id.editTextConfirmationSecondaryPassword)
+    register = findViewById(R.id.buttonRegister)
+    login = findViewById(R.id.textVIewLogin)
 
-    val registerBtn = findViewById<Button>(R.id.buttonRegister)
-    val toLogin = findViewById<TextView>(R.id.textVIewLogin)
+    register.setOnClickListener {
+      validation()
+    }
 
-    login = Intent(applicationContext, LoginActivity::class.java)
+    login.setOnClickListener {
+      finish()
+    }
+  }
 
-    registerBtn.setOnClickListener(View.OnClickListener {
-      loading.openDialog()
-      val validity = validation()
-      if(validity.contentEquals(""))
-        doRegister()
-      else {
+  private fun validation() {
+    loading.openDialog()
+    when {
+      sponsor.text.isEmpty() -> {
+        Toast.makeText(this, "sponsor required", Toast.LENGTH_SHORT).show()
         loading.closeDialog()
-        Toast.makeText(this, validity, Toast.LENGTH_SHORT).show()
+        sponsor.requestFocus()
       }
-    })
-
-    toLogin.setOnClickListener {
-      startActivity(login)
-      finishAffinity()
+      name.text.isEmpty() -> {
+        Toast.makeText(this, "name required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        name.requestFocus()
+      }
+      username.text.isEmpty() -> {
+        Toast.makeText(this, "username required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        username.requestFocus()
+      }
+      email.text.isEmpty() -> {
+        Toast.makeText(this, "email required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        email.requestFocus()
+      }
+      phone.text.isEmpty() -> {
+        Toast.makeText(this, "phone required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        phone.requestFocus()
+      }
+      password.text.isEmpty() -> {
+        Toast.makeText(this, "password required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        password.requestFocus()
+      }
+      confirmPassword.text.isEmpty() -> {
+        Toast.makeText(this, "confirmation password required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        confirmPassword.requestFocus()
+      }
+      secondaryPassword.text.isEmpty() -> {
+        Toast.makeText(this, "secondary password required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        secondaryPassword.requestFocus()
+      }
+      confirmSecondaryPassword.text.isEmpty() -> {
+        Toast.makeText(this, "confirmation secondary password required", Toast.LENGTH_SHORT).show()
+        loading.closeDialog()
+        confirmSecondaryPassword.requestFocus()
+      }
+      else -> {
+        onRegistration()
+      }
     }
   }
 
-  private fun validation(): String {
-    if(!insideRegistration){
-      if(TextUtils.isEmpty(sponsor.text.toString()))
-        return "Sponsor cannot be empty"
-      if(TextUtils.isEmpty(password.text.toString()) || second_password.text.toString().length < 10)
-        return "Password at least have 10 characters"
-      if(TextUtils.isEmpty(second_password.text.toString()) || second_password.text.toString().length < 6)
-        return "Secondary Password needs to be 6 or more digits/numbers"
-      if(TextUtils.equals(password.text.toString(), password_confirm.text.toString()))
-        return "Password confirmation didn't match"
-      if(TextUtils.equals(second_password.text.toString(), second_password_confirm.text.toString()))
-        return "Secondary Password confirmation didn't match"
-    }
-    if(TextUtils.isEmpty(username.text.toString()))
-      return "Username cannot be empty"
-    if(TextUtils.isEmpty(name.text.toString()))
-      return "Name cannot be empty"
-    if(TextUtils.isEmpty(email.text.toString()) || !Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches())
-      return "Email is empty or have incorrect format"
-    if(TextUtils.isEmpty(phone.text.toString()) || !Patterns.PHONE.matcher(phone.text.toString()).matches())
-      return "Phone is empty or have incorrect format"
-    return ""
-  }
-
-  protected open fun doRegister(){
+  private fun onRegistration() {
     val body = FormBody.Builder()
     body.addEncoded("sponsor", sponsor.text.toString())
     body.addEncoded("name", name.text.toString())
@@ -109,21 +117,23 @@ open class RegistrationActivity : AppCompatActivity() {
     body.addEncoded("email", email.text.toString())
     body.addEncoded("phone", phone.text.toString())
     body.addEncoded("password", password.text.toString())
-    body.addEncoded("confirmation_password", password_confirm.text.toString())
-    body.addEncoded("secondary_password", second_password.text.toString())
-    body.addEncoded("confirmation_secondary_password", second_password_confirm.text.toString())
+    body.addEncoded("confirmation_password", confirmPassword.text.toString())
+    body.addEncoded("secondary_password", secondaryPassword.text.toString())
+    body.addEncoded("confirmation_secondary_password", confirmSecondaryPassword.text.toString())
     Timer().schedule(1000) {
-      val response = PostController("register", body).call()
-      if (response.getInt("code") == 200){
+      val result = PostController("registration", body).call()
+
+      Log.i("json", result.toString())
+
+      if (result.getInt("code") == 200) {
         runOnUiThread {
-          Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_LONG).show()
-          startActivity(login)
-          finishAffinity()
+          Toast.makeText(applicationContext, result.getString("data"), Toast.LENGTH_SHORT).show()
           loading.closeDialog()
+          finish()
         }
       } else {
         runOnUiThread {
-          Toast.makeText(applicationContext, response.getString("data"), Toast.LENGTH_SHORT).show()
+          Toast.makeText(applicationContext, result.getString("data"), Toast.LENGTH_SHORT).show()
           loading.closeDialog()
         }
       }

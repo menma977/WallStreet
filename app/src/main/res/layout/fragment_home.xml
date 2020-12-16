@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.HomeFragment">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:baselineAligned="false">
+
+      <LinearLayout
+          android:id="@+id/buttonUpgrade"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/upgradeImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/upgrade_active"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/top_up"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="12sp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/buttonHistoryRoi"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/ratio"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="12sp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/buttonHistoryDoge"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/history_doge"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="12sp"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/buttonHistoryDogeBoge"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/history_boge"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="12sp"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/background"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:elevation="5dp">
+
+      <ImageView
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:contentDescription="@string/icon"
+          android:layout_marginEnd="10dp"
+          app:srcCompat="@android:drawable/stat_sys_warning"/>
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewNotification"
+          android:layout_weight="1"
+          android:textColor="@color/White"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+      <TextView
+          android:text="@string/app_name"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:id="@+id/textViewLevel"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold"
+          android:textAlignment="textStart"/>
+
+      <TextView
+          android:text="@string/app_name"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:id="@+id/textViewUsername"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold"
+          android:textAlignment="textEnd"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+      <ProgressBar
+          style="?android:attr/progressBarStyleHorizontal"
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          android:id="@+id/progressBar"
+          android:progressDrawable="@drawable/progress_bar"
+          android:max="100"
+          android:progress="0"
+          android:indeterminate="false"/>
+
+      <TextView
+          android:id="@+id/textViewProgressBar"
+          android:text="@string/zero"
+          android:background="@color/Link"
+          android:textColor="@color/White"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:textSize="10sp"
+          tools:ignore="SmallSp"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginBottom="5dp"
+          android:layout_marginTop="0dp"
+          android:layout_marginStart="20dp"
+          android:layout_marginEnd="0dp"/>
+
+      <TextView
+          android:id="@+id/textViewTarget"
+          android:text="@string/zero"
+          android:background="@color/Link"
+          android:textColor="@color/White"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:textSize="10sp"
+          tools:ignore="RelativeOverlap,SmallSp"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentEnd="true"
+          android:layout_marginBottom="5dp"
+          android:layout_marginTop="0dp"
+          android:layout_marginStart="0dp"
+          android:layout_marginEnd="20dp"/>
+
+    </RelativeLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card2"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:padding="10dp"
+        android:elevation="15dp">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/wallet_doge_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/outgo"/>
+
+        <TextView
+            android:hint="@string/zero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDogeBalance"
+            android:layout_weight="1"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/colorSecondaryDark"
+          android:layout_marginStart="5dp"
+          android:layout_marginEnd="5dp"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/wallet_dogebug_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/income"/>
+
+        <TextView
+            android:hint="@string/zero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDogeBugBalance"
+            android:layout_weight="1"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+  </LinearLayout>
+
+</ScrollView>
