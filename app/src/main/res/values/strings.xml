@@ -29,6 +29,10 @@
   <string name="btc">BTC</string>
   <string name="eth">ETH</string>
   <string name="ltc">LTC</string>
+  <string name="doge_wallet">Dogecoin Wallet</string>
+  <string name="btc_wallet">Bitcoin Wallet</string>
+  <string name="eth_wallet">Ethereum Wallet</string>
+  <string name="ltc_wallet">Litecoin Wallet</string>
   <string name="doge">Doge</string>
   <string name="idr">IDR</string>
   <string name="ic_dollar">$</string>
