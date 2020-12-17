@@ -26,7 +26,7 @@ class WebViewController(private var targetUrl: String, private var token: String
       val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
       return JSONObject().put("code", 200).put("data", input.readText())
     } catch (e: Exception) {
-      JSONObject().put("code", 500).put("data", e.message)
+      JSONObject().put("code", 500).put("data", e.message).put("logout", false)
     }
   }
 }

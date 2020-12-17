@@ -17,6 +17,8 @@
       android:theme="@style/AppTheme"
       tools:ignore="AllowBackup"
       tools:targetApi="n">
+    <activity android:name=".view.btc.SendBTCActivity">
+    </activity>
     <activity
         android:name=".view.user.RegisteredActivity"
         android:configChanges="orientation|screenSize"
@@ -55,6 +57,22 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <service
+        android:name=".background.BalanceService"
+        android:enabled="true"/>
+    <service
+        android:name=".background.BtcService"
+        android:enabled="true"/>
+    <service
+        android:name=".background.DogeService"
+        android:enabled="true"/>
+    <service
+        android:name=".background.EthService"
+        android:enabled="true"/>
+    <service
+        android:name=".background.LtcService"
+        android:enabled="true"/>
   </application>
 
 </manifest>

@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
     loginButton.setOnClickListener {
       loading.openDialog()
       when {
-        validatePermission() -> {
+        PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) -> {
           loading.closeDialog()
           doRequestPermission()
         }
@@ -183,17 +183,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton.visibility = Button.VISIBLE
         reloadButton.visibility = Button.GONE
         updateButton.visibility = Button.GONE
-      }
-    }
-  }
-
-  private fun validatePermission(): Boolean {
-    return when {
-      ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED -> {
-        false
-      }
-      else -> {
-        true
       }
     }
   }

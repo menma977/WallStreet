@@ -22,15 +22,15 @@ class PostController(private var targetUrl: String, private var token: String?, 
           jsonObject.toString().contains("message") -> {
             JSONObject().put("code", 200).put("data", jsonObject.getString("message")).put("logout", false)
           }
-          jsonObject.toString().contains("Unauthenticated.") -> {
-            JSONObject().put("code", 200).put("data", jsonObject).put("logout", true)
-          }
           else -> {
             JSONObject().put("code", 200).put("data", jsonObject).put("logout", false)
           }
         }
       } else {
         return when {
+          jsonObject.toString().contains("Unauthenticated.") -> {
+            JSONObject().put("code", 500).put("data", jsonObject.getString("message")).put("logout", true)
+          }
           jsonObject.toString().contains("errors") -> {
             JSONObject().put("code", 500).put("data", jsonObject.getJSONObject("errors").getJSONArray(jsonObject.getJSONObject("errors").names()[0].toString())[0]).put("logout", false)
           }
@@ -58,13 +58,13 @@ class PostController(private var targetUrl: String, private var token: String?, 
       request.url(Url.web(targetUrl))
       request.post(bodyValue.build())
       if (!token.isNullOrEmpty()) {
-        request.addHeader("Authorization", token!!)
+        request.addHeader("Authorization", "Bearer ${token!!}")
       }
 
       request.addHeader("charset", "utf-8")
       request.addHeader("Content-Type", "application/json")
       request.addHeader("Accept", "application/json")
-      request.addHeader("X-Request-With", "XMLHttpRequest")
+      request.addHeader("X-Requested-With", "XMLHttpRequest")
       val response = client.newCall(request.build()).execute()
       val convertJSON = render(response)
       Log.i("json", convertJSON.toString())
@@ -72,7 +72,7 @@ class PostController(private var targetUrl: String, private var token: String?, 
       return responseHandler(response, convertJSON)
     } catch (e: Exception) {
       Log.e("json", e.stackTraceToString())
-      JSONObject().put("code", 500).put("data", e.message)
+      JSONObject().put("code", 500).put("data", e.message).put("logout", false)
     }
   }
 }

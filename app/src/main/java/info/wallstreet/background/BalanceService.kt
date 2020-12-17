@@ -1,4 +1,4 @@
-package info.bugnode.background
+package info.wallstreet.background
 
 import android.app.Service
 import android.content.Intent

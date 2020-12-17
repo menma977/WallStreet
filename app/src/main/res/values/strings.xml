@@ -37,4 +37,7 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="zero">0</string>
   <string name="top_up">Top Up</string>
+  <string name="wallet">Enter Wallet</string>
+  <string name="amount">Enter Amount</string>
+  <string name="description_qr">press logo to open barcode scan</string>
 </resources>

@@ -1,17 +1,92 @@
 package info.wallstreet.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import info.wallstreet.MainActivity
 import info.wallstreet.R
+import info.wallstreet.background.BtcService
+import info.wallstreet.background.DogeService
+import info.wallstreet.background.EthService
+import info.wallstreet.background.LtcService
+import info.wallstreet.config.Loading
+import info.wallstreet.controller.GetController
+import info.wallstreet.model.User
 import info.wallstreet.view.fragment.HomeFragment
+import java.util.*
+import kotlin.concurrent.schedule
 
 class NavigationActivity : AppCompatActivity() {
+  private lateinit var user: User
+  private lateinit var loading: Loading
+  private lateinit var receiverBtc: Intent
+  private lateinit var receiverDoge: Intent
+  private lateinit var receiverltc: Intent
+  private lateinit var receiverEth: Intent
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_navigation)
+
+    user = User(this)
+    loading = Loading(this)
+
+    runService()
     val fragment = HomeFragment()
     addFragment(fragment)
+  }
+
+  override fun onStart() {
+    super.onStart()
+    runService()
+  }
+
+  override fun onStop() {
+    super.onStop()
+    stopService(receiverBtc)
+    stopService(receiverDoge)
+    stopService(receiverltc)
+    stopService(receiverEth)
+  }
+
+  override fun onBackPressed() {
+    if (supportFragmentManager.backStackEntryCount == 1) {
+      stopService(receiverBtc)
+      stopService(receiverDoge)
+      stopService(receiverltc)
+      stopService(receiverEth)
+      finishAffinity()
+    } else {
+      super.onBackPressed()
+    }
+  }
+
+  private fun runService() {
+    Timer().schedule(1000) {
+      receiverBtc = Intent(applicationContext, BtcService::class.java)
+      receiverDoge = Intent(applicationContext, DogeService::class.java)
+      receiverltc = Intent(applicationContext, LtcService::class.java)
+      receiverEth = Intent(applicationContext, EthService::class.java)
+
+      startService(receiverBtc)
+      startService(receiverDoge)
+      startService(receiverltc)
+      startService(receiverEth)
+    }
+  }
+
+  fun onLogout() {
+    Timer().schedule(100) {
+      GetController("logout", user.getString("token")).call()
+      runOnUiThread {
+        user.clear()
+        finishAffinity()
+        val move = Intent(applicationContext, MainActivity::class.java)
+        loading.closeDialog()
+        startActivity(move)
+      }
+    }
   }
 
   private fun addFragment(fragment: Fragment) {
