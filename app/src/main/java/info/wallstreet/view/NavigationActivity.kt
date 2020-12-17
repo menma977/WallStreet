@@ -1,15 +1,13 @@
 package info.wallstreet.view
 
+import android.content.BroadcastReceiver
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import info.wallstreet.MainActivity
 import info.wallstreet.R
-import info.wallstreet.background.BtcService
-import info.wallstreet.background.DogeService
-import info.wallstreet.background.EthService
-import info.wallstreet.background.LtcService
+import info.wallstreet.background.*
 import info.wallstreet.config.Loading
 import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
@@ -20,6 +18,7 @@ import kotlin.concurrent.schedule
 class NavigationActivity : AppCompatActivity() {
   private lateinit var user: User
   private lateinit var loading: Loading
+  private lateinit var receiverBalances: Intent
   private lateinit var receiverBtc: Intent
   private lateinit var receiverDoge: Intent
   private lateinit var receiverltc: Intent
@@ -44,6 +43,7 @@ class NavigationActivity : AppCompatActivity() {
 
   override fun onStop() {
     super.onStop()
+    stopService(receiverBalances)
     stopService(receiverBtc)
     stopService(receiverDoge)
     stopService(receiverltc)
@@ -52,6 +52,7 @@ class NavigationActivity : AppCompatActivity() {
 
   override fun onBackPressed() {
     if (supportFragmentManager.backStackEntryCount == 1) {
+      stopService(receiverBalances)
       stopService(receiverBtc)
       stopService(receiverDoge)
       stopService(receiverltc)
@@ -64,11 +65,13 @@ class NavigationActivity : AppCompatActivity() {
 
   private fun runService() {
     Timer().schedule(1000) {
+      receiverBalances = Intent(applicationContext, BalanceService::class.java)
       receiverBtc = Intent(applicationContext, BtcService::class.java)
       receiverDoge = Intent(applicationContext, DogeService::class.java)
       receiverltc = Intent(applicationContext, LtcService::class.java)
       receiverEth = Intent(applicationContext, EthService::class.java)
 
+      startService(receiverBalances)
       startService(receiverBtc)
       startService(receiverDoge)
       startService(receiverltc)

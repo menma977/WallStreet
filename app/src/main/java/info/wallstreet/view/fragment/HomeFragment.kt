@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -16,6 +17,9 @@ import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.btc.SendBTCActivity
+import info.wallstreet.view.btc.SendCoinActivity
+import info.wallstreet.view.modal.WalletQR
+import java.util.*
 
 class HomeFragment : Fragment() {
   private lateinit var parentActivity: NavigationActivity
@@ -30,10 +34,20 @@ class HomeFragment : Fragment() {
   private lateinit var ethFake: TextView
   private lateinit var doge: TextView
   private lateinit var dogeFake: TextView
+
+  private lateinit var toBTCwallet: ImageView
+  private lateinit var toLTCwallet: ImageView
+  private lateinit var toETHwallet: ImageView
+  private lateinit var toDOGEwallet: ImageView
+
   private lateinit var move: Intent
   private var onLogoutReady = false
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     val view = inflater.inflate(R.layout.fragment_home, container, false)
 
     parentActivity = activity as NavigationActivity
@@ -50,6 +64,11 @@ class HomeFragment : Fragment() {
     ethFake = view.findViewById(R.id.textViewEthereumBalanceFake)
     doge = view.findViewById(R.id.textViewDogeCoinBalance)
     dogeFake = view.findViewById(R.id.textViewDogeCoinBalanceFake)
+
+    toBTCwallet = view.findViewById(R.id.wallet_bitcoin_view)
+    toLTCwallet = view.findViewById(R.id.wallet_lite_coin_view)
+    toETHwallet = view.findViewById(R.id.wallet_ethereum_view)
+    toDOGEwallet = view.findViewById(R.id.wallet_doge_coin_view)
 
     level.text = user.getString("level")
     username.text = user.getString("username")
@@ -70,7 +89,55 @@ class HomeFragment : Fragment() {
       startActivity(move)
     }
 
+    ltc.setOnClickListener {
+      sendCoin("ltc", false)
+    }
+
+    ltcFake.setOnClickListener {
+      sendCoin("ltc", false)
+    }
+
+    eth.setOnClickListener {
+      sendCoin("eth", false)
+    }
+
+    ethFake.setOnClickListener {
+      sendCoin("eth", false)
+    }
+
+    doge.setOnClickListener {
+      sendCoin("doge", false)
+    }
+
+    dogeFake.setOnClickListener {
+      sendCoin("doge", false)
+    }
+
+    toBTCwallet.setOnClickListener {
+      WalletQR.show(parentActivity, "btc", user)
+    }
+
+    toLTCwallet.setOnClickListener {
+      WalletQR.show(parentActivity, "ltc", user)
+    }
+
+    toETHwallet.setOnClickListener {
+      WalletQR.show(parentActivity, "eth", user)
+    }
+
+    toDOGEwallet.setOnClickListener {
+      WalletQR.show(parentActivity, "doge", user)
+    }
+
     return view
+  }
+
+  private fun sendCoin(currency: String, fake: Boolean) {
+    move = Intent(parentActivity, SendCoinActivity::class.java)
+    move.putExtra("title", currency.toUpperCase(Locale.getDefault()) + if (fake) " Wall" else "")
+    move.putExtra("currency", currency.toLowerCase(Locale.getDefault()))
+    move.putExtra("fake", fake)
+    startActivity(move)
   }
 
   private fun defaultBalance() {
@@ -78,25 +145,29 @@ class HomeFragment : Fragment() {
      * ture balance
      */
     if (user.getString("balance_btc").isNotEmpty()) {
-      btc.text = CoinFormat.decimalToCoin(user.getString("balance_btc").toBigDecimal()).toPlainString()
+      btc.text =
+        CoinFormat.decimalToCoin(user.getString("balance_btc").toBigDecimal()).toPlainString()
     } else {
       btc.text = "0"
     }
 
     if (user.getString("balance_doge").isNotEmpty()) {
-      doge.text = CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
+      doge.text =
+        CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
     } else {
       doge.text = "0"
     }
 
     if (user.getString("balance_ltc").isNotEmpty()) {
-      ltc.text = CoinFormat.decimalToCoin(user.getString("balance_ltc").toBigDecimal()).toPlainString()
+      ltc.text =
+        CoinFormat.decimalToCoin(user.getString("balance_ltc").toBigDecimal()).toPlainString()
     } else {
       ltc.text = "0"
     }
 
     if (user.getString("balance_eth").isNotEmpty()) {
-      eth.text = CoinFormat.decimalToCoin(user.getString("balance_eth").toBigDecimal()).toPlainString()
+      eth.text =
+        CoinFormat.decimalToCoin(user.getString("balance_eth").toBigDecimal()).toPlainString()
     } else {
       eth.text = "0"
     }
@@ -104,25 +175,29 @@ class HomeFragment : Fragment() {
      * Fake Balance
      */
     if (user.getString("fake_balance_btc").isNotEmpty()) {
-      btcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_btc").toBigDecimal()).toPlainString()
+      btcFake.text =
+        CoinFormat.decimalToCoin(user.getString("fake_balance_btc").toBigDecimal()).toPlainString()
     } else {
       btcFake.text = "0"
     }
 
     if (user.getString("fake_balance_doge").isNotEmpty()) {
-      dogeFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_doge").toBigDecimal()).toPlainString()
+      dogeFake.text =
+        CoinFormat.decimalToCoin(user.getString("fake_balance_doge").toBigDecimal()).toPlainString()
     } else {
       dogeFake.text = "0"
     }
 
     if (user.getString("fake_balance_ltc").isNotEmpty()) {
-      ltcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_ltc").toBigDecimal()).toPlainString()
+      ltcFake.text =
+        CoinFormat.decimalToCoin(user.getString("fake_balance_ltc").toBigDecimal()).toPlainString()
     } else {
       ltcFake.text = "0"
     }
 
     if (user.getString("fake_balance_eth").isNotEmpty()) {
-      ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
+      ethFake.text =
+        CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
     } else {
       ethFake.text = "0"
     }
@@ -130,14 +205,21 @@ class HomeFragment : Fragment() {
 
   override fun onResume() {
     super.onResume()
-    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverBtc, IntentFilter("web.btc"))
-    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverDoge, IntentFilter("web.doge"))
-    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverEth, IntentFilter("web.eth"))
-    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverLtc, IntentFilter("web.ltc"))
+    LocalBroadcastManager.getInstance(parentActivity)
+      .registerReceiver(broadcastReceiverBalances, IntentFilter("doge.balances"))
+    LocalBroadcastManager.getInstance(parentActivity)
+      .registerReceiver(broadcastReceiverBtc, IntentFilter("web.btc"))
+    LocalBroadcastManager.getInstance(parentActivity)
+      .registerReceiver(broadcastReceiverDoge, IntentFilter("web.doge"))
+    LocalBroadcastManager.getInstance(parentActivity)
+      .registerReceiver(broadcastReceiverEth, IntentFilter("web.eth"))
+    LocalBroadcastManager.getInstance(parentActivity)
+      .registerReceiver(broadcastReceiverLtc, IntentFilter("web.ltc"))
   }
 
   override fun onDestroy() {
     super.onDestroy()
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBalances)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
@@ -146,6 +228,7 @@ class HomeFragment : Fragment() {
 
   override fun onStop() {
     super.onStop()
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBalances)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
@@ -154,10 +237,25 @@ class HomeFragment : Fragment() {
 
   override fun onPause() {
     super.onPause()
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBalances)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
+  }
+
+  private var broadcastReceiverBalances: BroadcastReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+      if (user.getBoolean("logout")) {
+        if (!onLogoutReady) {
+          onLogoutReady = true
+          parentActivity.onLogout()
+        }
+      } else {
+        btcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_btc").toBigDecimal())
+          .toPlainString()
+      }
+    }
   }
 
   private var broadcastReceiverBtc: BroadcastReceiver = object : BroadcastReceiver() {
@@ -168,7 +266,14 @@ class HomeFragment : Fragment() {
           parentActivity.onLogout()
         }
       } else {
-        btcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_btc").toBigDecimal()).toPlainString()
+        btc.text =
+          CoinFormat.decimalToCoin(user.getString("balance_btc").toBigDecimal()).toPlainString()
+        ltc.text =
+          CoinFormat.decimalToCoin(user.getString("balance_ltc").toBigDecimal()).toPlainString()
+        eth.text =
+          CoinFormat.decimalToCoin(user.getString("balance_eth").toBigDecimal()).toPlainString()
+        doge.text =
+          CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
       }
     }
   }
@@ -180,7 +285,8 @@ class HomeFragment : Fragment() {
           parentActivity.onLogout()
         }
       } else {
-        dogeFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_doge").toBigDecimal()).toPlainString()
+        dogeFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_doge").toBigDecimal())
+          .toPlainString()
       }
     }
   }
@@ -192,7 +298,8 @@ class HomeFragment : Fragment() {
           parentActivity.onLogout()
         }
       } else {
-        ltcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_ltc").toBigDecimal()).toPlainString()
+        ltcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_ltc").toBigDecimal())
+          .toPlainString()
       }
     }
   }
@@ -204,7 +311,8 @@ class HomeFragment : Fragment() {
           parentActivity.onLogout()
         }
       } else {
-        ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
+        ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal())
+          .toPlainString()
       }
     }
   }

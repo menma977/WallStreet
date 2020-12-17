@@ -35,40 +35,40 @@ class BalanceService : Service() {
           val privateIntent = Intent()
           if (startBackgroundService) {
             synchronized(trigger) {
-              fetchBalance("btc", privateIntent, trigger)
-              fetchBalance("ltc", privateIntent, trigger)
-              fetchBalance("eth", privateIntent, trigger)
-              fetchBalance("doge", privateIntent, trigger)
+              try {
+                val body = FormBody.Builder()
+                body.addEncoded("a", "GetBalances")
+                body.addEncoded("key", "1b4755ced78e4d91bce9128b9a053cad")
+                body.addEncoded("s", user.getString("cookie"))
+                json = DogeController(body).call()
+                if (json.getInt("code") == 200) {
+                  user.setString("balance_btc", "0")
+                  user.setString("balance_ltc", "0")
+                  user.setString("balance_eth", "0")
+                  user.setString("balance_doge", "0")
+                  val balances = json.getJSONObject("data").getJSONArray("Balances")
+                  if (balances.length() > 0) {
+                    for (i in 0 until balances.length()) {
+                      val balance = balances.getJSONObject(i)
+                      val currency = balance.getString("Currency")
+                      user.setString("balance_$currency", balance.getString("Balance"))
+                    }
+                  }
+                  privateIntent.action = "doge.balances"
+                  LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(privateIntent)
+                } else {
+                  trigger.wait(60000)
+                }
+              } catch (e: Exception) {
+                Log.w("error", e.message.toString())
+              }
             }
           } else {
+            stopSelf()
             break
           }
         }
       }
-    }
-  }
-
-  private fun fetchBalance(type: String, privateIntent: Intent, trigger: Object) {
-    try {
-      val body = FormBody.Builder()
-      body.addEncoded("a", "GetBalance")
-      body.addEncoded("key", "1b4755ced78e4d91bce9128b9a053cad")
-      body.addEncoded("s", user.getString("cookie"))
-      body.addEncoded("Currency", "doge")
-      json = DogeController(body).call()
-      if (json.getInt("code") == 200) {
-        if (json.getJSONObject("data").getString("Balance").isEmpty()) {
-          user.setString("balance_$type", "0")
-        } else {
-          user.setString("balance_$type", json.getJSONObject("data").getString("Balance"))
-        }
-        privateIntent.action = "api.doge"
-        LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(privateIntent)
-      } else {
-        trigger.wait(60000)
-      }
-    } catch (e: Exception) {
-      Log.w("error", e.message.toString())
     }
   }
 
