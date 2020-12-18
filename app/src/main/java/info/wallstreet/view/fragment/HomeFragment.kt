@@ -16,7 +16,7 @@ import info.wallstreet.R
 import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
-import info.wallstreet.view.btc.SendCoinActivity
+import info.wallstreet.view.coin.SendCoinActivity
 import info.wallstreet.view.modal.WalletQR
 import java.util.*
 
