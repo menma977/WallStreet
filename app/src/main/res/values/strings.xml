@@ -44,4 +44,8 @@
   <string name="wallet">Enter Wallet</string>
   <string name="amount">Enter Amount</string>
   <string name="description_qr">press logo to open barcode scan</string>
+  <string name="edit_password">Edit Password</string>
+  <string name="edit_secondary_password">Edit Secondary Password</string>
+  <string name="logout">Logout</string>
+  <string name="edit">EDIT</string>
 </resources>

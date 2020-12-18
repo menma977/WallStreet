@@ -41,8 +41,8 @@
           android:text="@string/app_name"/>
 
       <TextView
-          android:hint="@string/dollar_example"
-          android:id="@+id/textViewDollar"
+          android:hint="@string/username"
+          android:id="@+id/textViewUsername"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textSize="15sp"

@@ -131,9 +131,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
       json = PostController("$currency.store", user.getString("token"), body).call()
       if (json.getInt("code") == 200) {
         runOnUiThread {
-          Toast.makeText(
-            applicationContext, json.getJSONObject("data").getString("message"), Toast.LENGTH_LONG
-          ).show()
+          Toast.makeText(applicationContext, json.getString("data"), Toast.LENGTH_LONG).show()
           loading.closeDialog()
           finish()
         }

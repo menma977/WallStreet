@@ -2,6 +2,8 @@ package info.wallstreet.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import info.wallstreet.MainActivity
@@ -11,6 +13,7 @@ import info.wallstreet.config.Loading
 import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
 import info.wallstreet.view.fragment.HomeFragment
+import info.wallstreet.view.fragment.SettingFragment
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -22,6 +25,9 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var receiverDoge: Intent
   private lateinit var receiverltc: Intent
   private lateinit var receiverEth: Intent
+  private lateinit var username: TextView
+  private lateinit var homeButton: LinearLayout
+  private lateinit var settingButton: LinearLayout
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -30,7 +36,14 @@ class NavigationActivity : AppCompatActivity() {
     user = User(this)
     loading = Loading(this)
 
+    username = findViewById(R.id.textViewUsername)
+    homeButton = findViewById(R.id.linearLayoutHome)
+    settingButton = findViewById(R.id.linearLayoutSetting)
+
+    username.text = user.getString("username")
+
     runService()
+    navigation()
     val fragment = HomeFragment()
     addFragment(fragment)
   }
@@ -59,6 +72,18 @@ class NavigationActivity : AppCompatActivity() {
       finishAffinity()
     } else {
       super.onBackPressed()
+    }
+  }
+
+  private fun navigation() {
+    homeButton.setOnClickListener {
+      val fragment = HomeFragment()
+      addFragment(fragment)
+    }
+
+    settingButton.setOnClickListener {
+      val fragment = SettingFragment()
+      addFragment(fragment)
     }
   }
 

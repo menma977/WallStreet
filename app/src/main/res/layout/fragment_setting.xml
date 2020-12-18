@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.SettingFragment">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card2"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        android:elevation="10dp">
+
+      <TextView
+          android:hint="@string/username"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewUsername"
+          android:textColor="@color/textPrimary"
+          android:textStyle="bold"
+          android:textSize="20sp"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <TextView
+          android:hint="@string/email_address"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewEmail"
+          android:textColor="@color/textSecondary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <TextView
+          android:hint="@string/phone_number"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewPhone"
+          android:textColor="@color/textSecondary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <TextView
+          android:hint="@string/app_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewLevel"
+          android:textColor="@color/textSecondary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/White"
+        android:elevation="10dp"
+        android:padding="10dp">
+
+      <TextView
+          android:text="@string/edit_password"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:id="@+id/textViewEditPassword"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold"
+          android:textSize="16sp"
+          app:drawableTint="@color/textSecondary"
+          app:drawableRightCompat="@android:drawable/ic_menu_send"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <TextView
+          android:text="@string/edit_secondary_password"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:id="@+id/textViewEditSecondaryPassword"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold"
+          android:textSize="16sp"
+          app:drawableTint="@color/textSecondary"
+          app:drawableRightCompat="@android:drawable/ic_menu_send"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <TextView
+          android:text="@string/logout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:id="@+id/textViewLogout"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold"
+          android:textSize="16sp"
+          app:drawableTint="@color/textSecondary"
+          app:drawableRightCompat="@android:drawable/ic_notification_clear_all"/>
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+</ScrollView>
