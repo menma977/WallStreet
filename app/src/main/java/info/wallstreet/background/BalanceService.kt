@@ -65,7 +65,6 @@ class BalanceService : Service() {
             }
           } else {
             stopSelf()
-            break
           }
         }
       }

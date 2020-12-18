@@ -20,6 +20,7 @@ import kotlin.concurrent.schedule
 class NavigationActivity : AppCompatActivity() {
   private lateinit var user: User
   private lateinit var loading: Loading
+  private lateinit var receiverUpgrade: Intent
   private lateinit var receiverBalances: Intent
   private lateinit var receiverBtc: Intent
   private lateinit var receiverDoge: Intent
@@ -56,6 +57,7 @@ class NavigationActivity : AppCompatActivity() {
   override fun onStop() {
     super.onStop()
     stopService(receiverBalances)
+    stopService(receiverUpgrade)
     stopService(receiverBtc)
     stopService(receiverDoge)
     stopService(receiverltc)
@@ -65,6 +67,7 @@ class NavigationActivity : AppCompatActivity() {
   override fun onBackPressed() {
     if (supportFragmentManager.backStackEntryCount == 1) {
       stopService(receiverBalances)
+      stopService(receiverUpgrade)
       stopService(receiverBtc)
       stopService(receiverDoge)
       stopService(receiverltc)
@@ -90,12 +93,14 @@ class NavigationActivity : AppCompatActivity() {
   private fun runService() {
     Timer().schedule(1000) {
       receiverBalances = Intent(applicationContext, BalanceService::class.java)
+      receiverUpgrade = Intent(applicationContext, UpgradeService::class.java)
       receiverBtc = Intent(applicationContext, BtcService::class.java)
       receiverDoge = Intent(applicationContext, DogeService::class.java)
       receiverltc = Intent(applicationContext, LtcService::class.java)
       receiverEth = Intent(applicationContext, EthService::class.java)
 
       startService(receiverBalances)
+      startService(receiverUpgrade)
       startService(receiverBtc)
       startService(receiverDoge)
       startService(receiverltc)
