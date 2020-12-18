@@ -1,4 +1,4 @@
-package info.wallstreet.view.btc
+package info.wallstreet.view.coin
 
 import android.content.BroadcastReceiver
 import android.content.Context
