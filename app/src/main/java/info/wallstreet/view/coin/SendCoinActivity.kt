@@ -65,7 +65,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     title.text = intent.getStringExtra("title")
     isFake = intent.getBooleanExtra("fake", true)
     currency = intent.getStringExtra("currency") ?: "btc"
-    println(currency)
+
     currentBalance.text = if (isFake) {
       balanceValue = user.getString("fake_balance_$currency").toBigDecimal()
       CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
@@ -129,16 +129,24 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     body.addEncoded("fake", isFake.toString())
     Timer().schedule(100) {
       json = PostController("$currency.store", user.getString("token"), body).call()
-      if (json.getInt("code") == 200) {
-        runOnUiThread {
-          Toast.makeText(applicationContext, json.getString("data"), Toast.LENGTH_LONG).show()
-          loading.closeDialog()
-          finish()
+      when {
+        json.getInt("code") == 200 -> {
+          runOnUiThread {
+            Toast.makeText(applicationContext, json.getString("data"), Toast.LENGTH_LONG).show()
+            loading.closeDialog()
+            finish()
+          }
         }
-      } else {
-        runOnUiThread {
-          Toast.makeText(applicationContext, json.getString("data"), Toast.LENGTH_LONG).show()
-          loading.closeDialog()
+        json.getBoolean("logout") -> {
+          runOnUiThread {
+            onLogout()
+          }
+        }
+        else -> {
+          runOnUiThread {
+            Toast.makeText(applicationContext, json.getString("data"), Toast.LENGTH_LONG).show()
+            loading.closeDialog()
+          }
         }
       }
     }
