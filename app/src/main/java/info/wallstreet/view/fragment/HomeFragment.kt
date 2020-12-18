@@ -37,6 +37,14 @@ class HomeFragment : Fragment() {
   private lateinit var toLTCWallet: ImageView
   private lateinit var toETHWallet: ImageView
   private lateinit var toDOGEWallet: ImageView
+  private lateinit var toSendBTC: ImageView
+  private lateinit var toSendLTC: ImageView
+  private lateinit var toSendETH: ImageView
+  private lateinit var toSendDOGE: ImageView
+  private lateinit var toSendBTCFake: ImageView
+  private lateinit var toSendLTCFake: ImageView
+  private lateinit var toSendETHFake: ImageView
+  private lateinit var toSendDOGEFake: ImageView
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -60,45 +68,55 @@ class HomeFragment : Fragment() {
     doge = view.findViewById(R.id.textViewDogeCoinBalance)
     dogeFake = view.findViewById(R.id.textViewDogeCoinBalanceFake)
 
-    toBTCWallet = view.findViewById(R.id.wallet_bitcoin_view)
-    toLTCWallet = view.findViewById(R.id.wallet_lite_coin_view)
-    toETHWallet = view.findViewById(R.id.wallet_ethereum_view)
-    toDOGEWallet = view.findViewById(R.id.wallet_doge_coin_view)
+    toBTCWallet = view.findViewById(R.id.toBtcWallet)
+    toLTCWallet = view.findViewById(R.id.toLtcWallet)
+    toETHWallet = view.findViewById(R.id.toEthWallet)
+    toDOGEWallet = view.findViewById(R.id.toDogeWallet)
+
+    toSendBTC = view.findViewById(R.id.wallet_bitcoin_view)
+    toSendLTC = view.findViewById(R.id.wallet_litecoin_view)
+    toSendETH = view.findViewById(R.id.wallet_ethereum_view)
+    toSendDOGE = view.findViewById(R.id.wallet_dogecoin_view)
+
+    toSendBTCFake = view.findViewById(R.id.wallet_fake_bitcoin_view)
+    toSendLTCFake = view.findViewById(R.id.wallet_fake_litecoin_view)
+    toSendETHFake = view.findViewById(R.id.wallet_fake_ethereum_view)
+    toSendDOGEFake = view.findViewById(R.id.wallet_fake_dogecoin_view)
 
     level.text = user.getString("level")
     username.text = user.getString("username")
 
     defaultBalance()
 
-    btc.setOnClickListener {
+    toSendBTC.setOnClickListener {
       sendCoin("btc", false)
     }
 
-    btcFake.setOnClickListener {
+    toSendBTCFake.setOnClickListener {
       sendCoin("btc", true)
     }
 
-    ltc.setOnClickListener {
+    toSendLTC.setOnClickListener {
       sendCoin("ltc", false)
     }
 
-    ltcFake.setOnClickListener {
+    toSendLTCFake.setOnClickListener {
       sendCoin("ltc", true)
     }
 
-    eth.setOnClickListener {
+    toSendETH.setOnClickListener {
       sendCoin("eth", false)
     }
 
-    ethFake.setOnClickListener {
+    toSendETHFake.setOnClickListener {
       sendCoin("eth", true)
     }
 
-    doge.setOnClickListener {
+    toSendDOGE.setOnClickListener {
       sendCoin("doge", false)
     }
 
-    dogeFake.setOnClickListener {
+    toSendDOGEFake.setOnClickListener {
       sendCoin("doge", true)
     }
 

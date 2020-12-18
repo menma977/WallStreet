@@ -29,12 +29,16 @@
   <string name="btc">BTC</string>
   <string name="eth">ETH</string>
   <string name="ltc">LTC</string>
+  <string name="doge">Doge</string>
+  <string name="btc_wall">BTC Wall</string>
+  <string name="eth_wall">ETH Wall</string>
+  <string name="ltc_wall">LTC Wall</string>
+  <string name="doge_wall">Doge Wall</string>
+  <string name="idr">IDR</string>
   <string name="doge_wallet">Dogecoin Wallet</string>
   <string name="btc_wallet">Bitcoin Wallet</string>
   <string name="eth_wallet">Ethereum Wallet</string>
   <string name="ltc_wallet">Litecoin Wallet</string>
-  <string name="doge">Doge</string>
-  <string name="idr">IDR</string>
   <string name="ic_dollar">$</string>
   <string name="str_dollar">USD</string>
   <!-- TODO: Remove or change this placeholder text -->
