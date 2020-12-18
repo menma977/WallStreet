@@ -64,18 +64,16 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     title.text = intent.getStringExtra("title")
     isFake = intent.getBooleanExtra("fake", true)
-    currency = intent.getStringExtra("title") ?: "btc"
-
+    currency = intent.getStringExtra("currency") ?: "btc"
+    println(currency)
     currentBalance.text = if (isFake) {
       balanceValue = user.getString("fake_balance_$currency").toBigDecimal()
-      CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal())
-        .toPlainString() + " " + currency.toUpperCase(
+      CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
         Locale.getDefault()
       )
     } else {
       balanceValue = user.getString("balance_$currency").toBigDecimal()
-      CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal())
-        .toPlainString() + " " + currency.toUpperCase(
+      CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
         Locale.getDefault()
       )
     }
@@ -105,8 +103,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           secondaryPasswordText.requestFocus()
         }
         secondaryPasswordText.text.length < 6 -> {
-          Toast.makeText(this, "Secondary password must be 6 digit numbers", Toast.LENGTH_SHORT)
-            .show()
+          Toast.makeText(this, "Secondary password must be 6 digit numbers", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
         else -> {
@@ -126,8 +123,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     val body = FormBody.Builder()
     body.addEncoded("wallet", walletText.text.toString())
     body.addEncoded(
-      "value",
-      CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()).toEngineeringString()
+      "value", CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()).toEngineeringString()
     )
     body.addEncoded("secondary_password", secondaryPasswordText.text.toString())
     body.addEncoded("fake", isFake.toString())
@@ -136,9 +132,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
       if (json.getInt("code") == 200) {
         runOnUiThread {
           Toast.makeText(
-            applicationContext,
-            json.getJSONObject("data").getString("message"),
-            Toast.LENGTH_LONG
+            applicationContext, json.getJSONObject("data").getString("message"), Toast.LENGTH_LONG
           ).show()
           loading.closeDialog()
           finish()
@@ -170,8 +164,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           }
         }
         startService(receiver)
-        LocalBroadcastManager.getInstance(applicationContext)
-          .registerReceiver(broadcastReceiver, IntentFilter("web.$currency"))
+        LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiver, IntentFilter("web.$currency"))
       }
     }
   }
@@ -198,13 +191,11 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         onLogout()
       } else {
         val balance = if (isFake) {
-          CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal())
-            .toPlainString() + " " + currency.toUpperCase(
+          CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
             Locale.getDefault()
           )
         } else {
-          CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal())
-            .toPlainString() + " " + currency.toUpperCase(
+          CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
             Locale.getDefault()
           )
         }

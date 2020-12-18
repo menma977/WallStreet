@@ -17,7 +17,13 @@
       android:theme="@style/AppTheme"
       tools:ignore="AllowBackup"
       tools:targetApi="n">
-    <activity android:name=".view.btc.SendBTCActivity">
+    <activity
+        android:name=".view.btc.SendCoinActivity"
+        android:configChanges="orientation|screenSize"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
     </activity>
     <activity
         android:name=".view.user.RegisteredActivity"

@@ -6,7 +6,7 @@ object Url {
    * @return String
    */
   fun web(target: String): String {
-    return "http://192.168.67.201/api/${target.replace(".", "/")}"
+    return "http://192.168.77.207/api/${target.replace(".", "/")}"
   }
 
   /**

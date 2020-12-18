@@ -1,6 +1,5 @@
 package info.wallstreet.view
 
-import android.content.BroadcastReceiver
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
