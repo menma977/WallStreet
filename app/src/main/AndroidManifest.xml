@@ -87,6 +87,9 @@
     <service
         android:name=".background.LtcService"
         android:enabled="true"/>
+    <service
+        android:name=".background.UpgradeService"
+        android:enabled="true"/>
   </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -45,6 +46,9 @@ class HomeFragment : Fragment() {
   private lateinit var toSendLTCFake: ImageView
   private lateinit var toSendETHFake: ImageView
   private lateinit var toSendDOGEFake: ImageView
+  private lateinit var progressBar: ProgressBar
+  private lateinit var progressValue: TextView
+  private lateinit var targetValue: TextView
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -82,8 +86,12 @@ class HomeFragment : Fragment() {
     toSendLTCFake = view.findViewById(R.id.wallet_fake_litecoin_view)
     toSendETHFake = view.findViewById(R.id.wallet_fake_ethereum_view)
     toSendDOGEFake = view.findViewById(R.id.wallet_fake_dogecoin_view)
+    
+    progressBar = view.findViewById(R.id.progressBar)
+    progressValue = view.findViewById(R.id.textViewProgressBar)
+    targetValue = view.findViewById(R.id.textViewTarget)
 
-    level.text = user.getString("level")
+    level.text = "Level : ${user.getString("level")}"
     username.text = user.getString("username")
 
     defaultBalance()
@@ -205,6 +213,7 @@ class HomeFragment : Fragment() {
   override fun onResume() {
     super.onResume()
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverBalances, IntentFilter("doge.balances"))
+    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverUpgrade, IntentFilter("web.upgrade"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverBtc, IntentFilter("web.btc"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverDoge, IntentFilter("web.doge"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverEth, IntentFilter("web.eth"))
@@ -214,6 +223,7 @@ class HomeFragment : Fragment() {
   override fun onDestroy() {
     super.onDestroy()
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBalances)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverUpgrade)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
@@ -223,6 +233,7 @@ class HomeFragment : Fragment() {
   override fun onStop() {
     super.onStop()
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBalances)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverUpgrade)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
@@ -232,12 +243,27 @@ class HomeFragment : Fragment() {
   override fun onPause() {
     super.onPause()
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBalances)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverUpgrade)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverBtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
   }
 
+  private var broadcastReceiverUpgrade: BroadcastReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+      if (user.getBoolean("logout")) {
+        if (!onLogoutReady) {
+          onLogoutReady = true
+          parentActivity.onLogout()
+        }
+      } else {
+        progressBar.progress = user.getInteger("progress")
+        progressValue.text = CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()
+        targetValue.text = CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()
+      }
+    }
+  }
   private var broadcastReceiverBalances: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
       if (user.getBoolean("logout")) {
