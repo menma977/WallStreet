@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".view.HistoryActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10sp">
+
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/ic_btc" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:text="@android:string/untitled"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/card2"
+        android:padding="10sp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lists_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+</LinearLayout>

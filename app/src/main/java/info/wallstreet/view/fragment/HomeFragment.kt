@@ -18,6 +18,7 @@ import info.wallstreet.R
 import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
+import info.wallstreet.view.UpgradeHistoryActivity
 import info.wallstreet.view.coin.SendCoinActivity
 import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
@@ -52,6 +53,7 @@ class HomeFragment : Fragment() {
   private lateinit var progressValue: TextView
   private lateinit var targetValue: TextView
   private lateinit var inviteBtn: Button
+  private lateinit var historyUpgradeButton: ImageView
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -91,6 +93,7 @@ class HomeFragment : Fragment() {
     toSendDOGEFake = view.findViewById(R.id.wallet_fake_dogecoin_view)
 
     inviteBtn = view.findViewById(R.id.invite)
+    historyUpgradeButton = view.findViewById(R.id.history_upgrades)
     
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
@@ -103,6 +106,11 @@ class HomeFragment : Fragment() {
 
     inviteBtn.setOnClickListener {
       UpgradePop(parentActivity, user).show()
+    }
+
+    historyUpgradeButton.setOnClickListener {
+      move = Intent(parentActivity, UpgradeHistoryActivity::class.java)
+      startActivity(move)
     }
 
     toSendBTC.setOnClickListener {
