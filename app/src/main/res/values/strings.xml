@@ -20,6 +20,9 @@
   <string name="do_you_have_account">do you have account?</string>
   <string name="reset_password_will_send_link_to_email_address">Reset password will send link to email address</string>
   <string name="add_new_user">Invite and extend your network for more profit!</string>
+  <string name="currency">Currency</string>
+  <string name="packages">Packages</string>
+  <string name="upgrade">Upgrade</string>
   <string name="invite">Invite</string>
   <string name="send">Send</string>
   <string name="dollar_example">$ 100</string>
@@ -52,4 +55,11 @@
   <string name="edit_secondary_password">Edit Secondary Password</string>
   <string name="logout">Logout</string>
   <string name="edit">EDIT</string>
+
+  <string-array name="currency_choice">
+    <item>Bitcoin</item>
+    <item>Litecoin</item>
+    <item>Ethereum</item>
+    <item>Dogecoin</item>
+  </string-array>
 </resources>

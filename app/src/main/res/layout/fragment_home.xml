@@ -195,6 +195,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/card2"
         android:elevation="15dp"
@@ -247,6 +248,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
           <LinearLayout
@@ -326,8 +328,10 @@
             android:id="@+id/toBtcWallet"
             android:layout_width="40sp"
             android:layout_height="40sp"
+            android:background="@color/background"
             android:contentDescription="@string/icon"
-            android:src="@drawable/ic_btc" />
+            android:src="@drawable/ic_btc"
+            app:srcCompat="@drawable/barcode" />
 
       </LinearLayout>
 
@@ -345,6 +349,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
           <LinearLayout
@@ -424,9 +429,10 @@
             android:id="@+id/toEthWallet"
             android:layout_width="40sp"
             android:layout_height="40sp"
+            android:background="@color/background"
             android:contentDescription="@string/icon"
             android:src="@drawable/ic_btc"
-            app:srcCompat="@drawable/ic_eth" />
+            app:srcCompat="@drawable/barcode" />
 
       </LinearLayout>
 
@@ -444,6 +450,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
           <LinearLayout
@@ -523,9 +530,10 @@
             android:id="@+id/toLtcWallet"
             android:layout_width="40sp"
             android:layout_height="40sp"
+            android:background="@color/background"
             android:contentDescription="@string/icon"
             android:src="@drawable/ic_btc"
-            app:srcCompat="@drawable/ic_ltc" />
+            app:srcCompat="@drawable/barcode" />
 
       </LinearLayout>
 
@@ -544,6 +552,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
           <LinearLayout
@@ -623,9 +632,10 @@
             android:id="@+id/toDogeWallet"
             android:layout_width="40sp"
             android:layout_height="40sp"
+            android:background="@color/background"
             android:contentDescription="@string/icon"
             android:src="@drawable/ic_btc"
-            app:srcCompat="@drawable/ic_doge" />
+            app:srcCompat="@drawable/barcode" />
 
       </LinearLayout>
 
@@ -648,8 +658,9 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="12sp"
           android:text="@string/add_new_user"
+          android:textAlignment="center"
           android:textSize="14sp"
-          android:textStyle="bold"/>
+          android:textStyle="bold" />
 
       <Button
           android:id="@+id/invite"
@@ -659,7 +670,7 @@
           android:layout_marginEnd="70dp"
           android:background="@drawable/button"
           android:text="@string/invite"
-          android:textSize="10sp"/>
+          android:textSize="10sp" />
 
     </LinearLayout>
 

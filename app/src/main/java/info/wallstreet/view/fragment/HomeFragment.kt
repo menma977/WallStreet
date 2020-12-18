@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -18,6 +19,7 @@ import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.coin.SendCoinActivity
+import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
 import java.util.*
 
@@ -49,6 +51,7 @@ class HomeFragment : Fragment() {
   private lateinit var progressBar: ProgressBar
   private lateinit var progressValue: TextView
   private lateinit var targetValue: TextView
+  private lateinit var inviteBtn: Button
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -86,6 +89,8 @@ class HomeFragment : Fragment() {
     toSendLTCFake = view.findViewById(R.id.wallet_fake_litecoin_view)
     toSendETHFake = view.findViewById(R.id.wallet_fake_ethereum_view)
     toSendDOGEFake = view.findViewById(R.id.wallet_fake_dogecoin_view)
+
+    inviteBtn = view.findViewById(R.id.invite)
     
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
@@ -95,6 +100,10 @@ class HomeFragment : Fragment() {
     username.text = user.getString("username")
 
     defaultBalance()
+
+    inviteBtn.setOnClickListener {
+      UpgradePop(parentActivity, user).show()
+    }
 
     toSendBTC.setOnClickListener {
       sendCoin("btc", false)
