@@ -17,7 +17,7 @@ class PostController(private var targetUrl: String, private var token: String?, 
   companion object {
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     fun responseHandler(response: Response, jsonObject: JSONObject): JSONObject {
-      if (response.isSuccessful && response.code == 200) {
+      if (response.isSuccessful) {
         return when {
           jsonObject.toString().contains("message") -> {
             JSONObject().put("code", 200).put("data", jsonObject.getString("message")).put("logout", false)
