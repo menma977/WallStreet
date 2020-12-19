@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
     containerRegister = findViewById(R.id.linearLayoutContainerRegister)
 
     username.setText("admin")
-    password.setText("admin")
+    password.setText("123456")
 
     version.text = BuildConfig.VERSION_NAME
 
