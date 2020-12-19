@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
 
     inviteBtn = view.findViewById(R.id.invite)
     historyUpgradeButton = view.findViewById(R.id.history_upgrades)
-    
+
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
     targetValue = view.findViewById(R.id.textViewTarget)
@@ -276,8 +276,10 @@ class HomeFragment : Fragment() {
         }
       } else {
         progressBar.progress = user.getInteger("progress")
-        progressValue.text = CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()
-        targetValue.text = CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()
+        val getProgressValue = "$ ${CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()}"
+        val getTargetValue = "$ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()}"
+        progressValue.text = getProgressValue
+        targetValue.text = getTargetValue
       }
     }
   }
