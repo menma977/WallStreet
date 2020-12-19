@@ -46,7 +46,12 @@ class PostController(private var targetUrl: String, private var token: String?, 
 
     fun render(response: Response): String {
       val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
-      return input.readLine()
+      var result = ""
+      do {
+        var s = input.readLine()
+        result += s
+      } while(s != null)
+      return result
     }
   }
 
@@ -59,13 +64,14 @@ class PostController(private var targetUrl: String, private var token: String?, 
       if (!token.isNullOrEmpty()) {
         request.addHeader("Authorization", "Bearer ${token!!}")
       }
-
       request.addHeader("charset", "utf-8")
       request.addHeader("Content-Type", "application/json")
       request.addHeader("Accept", "application/json")
       request.addHeader("X-Requested-With", "XMLHttpRequest")
       val response = client.newCall(request.build()).execute()
-      val convertJSON = JSONObject(render(response))
+      val raw = render(response)
+      Log.i("raw", raw)
+      val convertJSON = JSONObject(raw)
       Log.i("json", convertJSON.toString())
 
       return responseHandler(response, convertJSON)

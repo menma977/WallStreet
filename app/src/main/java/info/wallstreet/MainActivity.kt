@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
       Log.i("json", result.toString())
 
       if (result.getInt("code") == 200) {
+        setupPreference()
         if (result.getJSONObject("data").getInt("version") != BuildConfig.VERSION_CODE) {
           onMove(token = false, update = true, mt = false, error = false)
         } else if (result.getJSONObject("data").getInt("maintenance") == 1) {
@@ -84,5 +85,18 @@ class MainActivity : AppCompatActivity() {
 
     startActivity(move)
     finishAffinity()
+  }
+
+  private fun setupPreference() {
+    val result = GetController("upgrade.packages").call()
+    if (result.getInt("code") == 200) {
+      val pref = getSharedPreferences("option-cached",MODE_PRIVATE).edit()
+      val packages = result.getJSONObject("data").getJSONArray("packages")
+      pref.putString(
+        "packages-json",
+        packages.toString().replace(Regex("\\s+", RegexOption.MULTILINE), "")
+      )
+      pref.apply()
+    }
   }
 }

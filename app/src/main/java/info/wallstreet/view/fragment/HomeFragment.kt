@@ -8,10 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.R
@@ -53,6 +50,7 @@ class HomeFragment : Fragment() {
   private lateinit var progressValue: TextView
   private lateinit var targetValue: TextView
   private lateinit var inviteBtn: Button
+  private lateinit var upgradeBtn: LinearLayout
   private lateinit var historyUpgradeButton: ImageView
   private lateinit var move: Intent
   private var onLogoutReady = false
@@ -93,6 +91,7 @@ class HomeFragment : Fragment() {
     toSendDOGEFake = view.findViewById(R.id.wallet_fake_dogecoin_view)
 
     inviteBtn = view.findViewById(R.id.invite)
+    upgradeBtn = view.findViewById(R.id.buttonUpgrade)
     historyUpgradeButton = view.findViewById(R.id.history_upgrades)
 
     progressBar = view.findViewById(R.id.progressBar)
@@ -104,7 +103,7 @@ class HomeFragment : Fragment() {
 
     defaultBalance()
 
-    inviteBtn.setOnClickListener {
+    upgradeBtn.setOnClickListener {
       UpgradePop(parentActivity, user).show()
     }
 
