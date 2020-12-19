@@ -45,10 +45,9 @@ class GetController(private var targetUrl: String, private var token: String?, p
       }
     }
 
-    fun render(response: Response): JSONObject {
+    fun render(response: Response): String {
       val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
-      val inputData: String = input.readLine()
-      return JSONObject(inputData)
+      return input.readLine()
     }
   }
 
@@ -64,7 +63,7 @@ class GetController(private var targetUrl: String, private var token: String?, p
 
       request.addHeader("X-Requested-With", "XMLHttpRequest")
       val response = client.newCall(request.build()).execute()
-      val convertJSON = render(response)
+      val convertJSON = JSONObject(render(response))
       Log.i("json", convertJSON.toString())
 
       return responseHandler(response, convertJSON)

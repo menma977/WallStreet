@@ -55,6 +55,7 @@
   <string name="edit_secondary_password">Edit Secondary Password</string>
   <string name="logout">Logout</string>
   <string name="edit">EDIT</string>
+  <string name="add_user">Add User</string>
 
   <string-array name="currency_choice">
     <item>Bitcoin</item>

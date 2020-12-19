@@ -77,7 +77,7 @@ class RegisteredActivity : AppCompatActivity() {
     body.addEncoded("email", email.text.toString())
     body.addEncoded("phone", phone.text.toString())
     Timer().schedule(1000) {
-      val result = PostController("registered", body).call()
+      val result = PostController("user.registered", user.getString("token"), body).call()
 
       Log.i("json", result.toString())
 

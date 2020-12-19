@@ -14,6 +14,7 @@ import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
 import info.wallstreet.view.fragment.HomeFragment
 import info.wallstreet.view.fragment.SettingFragment
+import info.wallstreet.view.user.RegisteredActivity
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -28,6 +29,7 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var receiverEth: Intent
   private lateinit var username: TextView
   private lateinit var homeButton: LinearLayout
+  private lateinit var addUserButton: LinearLayout
   private lateinit var settingButton: LinearLayout
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class NavigationActivity : AppCompatActivity() {
 
     username = findViewById(R.id.textViewUsername)
     homeButton = findViewById(R.id.linearLayoutHome)
+    addUserButton = findViewById(R.id.linearLayoutAddUser)
     settingButton = findViewById(R.id.linearLayoutSetting)
 
     username.text = user.getString("username")
@@ -82,6 +85,11 @@ class NavigationActivity : AppCompatActivity() {
     homeButton.setOnClickListener {
       val fragment = HomeFragment()
       addFragment(fragment)
+    }
+
+    addUserButton.setOnClickListener {
+      val move = Intent(this, RegisteredActivity::class.java)
+      startActivity(move)
     }
 
     settingButton.setOnClickListener {
