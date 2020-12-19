@@ -56,7 +56,6 @@ class GetController(private var targetUrl: String, private var token: String?, p
     return try {
       val client = OkHttpClient.Builder().build()
       val request = Request.Builder()
-      println(Url.web(targetUrl))
       request.url(Url.web(targetUrl))
       request.method("GET", if (bodyValue != null) bodyValue!!.build() else null)
       if (!token.isNullOrEmpty()) {
