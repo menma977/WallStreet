@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".view.UpgradeHistoryActivity"
+    tools:context=".view.history.UpgradeHistoryActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout

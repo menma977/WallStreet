@@ -15,7 +15,7 @@ import info.wallstreet.R
 import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
-import info.wallstreet.view.UpgradeHistoryActivity
+import info.wallstreet.view.history.UpgradeHistoryActivity
 import info.wallstreet.view.coin.SendCoinActivity
 import info.wallstreet.view.history.FakeBalanceActivity
 import info.wallstreet.view.modal.UpgradePop
