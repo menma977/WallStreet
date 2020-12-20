@@ -17,9 +17,24 @@
       android:theme="@style/AppTheme"
       tools:ignore="AllowBackup"
       tools:targetApi="n">
-    <activity android:name=".view.history.FakeBalanceActivity">
+    <activity
+        android:name=".view.history.FakeBalanceActivity"
+        android:configChanges="orientation|screenSize"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
     </activity>
-    <activity android:name=".view.UpgradeHistoryActivity"/>
+
+    <activity
+        android:name=".view.UpgradeHistoryActivity"
+        android:configChanges="orientation|screenSize"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+
     <activity
         android:name=".view.user.EditPasswordActivity"
         android:configChanges="orientation|screenSize"

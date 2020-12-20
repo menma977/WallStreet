@@ -17,6 +17,7 @@ import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.UpgradeHistoryActivity
 import info.wallstreet.view.coin.SendCoinActivity
+import info.wallstreet.view.history.FakeBalanceActivity
 import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
 import java.util.*
@@ -52,6 +53,7 @@ class HomeFragment : Fragment() {
   private lateinit var inviteBtn: Button
   private lateinit var upgradeBtn: LinearLayout
   private lateinit var historyUpgradeButton: ImageView
+  private lateinit var historyWall: LinearLayout
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -93,6 +95,7 @@ class HomeFragment : Fragment() {
     inviteBtn = view.findViewById(R.id.invite)
     upgradeBtn = view.findViewById(R.id.buttonUpgrade)
     historyUpgradeButton = view.findViewById(R.id.history_upgrades)
+    historyWall = view.findViewById(R.id.buttonHistoryWall)
 
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
@@ -109,6 +112,11 @@ class HomeFragment : Fragment() {
 
     historyUpgradeButton.setOnClickListener {
       move = Intent(parentActivity, UpgradeHistoryActivity::class.java)
+      startActivity(move)
+    }
+
+    historyWall.setOnClickListener {
+      move = Intent(parentActivity, FakeBalanceActivity::class.java)
       startActivity(move)
     }
 
