@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import info.wallstreet.R
+import info.wallstreet.controller.GetController
 import info.wallstreet.model.UpgradeHistory
 import info.wallstreet.view.adapter.UpgradeListAdapter
+import org.json.JSONObject
 import java.util.*
 
 class UpgradeHistoryActivity : AppCompatActivity() {
   private lateinit var listView: RecyclerView
   private lateinit var title: TextView
   private lateinit var listAdapter: UpgradeListAdapter
+  private var page = 1
 
   private lateinit var type: String
 
@@ -29,11 +32,27 @@ class UpgradeHistoryActivity : AppCompatActivity() {
       layoutManager = LinearLayoutManager(applicationContext)
       adapter = listAdapter
     }
+    rePopulate()
+  }
 
-    //populate Adapter
-    listAdapter.addItem(UpgradeHistory("btc", "1", Date()))
-    listAdapter.addItem(UpgradeHistory("eth", "2", Date()))
-    listAdapter.addItem(UpgradeHistory("btc", "3", Date()))
-    listAdapter.addItem(UpgradeHistory("doge", "4", Date()))
+  private fun rePopulate(){
+    Thread {
+      val result = GetController("upgrade.show?page=$page").call()
+      if(result.getInt("code")==200){
+        val newData = result.getJSONObject("data").getJSONArray("upgrades")
+        if(newData.length() > 0){
+          page++
+          listAdapter.clear()
+          for(i in 0 until newData.length()){
+            val history = newData[i] as JSONObject
+            listAdapter.addItem(UpgradeHistory(
+              history.getString("debit"),
+              history.getString("description"),
+              history.getString("created_at")
+            ))
+          }
+        }
+      }
+    }.start()
   }
 }

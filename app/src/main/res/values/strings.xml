@@ -2,6 +2,8 @@
   <string name="app_name">Wall Street</string>
   <string name="logo">Logo</string>
   <string name="login">Login</string>
+  <string name="prev">Previous</string>
+  <string name="next">Next</string>
   <string name="version">version</string>
   <string name="username">Username</string>
   <string name="password">Password</string>
@@ -20,11 +22,12 @@
   <string name="do_you_have_account">do you have account?</string>
   <string name="reset_password_will_send_link_to_email_address">Reset password will send link to email address</string>
   <string name="add_new_user">Invite and extend your network for more profit!</string>
-  <string name="currency">Currency</string>
+  <string name="balance">Balance</string>
   <string name="packages">Packages</string>
   <string name="upgrade">Upgrade</string>
   <string name="invite">Invite</string>
   <string name="send">Send</string>
+  <string name="description">Description</string>
   <string name="dollar_example">$ 100</string>
   <string name="icon">Icon</string>
   <string name="home">Home</string>

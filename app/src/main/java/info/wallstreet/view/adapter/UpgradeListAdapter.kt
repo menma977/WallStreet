@@ -4,11 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import info.wallstreet.R
 import info.wallstreet.model.UpgradeHistory
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -17,7 +18,7 @@ class UpgradeListAdapter(private val context: Context) :
   private val myDataset = ArrayList<UpgradeHistory>()
 
   init {
-    myDataset.add(UpgradeHistory("", "", Date()))
+    myDataset.add(UpgradeHistory("", "", Date().toString()))
   }
 
   override fun onCreateViewHolder(
@@ -31,20 +32,12 @@ class UpgradeListAdapter(private val context: Context) :
 
   override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
     if (position == 0) return
-    (holder.currency).setImageResource(
-      when (myDataset[position].type) {
-        "btc" -> R.drawable.ic_btc
-        "ltc" -> R.drawable.ic_ltc
-        "eth" -> R.drawable.ic_eth
-        "doge" -> R.drawable.ic_doge
-        else -> R.drawable.ic_btc
-      }
-    )
-    holder.currency.visibility = View.VISIBLE
-    holder.currencyHeader.text =
-      myDataset[position].type.toUpperCase(Locale.getDefault())
-    holder.level.text = myDataset[position].level
-    holder.date.text = myDataset[position].date.toString()
+    holder.balance.text = myDataset[position].balance
+    holder.description.text = myDataset[position].description
+    holder.date.text =
+      SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.ROOT).format(
+        DateFormat.getDateInstance().parse(myDataset[position].date)
+      )
   }
 
   override fun getItemCount() = myDataset.size
@@ -55,10 +48,16 @@ class UpgradeListAdapter(private val context: Context) :
     this.notifyItemRangeInserted(0, myDataset.size)
   }
 
+  fun clear() {
+    myDataset.clear()
+    myDataset.add(UpgradeHistory("", "", Date().toString()))
+    this.notifyDataSetChanged()
+    this.notifyItemRangeInserted(0, myDataset.size)
+  }
+
   class MyViewHolder(layout: View) : RecyclerView.ViewHolder(layout) {
-    val currency: ImageView = layout.findViewById(R.id.currency)
-    val currencyHeader: TextView = layout.findViewById(R.id.currency_header)
-    val level: TextView = layout.findViewById(R.id.level)
+    val balance: TextView = layout.findViewById(R.id.balance)
+    val description: TextView = layout.findViewById(R.id.description)
     val date: TextView = layout.findViewById(R.id.date)
   }
 }

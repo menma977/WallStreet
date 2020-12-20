@@ -16,30 +16,23 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/currency"
-            android:layout_width="18sp"
-            android:layout_height="18sp"
-            android:layout_marginEnd="5sp"
-            android:visibility="gone"
-            app:srcCompat="@drawable/ic_btc" />
-
         <TextView
-            android:id="@+id/currency_header"
-            android:layout_width="wrap_content"
+            android:id="@+id/balance"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/currency" />
+            android:text="@string/balance"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/level"
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="7"
         android:padding="2sp"
-        android:text="Level"
+        android:text="@string/description"
         android:textAlignment="center" />
 
     <TextView
