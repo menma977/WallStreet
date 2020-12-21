@@ -17,6 +17,8 @@
       android:theme="@style/AppTheme"
       tools:ignore="AllowBackup"
       tools:targetApi="n">
+    <activity android:name=".view.history.HistoryBalanceActivity">
+    </activity>
     <activity
         android:name=".view.history.FakeBalanceActivity"
         android:configChanges="orientation|screenSize"
@@ -25,7 +27,6 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
-
     <activity
         android:name=".view.history.UpgradeHistoryActivity"
         android:configChanges="orientation|screenSize"
@@ -34,7 +35,6 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".view.NavigationActivity"/>
     </activity>
-
     <activity
         android:name=".view.user.EditPasswordActivity"
         android:configChanges="orientation|screenSize"
