@@ -8,11 +8,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.R
 import info.wallstreet.config.CoinFormat
+import info.wallstreet.config.Loading
+import info.wallstreet.controller.WebViewController
+import info.wallstreet.model.Url
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.history.UpgradeHistoryActivity
@@ -21,10 +27,13 @@ import info.wallstreet.view.history.FakeBalanceActivity
 import info.wallstreet.view.history.HistoryBalanceActivity
 import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
+import org.json.JSONObject
 import java.util.*
+import kotlin.concurrent.schedule
 
 class HomeFragment : Fragment() {
   private lateinit var parentActivity: NavigationActivity
+  private lateinit var loading: Loading
   private lateinit var user: User
   private lateinit var level: TextView
   private lateinit var username: TextView
@@ -51,12 +60,13 @@ class HomeFragment : Fragment() {
   private lateinit var progressBar: ProgressBar
   private lateinit var progressValue: TextView
   private lateinit var targetValue: TextView
-  private lateinit var inviteBtn: Button
   private lateinit var upgradeBtn: LinearLayout
   private lateinit var historyUpgradeButton: LinearLayout
   private lateinit var historyWall: LinearLayout
   private lateinit var history999: LinearLayout
   private lateinit var move: Intent
+  private lateinit var webView: WebView
+  private lateinit var result: JSONObject
   private var onLogoutReady = false
 
   override fun onCreateView(
@@ -67,6 +77,7 @@ class HomeFragment : Fragment() {
     parentActivity = activity as NavigationActivity
 
     user = User(parentActivity)
+    loading = Loading(parentActivity)
 
     level = view.findViewById(R.id.textViewLevel)
     username = view.findViewById(R.id.textViewUsername)
@@ -94,7 +105,6 @@ class HomeFragment : Fragment() {
     toSendETHFake = view.findViewById(R.id.wallet_fake_ethereum_view)
     toSendDOGEFake = view.findViewById(R.id.wallet_fake_dogecoin_view)
 
-    inviteBtn = view.findViewById(R.id.invite)
     upgradeBtn = view.findViewById(R.id.buttonUpgrade)
     historyUpgradeButton = view.findViewById(R.id.history_upgrades)
     historyWall = view.findViewById(R.id.buttonHistoryWall)
@@ -103,6 +113,7 @@ class HomeFragment : Fragment() {
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
     targetValue = view.findViewById(R.id.textViewTarget)
+    webView = view.findViewById(R.id.webViewContent)
 
     level.text = "Level : ${user.getString("level")}"
     username.text = user.getString("username")
@@ -176,6 +187,8 @@ class HomeFragment : Fragment() {
       WalletQR.show(parentActivity, "doge", user)
     }
 
+    loadHtml()
+
     return view
   }
 
@@ -239,6 +252,26 @@ class HomeFragment : Fragment() {
       ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
     } else {
       ethFake.text = "0"
+    }
+  }
+
+  private fun loadHtml() {
+    loading.openDialog()
+    Timer().schedule(100) {
+      result = WebViewController("binary", user.getString("token")).call()
+      if (result.getInt("code") == 200) {
+        parentActivity.runOnUiThread {
+          webView.removeAllViews()
+          webView.webViewClient = WebViewClient()
+          webView.webChromeClient = WebChromeClient()
+          webView.settings.javaScriptEnabled = true
+          webView.settings.domStorageEnabled = true
+          webView.settings.javaScriptCanOpenWindowsAutomatically = true
+          webView.loadData(result.getString("data"), "text/html", "UTF-8")
+          webView.loadDataWithBaseURL(Url.web("binary"), result.getString("data"), "text/html", "UTF-8", null)
+          loading.closeDialog()
+        }
+      }
     }
   }
 

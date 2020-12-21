@@ -653,34 +653,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/card2"
-            android:gravity="center_horizontal|center_vertical"
             android:orientation="vertical"
-            android:paddingTop="40dp"
-            android:paddingBottom="40dp">
+            android:padding="10dp">
 
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="12sp"
-              android:text="@string/add_new_user"
-              android:textAlignment="center"
-              android:textSize="14sp"
-              android:textStyle="bold"/>
-
-          <Button
-              android:id="@+id/invite"
-              android:layout_width="134dp"
-              android:layout_height="27dp"
-              android:layout_marginStart="70dp"
-              android:layout_marginEnd="70dp"
-              android:background="@drawable/button"
-              android:text="@string/invite"
-              android:textSize="10sp"
-              tools:ignore="SmallSp"/>
+          <WebView
+              android:id="@+id/webViewContent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
 
         </LinearLayout>
 
@@ -689,6 +672,7 @@
             android:layout_height="20dp"/>
 
       </LinearLayout>
+
     </ScrollView>
 
   </LinearLayout>
