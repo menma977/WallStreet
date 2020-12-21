@@ -46,11 +46,12 @@ class PostController(private var targetUrl: String, private var token: String?, 
 
     fun render(response: Response): String {
       val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
+      var readInput = input.readLine()
       var result = ""
-      do {
-        var s = input.readLine()
-        result += s
-      } while(s != null)
+      while (readInput != null) {
+        result += readInput
+        readInput = input.readLine()
+      }
       return result
     }
   }

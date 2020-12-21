@@ -1,18 +1,20 @@
 package info.wallstreet.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import info.wallstreet.R
 import info.wallstreet.model.HistoryInternalBalance
 
-class HistoryInternalBalanceListAdapter : RecyclerView.Adapter<HistoryInternalBalanceListAdapter.MyViewHolder>() {
+class HistoryInternalBalanceListAdapter(private val context: Context) : RecyclerView.Adapter<HistoryInternalBalanceListAdapter.MyViewHolder>() {
   private val myDataset = ArrayList<HistoryInternalBalance>()
 
   init {
-    myDataset.add(HistoryInternalBalance("", "", ""))
+    myDataset.add(HistoryInternalBalance("in", "Address", "Balance", "Type", "AT"))
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -22,7 +24,16 @@ class HistoryInternalBalanceListAdapter : RecyclerView.Adapter<HistoryInternalBa
 
   override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
     holder.address.text = myDataset[position].address
-    holder.balance.text = myDataset[position].balance
+    if (myDataset[position].color == "in" && position != 0) {
+      holder.balance.setTextColor(ContextCompat.getColor(context, R.color.Success))
+      holder.balance.text = "+${myDataset[position].balance}"
+    } else if (myDataset[position].color == "out" && position != 0) {
+      holder.balance.setTextColor(ContextCompat.getColor(context, R.color.Danger))
+      holder.balance.text = "-${myDataset[position].balance}"
+    } else {
+      holder.balance.text = myDataset[position].balance
+    }
+    holder.currency.text = myDataset[position].currency
     holder.date.text = myDataset[position].date
   }
 
@@ -36,7 +47,7 @@ class HistoryInternalBalanceListAdapter : RecyclerView.Adapter<HistoryInternalBa
 
   fun clear() {
     myDataset.clear()
-    myDataset.add(HistoryInternalBalance("", "", ""))
+    myDataset.add(HistoryInternalBalance("in", "Address", "Balance", "Type", "AT"))
     this.notifyDataSetChanged()
     this.notifyItemRangeInserted(0, myDataset.size)
   }
@@ -44,6 +55,7 @@ class HistoryInternalBalanceListAdapter : RecyclerView.Adapter<HistoryInternalBa
   class MyViewHolder(layout: View) : RecyclerView.ViewHolder(layout) {
     val address: TextView = layout.findViewById(R.id.address)
     val balance: TextView = layout.findViewById(R.id.balance)
+    val currency: TextView = layout.findViewById(R.id.currency)
     val date: TextView = layout.findViewById(R.id.date)
   }
 }

@@ -47,7 +47,13 @@ class GetController(private var targetUrl: String, private var token: String?, p
 
     fun render(response: Response): String {
       val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
-      return input.readLine()
+      var readInput = input.readLine()
+      var result = ""
+      while (readInput != null) {
+        result += readInput
+        readInput = input.readLine()
+      }
+      return result
     }
   }
 

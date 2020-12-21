@@ -16,7 +16,8 @@
       android:layout_weight="1"
       android:padding="2sp"
       android:text="description"
-      android:textAlignment="center"/>
+      android:textAlignment="center"
+      android:textColor="@color/textSecondary"/>
 
   <TextView
       android:id="@+id/balance"
@@ -25,7 +26,8 @@
       android:layout_weight="1"
       android:padding="2sp"
       android:text="balance"
-      android:textAlignment="center"/>
+      android:textAlignment="center"
+      android:textColor="@color/textSecondary"/>
 
   <TextView
       android:id="@+id/date"
@@ -34,6 +36,7 @@
       android:layout_weight="1"
       android:padding="2sp"
       android:text="At"
-      android:textAlignment="center"/>
+      android:textAlignment="center"
+      android:textColor="@color/textSecondary"/>
 
 </TableRow>

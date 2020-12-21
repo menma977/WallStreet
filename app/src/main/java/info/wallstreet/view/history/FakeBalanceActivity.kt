@@ -50,8 +50,8 @@ class FakeBalanceActivity : AppCompatActivity() {
     buttonNext = findViewById(R.id.buttonNext)
     title = findViewById(R.id.textViewTitle)
 
-    title.text = "Balance"
-    listAdapter = HistoryFakeBalanceListAdapter()
+    title.text = "-"
+    listAdapter = HistoryFakeBalanceListAdapter(this)
     listView = findViewById<RecyclerView>(R.id.lists_container).apply {
       layoutManager = LinearLayoutManager(applicationContext)
       adapter = listAdapter
@@ -145,7 +145,7 @@ class FakeBalanceActivity : AppCompatActivity() {
       val read = list.getJSONObject(i)
       val balanceFormat = CoinFormat.decimalToCoin(read.getString("balance").toBigDecimal()).toPlainString()
       runOnUiThread {
-        listAdapter.addItem(HistoryFakeBalance(read.getString("description"), balanceFormat, read.getString("date")))
+        listAdapter.addItem(HistoryFakeBalance(read.getString("color"), read.getString("description"), balanceFormat, read.getString("date")))
       }
     }
 

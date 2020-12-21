@@ -1,18 +1,20 @@
 package info.wallstreet.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import info.wallstreet.R
 import info.wallstreet.model.HistoryFakeBalance
 
-class HistoryFakeBalanceListAdapter : RecyclerView.Adapter<HistoryFakeBalanceListAdapter.MyViewHolder>() {
+class HistoryFakeBalanceListAdapter(private val context: Context) : RecyclerView.Adapter<HistoryFakeBalanceListAdapter.MyViewHolder>() {
   private val myDataset = ArrayList<HistoryFakeBalance>()
 
   init {
-    myDataset.add(HistoryFakeBalance("", "", ""))
+    myDataset.add(HistoryFakeBalance("in", "Description", "Balance", "AT"))
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -22,7 +24,15 @@ class HistoryFakeBalanceListAdapter : RecyclerView.Adapter<HistoryFakeBalanceLis
 
   override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
     holder.description.text = myDataset[position].description
-    holder.balance.text = myDataset[position].balance
+    if (myDataset[position].color == "in" && position != 0) {
+      holder.balance.setTextColor(ContextCompat.getColor(context, R.color.Success))
+      holder.balance.text = "+${myDataset[position].balance}"
+    } else if (myDataset[position].color == "out" && position != 0) {
+      holder.balance.setTextColor(ContextCompat.getColor(context, R.color.Danger))
+      holder.balance.text = "-${myDataset[position].balance}"
+    } else {
+      holder.balance.text = myDataset[position].balance
+    }
     holder.date.text = myDataset[position].date
   }
 
@@ -36,7 +46,7 @@ class HistoryFakeBalanceListAdapter : RecyclerView.Adapter<HistoryFakeBalanceLis
 
   fun clear() {
     myDataset.clear()
-    myDataset.add(HistoryFakeBalance("", "", ""))
+    myDataset.add(HistoryFakeBalance("in", "Description", "Balance", "AT"))
     this.notifyDataSetChanged()
     this.notifyItemRangeInserted(0, myDataset.size)
   }

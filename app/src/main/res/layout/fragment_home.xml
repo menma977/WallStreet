@@ -51,7 +51,7 @@
       </LinearLayout>
 
       <LinearLayout
-          android:id="@+id/buttonHistoryRoi"
+          android:id="@+id/history_upgrades"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -101,7 +101,7 @@
       </LinearLayout>
 
       <LinearLayout
-          android:id="@+id/buttonHistoryDogeBoge"
+          android:id="@+id/buttonHistory999"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -110,7 +110,6 @@
           tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/history_upgrades"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
