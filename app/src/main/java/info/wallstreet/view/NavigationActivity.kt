@@ -14,6 +14,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.MainActivity
 import info.wallstreet.R
 import info.wallstreet.background.*
+import info.wallstreet.config.CoinFormat
 import info.wallstreet.config.Loading
 import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
@@ -21,6 +22,7 @@ import info.wallstreet.view.fragment.HomeFragment
 import info.wallstreet.view.fragment.SettingFragment
 import info.wallstreet.view.modal.ModalSendBalance
 import info.wallstreet.view.user.RegisteredActivity
+import java.math.BigDecimal
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -53,7 +55,7 @@ class NavigationActivity : AppCompatActivity() {
     settingButton = findViewById(R.id.linearLayoutSetting)
     buttonSendBalance = findViewById(R.id.imageButtonSend)
 
-    username.text = user.getString("username")
+    username.text = user.getString("username") + " $ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
 
     runService()
     navigation()
@@ -131,16 +133,17 @@ class NavigationActivity : AppCompatActivity() {
       startService(receiverltc)
       startService(receiverEth)
 
-      LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverDataUser, IntentFilter("web.user"))
+      LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverUpgrade, IntentFilter("web.upgrade"))
     }
   }
 
-  private var broadcastReceiverDataUser: BroadcastReceiver = object : BroadcastReceiver() {
+  private var broadcastReceiverUpgrade: BroadcastReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
       if (user.getBoolean("logout")) {
         onLogout()
       } else {
-        username.text = user.getString("username")
+        val text = user.getString("username") + " $ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
+        username.text = text
       }
     }
   }

@@ -2,7 +2,6 @@ package info.wallstreet
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
@@ -50,6 +49,12 @@ class MainActivity : AppCompatActivity() {
     when {
       token -> {
         move = Intent(applicationContext, NavigationActivity::class.java)
+        if (user.getString("targetValue").isEmpty()) {
+          user.setString("targetValue", "0")
+        }
+        if (user.getString("progressValue").isEmpty()) {
+          user.setString("progressValue", "0")
+        }
       }
       update -> {
         user.clear()
@@ -88,11 +93,10 @@ class MainActivity : AppCompatActivity() {
   private fun setupPreference() {
     val result = GetController("upgrade.packages").call()
     if (result.getInt("code") == 200) {
-      val pref = getSharedPreferences("option-cached",MODE_PRIVATE).edit()
+      val pref = getSharedPreferences("option-cached", MODE_PRIVATE).edit()
       val packages = result.getJSONObject("data").getJSONArray("packages")
       pref.putString(
-        "packages-json",
-        packages.toString().replace(Regex("\\s+", RegexOption.MULTILINE), "")
+        "packages-json", packages.toString().replace(Regex("\\s+", RegexOption.MULTILINE), "")
       )
       pref.apply()
     }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -135,6 +134,9 @@ class LoginActivity : AppCompatActivity() {
         user.setString("fake_balance_ltc", result.getJSONObject("data").getString("fake_ltc_balance"))
         user.setString("fake_balance_eth", result.getJSONObject("data").getString("fake_eth_balance"))
         user.setString("fake_balance_btc", result.getJSONObject("data").getString("fake_btc_balance"))
+
+        user.setString("targetValue", "0")
+        user.setString("progressValue", "0")
 
         runOnUiThread {
           move = Intent(applicationContext, NavigationActivity::class.java)

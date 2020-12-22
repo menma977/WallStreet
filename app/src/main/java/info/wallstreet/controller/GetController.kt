@@ -10,6 +10,7 @@ import org.json.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.concurrent.Callable
+import java.util.concurrent.TimeUnit
 
 class GetController(private var targetUrl: String, private var token: String?, private var bodyValue: FormBody.Builder?) : Callable<JSONObject> {
   constructor(targetUrl: String, token: String) : this(targetUrl, token, null)
@@ -59,7 +60,10 @@ class GetController(private var targetUrl: String, private var token: String?, p
 
   override fun call(): JSONObject {
     return try {
-      val client = OkHttpClient.Builder().build()
+      val client = OkHttpClient.Builder()
+      client.connectTimeout(30, TimeUnit.SECONDS)
+      client.writeTimeout(30, TimeUnit.SECONDS)
+      client.readTimeout(30, TimeUnit.SECONDS)
       val request = Request.Builder()
       request.url(Url.web(targetUrl))
       request.method("GET", if (bodyValue != null) bodyValue!!.build() else null)
@@ -68,7 +72,7 @@ class GetController(private var targetUrl: String, private var token: String?, p
       }
 
       request.addHeader("X-Requested-With", "XMLHttpRequest")
-      val response = client.newCall(request.build()).execute()
+      val response = client.build().newCall(request.build()).execute()
       val convertJSON = JSONObject(render(response))
 
       return responseHandler(response, convertJSON)

@@ -134,6 +134,9 @@ class HomeFragment : Fragment() {
 
     loadHtml()
 
+    progressValue.text = "$ ${CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()}"
+    targetValue.text = "$ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()}"
+
     return view
   }
 

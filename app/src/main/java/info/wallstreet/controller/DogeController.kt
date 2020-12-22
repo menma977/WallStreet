@@ -55,7 +55,10 @@ class DogeController(private var bodyValue: FormBody.Builder) : Callable<JSONObj
 
   override fun call(): JSONObject {
     return try {
-      val client = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS).build()
+      val client = OkHttpClient.Builder()
+      client.connectTimeout(30, TimeUnit.SECONDS)
+      client.writeTimeout(30, TimeUnit.SECONDS)
+      client.readTimeout(30, TimeUnit.SECONDS)
       val request = Request.Builder()
       request.url(Url.doge())
       request.addHeader("Access-Control-Allow-Origin", "*")
@@ -64,7 +67,7 @@ class DogeController(private var bodyValue: FormBody.Builder) : Callable<JSONObj
       request.header("Connection", "close")
       bodyValue.addEncoded("key", Url.keyDoge())
       request.post(bodyValue.build())
-      val response: Response = client.newCall(request.build()).execute()
+      val response: Response = client.build().newCall(request.build()).execute()
       val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
       val inputData: String = input.readLine()
       val convertJSON = JSONObject(inputData)
