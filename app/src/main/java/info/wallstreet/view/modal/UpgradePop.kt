@@ -24,11 +24,9 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
   private val packages: LinkedHashMap<String, Int>
 
   init {
-    val layout: LayoutInflater =
-      context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    val layout: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = layout.inflate(R.layout.modal_upgrade_layout, LinearLayout(context), false)
-    if(context is Activity)
-      setOwnerActivity(context)
+    if (context is Activity) setOwnerActivity(context)
     setView(view)
     typeCurrency = view.findViewById(R.id.currency)
     typePackages = view.findViewById(R.id.packages)
@@ -57,14 +55,11 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       packages.forEach { (k, v) ->
         keys[i++] = k
       }
-      typePackages.adapter =
-        ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, keys)
+      typePackages.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, keys)
     } else {
       dismiss()
       Toast.makeText(
-        context,
-        "cannot find packages, please restart application",
-        Toast.LENGTH_SHORT
+        context, "cannot find packages, please restart application", Toast.LENGTH_SHORT
       ).show()
     }
   }
@@ -78,7 +73,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       else -> "btc"
     }
     val softkey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    softkey.hideSoftInputFromWindow(View(ownerActivity).windowToken,0)
+    softkey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
     val pkg = typePackages.selectedItem.toString()
     val pass = secondaryPassword.text.toString()
     val balance = user.getString("balance_$type")
@@ -91,8 +86,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       val response = PostController("upgrade.store", user.getString("token"), body).call()
       ownerActivity?.runOnUiThread {
         Toast.makeText(context, response.getString("data"), Toast.LENGTH_LONG).show()
-        if (response.getInt("code") != 500)
-          dismiss()
+        if (response.getInt("code") != 500) dismiss()
       }
     }
   }

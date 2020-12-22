@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/card2"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingTop="20sp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="380dp">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginBottom="10sp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@mipmap/ic_launcher_foreground"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/send"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_btc"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btc"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonBTC"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_btc_wall"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btc_wall"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonBTCWall"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/colorSecondary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_eth"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/eth"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonETH"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_eth_wall"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/eth_wall"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonETHWall"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/colorSecondary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_doge"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/doge"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonDoge"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_doge_wall"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/doge_wall"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonDogeWall"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/colorSecondary"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_ltc"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ltc"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonLTC"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="5dp"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_ltc_wall"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ltc_wall"
+            android:textColor="@color/textSecondary"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:text="@string/send"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/buttonLTCWall"
+            android:layout_weight="0.5"
+            android:background="@drawable/button"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/buttonClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/card2"
+        android:contentDescription="@string/icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

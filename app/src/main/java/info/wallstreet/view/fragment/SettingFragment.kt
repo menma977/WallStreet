@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import info.wallstreet.R
+import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.user.EditPasswordActivity
@@ -42,7 +43,7 @@ class SettingFragment : Fragment() {
     username.text = user.getString("username")
     email.text = user.getString("email")
     phone.text = user.getString("phone")
-    level.text = "Current LEVEL : ${user.getString("level")}"
+    level.text = "Current TopUp : $${CoinFormat.toDollar(user.getString("level").toBigDecimal())}"
 
     editPassword.setOnClickListener {
       move = Intent(parentActivity, EditPasswordActivity::class.java)

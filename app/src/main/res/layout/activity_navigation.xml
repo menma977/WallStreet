@@ -54,7 +54,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         app:srcCompat="@drawable/barcode"
-        android:id="@+id/imageButtonQr"
+        android:id="@+id/imageButtonSend"
         android:background="@color/Link"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"

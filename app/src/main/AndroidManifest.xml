@@ -114,6 +114,9 @@
     <service
         android:name=".background.UpgradeService"
         android:enabled="true"/>
+    <service
+        android:name=".background.DataUserService"
+        android:enabled="true"/>
   </application>
 
 </manifest>

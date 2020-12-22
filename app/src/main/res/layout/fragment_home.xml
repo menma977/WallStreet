@@ -68,7 +68,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History Upgrade"
+            android:text="History TopUp"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
             android:textSize="12sp"/>
@@ -88,7 +88,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/history_doge"/>
+            app:srcCompat="@drawable/history_wall"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -113,12 +113,12 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/history_boge"/>
+            app:srcCompat="@drawable/history_coin"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History Balance"
+            android:text="History Coin"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
             android:textSize="12sp"/>
@@ -214,37 +214,6 @@
 
           <LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="20dp"
-              android:layout_marginTop="20dp"
-              android:layout_marginEnd="20dp"
-              android:layout_marginBottom="10dp"
-              android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewLevel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/app_name"
-                android:textAlignment="textStart"
-                android:textColor="@color/textSecondary"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/textViewUsername"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/app_name"
-                android:textAlignment="textEnd"
-                android:textColor="@color/textSecondary"
-                android:textStyle="bold"/>
-
-          </LinearLayout>
-
-          <LinearLayout
-              android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_marginStart="10dp"
               android:layout_marginEnd="10dp"
@@ -266,7 +235,6 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_bitcoin_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
@@ -288,12 +256,11 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_fake_bitcoin_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/icon"
-                    app:srcCompat="@drawable/ic_btc"/>
+                    app:srcCompat="@drawable/ic_btc_wall"/>
 
                 <TextView
                     android:layout_width="90sp"
@@ -367,7 +334,6 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_ethereum_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
@@ -389,12 +355,11 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_fake_ethereum_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/icon"
-                    app:srcCompat="@drawable/ic_eth"/>
+                    app:srcCompat="@drawable/ic_eth_wall"/>
 
                 <TextView
                     android:layout_width="90sp"
@@ -468,7 +433,6 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_litecoin_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
@@ -490,12 +454,11 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_fake_litecoin_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/icon"
-                    app:srcCompat="@drawable/ic_ltc"/>
+                    app:srcCompat="@drawable/ic_ltc_wall"/>
 
                 <TextView
                     android:layout_width="90sp"
@@ -570,7 +533,6 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_dogecoin_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
@@ -592,12 +554,11 @@
                   android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/wallet_fake_dogecoin_view"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/icon"
-                    app:srcCompat="@drawable/ic_doge"/>
+                    app:srcCompat="@drawable/ic_doge_wall"/>
 
                 <TextView
                     android:layout_width="90sp"
