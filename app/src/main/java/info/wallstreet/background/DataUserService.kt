@@ -33,7 +33,6 @@ class DataUserService : Service() {
           val privateIntent = Intent()
           if (startBackgroundService) {
             result = GetController("user.show", user.getString("token")).call()
-            println(result)
             when {
               result.getInt("code") == 200 -> {
                 user.setString("cookie", result.getJSONObject("data").getString("cookie"))

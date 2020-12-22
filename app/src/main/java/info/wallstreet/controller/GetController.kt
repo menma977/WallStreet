@@ -70,7 +70,6 @@ class GetController(private var targetUrl: String, private var token: String?, p
       request.addHeader("X-Requested-With", "XMLHttpRequest")
       val response = client.newCall(request.build()).execute()
       val convertJSON = JSONObject(render(response))
-      Log.i("json", convertJSON.toString())
 
       return responseHandler(response, convertJSON)
     } catch (e: Exception) {

@@ -128,7 +128,6 @@ class HistoryBalanceActivity : AppCompatActivity() {
       body.addEncoded("s", user.getString("cookie"))
       body.addEncoded("Token", newToken)
       result = DogeController(body).call()
-      Log.i("result", "Internal - $result")
 
       if (result.getInt("code") == 200) {
         val list = result.getJSONObject("data")
@@ -183,7 +182,6 @@ class HistoryBalanceActivity : AppCompatActivity() {
       body.addEncoded("s", user.getString("cookie"))
       body.addEncoded("Token", newToken)
       result = DogeController(body).call()
-      Log.i("result", "External - $result")
 
       if (result.getInt("code") == 200) {
         val list = result.getJSONObject("data")

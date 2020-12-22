@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
     Timer().schedule(1000) {
       val result = GetController("version").call()
 
-      Log.i("json", result.toString())
-
       if (result.getInt("code") == 200) {
         setupPreference()
         if (result.getJSONObject("data").getInt("version") != BuildConfig.VERSION_CODE) {

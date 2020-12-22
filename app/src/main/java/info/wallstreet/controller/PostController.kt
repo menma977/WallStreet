@@ -71,9 +71,7 @@ class PostController(private var targetUrl: String, private var token: String?, 
       request.addHeader("X-Requested-With", "XMLHttpRequest")
       val response = client.newCall(request.build()).execute()
       val raw = render(response)
-      Log.i("raw", raw)
       val convertJSON = JSONObject(raw)
-      Log.i("json", convertJSON.toString())
 
       return responseHandler(response, convertJSON)
     } catch (e: Exception) {

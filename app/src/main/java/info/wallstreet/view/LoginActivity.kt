@@ -114,8 +114,6 @@ class LoginActivity : AppCompatActivity() {
     Timer().schedule(1000) {
       val result = PostController("login", body).call()
 
-      Log.i("json", result.toString())
-
       if (result.getInt("code") == 200) {
         user.setString("token", result.getJSONObject("data").getString("token"))
         user.setString("cookie", result.getJSONObject("data").getString("cookie"))

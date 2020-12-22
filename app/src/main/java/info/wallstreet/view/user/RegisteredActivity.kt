@@ -79,8 +79,6 @@ class RegisteredActivity : AppCompatActivity() {
     Timer().schedule(1000) {
       val result = PostController("user.registered", user.getString("token"), body).call()
 
-      Log.i("json", result.toString())
-
       if (result.getInt("code") == 200) {
         runOnUiThread {
           Toast.makeText(applicationContext, result.getString("data"), Toast.LENGTH_SHORT).show()
