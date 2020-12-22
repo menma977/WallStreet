@@ -128,6 +128,16 @@ class LoginActivity : AppCompatActivity() {
         user.setString("wallet_eth", result.getJSONObject("data").getString("wallet_eth"))
         user.setString("level", result.getJSONObject("data").getString("level"))
 
+        user.setString("balance_doge", result.getJSONObject("data").getString("doge_balance"))
+        user.setString("balance_ltc", result.getJSONObject("data").getString("ltc_balance"))
+        user.setString("balance_eth", result.getJSONObject("data").getString("eth_balance"))
+        user.setString("balance_btc", result.getJSONObject("data").getString("btc_balance"))
+
+        user.setString("fake_balance_doge", result.getJSONObject("data").getString("fake_doge_balance"))
+        user.setString("fake_balance_ltc", result.getJSONObject("data").getString("fake_ltc_balance"))
+        user.setString("fake_balance_eth", result.getJSONObject("data").getString("fake_eth_balance"))
+        user.setString("fake_balance_btc", result.getJSONObject("data").getString("fake_btc_balance"))
+
         runOnUiThread {
           move = Intent(applicationContext, NavigationActivity::class.java)
           startActivity(move)
