@@ -81,7 +81,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
     body.add("type", type)
     body.add("upgrade_list", pkg)
     body.add("balance", balance)
-    body.add("secondaryPassword", pass)
+    body.add("secondary_password", pass)
     Timer().schedule(100) {
       val response = PostController("upgrade.store", user.getString("token"), body).call()
       ownerActivity?.runOnUiThread {
