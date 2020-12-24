@@ -36,6 +36,7 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var receiverDoge: Intent
   private lateinit var receiverltc: Intent
   private lateinit var receiverEth: Intent
+  private lateinit var receiverCamel: Intent
   private lateinit var username: TextView
   private lateinit var homeButton: LinearLayout
   private lateinit var addUserButton: LinearLayout
@@ -81,6 +82,7 @@ class NavigationActivity : AppCompatActivity() {
     stopService(receiverDoge)
     stopService(receiverltc)
     stopService(receiverEth)
+    stopService(receiverCamel)
   }
 
   override fun onBackPressed() {
@@ -92,6 +94,7 @@ class NavigationActivity : AppCompatActivity() {
       stopService(receiverDoge)
       stopService(receiverltc)
       stopService(receiverEth)
+      stopService(receiverCamel)
       finishAffinity()
     } else {
       super.onBackPressed()
@@ -124,6 +127,7 @@ class NavigationActivity : AppCompatActivity() {
       receiverDoge = Intent(applicationContext, DogeService::class.java)
       receiverltc = Intent(applicationContext, LtcService::class.java)
       receiverEth = Intent(applicationContext, EthService::class.java)
+      receiverCamel = Intent(applicationContext, CamelService::class.java)
 
       startService(dataUser)
       startService(receiverBalances)
@@ -132,6 +136,7 @@ class NavigationActivity : AppCompatActivity() {
       startService(receiverDoge)
       startService(receiverltc)
       startService(receiverEth)
+      startService(receiverCamel)
 
       LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverUpgrade, IntentFilter("web.upgrade"))
     }
