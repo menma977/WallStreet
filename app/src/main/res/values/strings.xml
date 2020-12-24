@@ -27,6 +27,7 @@
   <string name="upgrade">Top Up</string>
   <string name="invite">Invite</string>
   <string name="send">Send</string>
+  <string name="currency">Currency</string>
   <string name="description">Description</string>
   <string name="dollar_example">$ 100</string>
   <string name="icon">Icon</string>
@@ -65,5 +66,6 @@
     <item>Litecoin</item>
     <item>Ethereum</item>
     <item>Dogecoin</item>
+    <item>Camel</item>
   </string-array>
 </resources>

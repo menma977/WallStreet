@@ -109,6 +109,9 @@
         android:name=".background.EthService"
         android:enabled="true"/>
     <service
+        android:name=".background.CamelService"
+        android:enabled="true"/>
+    <service
         android:name=".background.LtcService"
         android:enabled="true"/>
     <service

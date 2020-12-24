@@ -70,10 +70,11 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       "Litecoin" -> "ltc"
       "Ethereum" -> "eth"
       "Dogecoin" -> "doge"
+      "Camel" -> "camel"
       else -> "btc"
     }
-    val softkey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    softkey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
+    val softKey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    softKey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
     val pkg = typePackages.selectedItem.toString()
     val pass = secondaryPassword.text.toString()
     val balance = user.getString("balance_$type")
