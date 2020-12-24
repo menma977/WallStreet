@@ -19,6 +19,16 @@ object Url {
   /**
    * @return String
    */
+  fun camel(endpoint: String): String {
+    var target = endpoint
+    if(endpoint.startsWith("/"))
+      target = target.substring(1)
+    return "https://api.cameltoken.io/tronapi/$target"
+  }
+
+  /**
+   * @return String
+   */
   fun keyDoge(): String {
     return "a8bbdad7d8174c29a0804c1d19023eba"
   }

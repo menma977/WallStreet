@@ -3,7 +3,9 @@
   <domain-config cleartextTrafficPermitted="true">
     <domain includeSubdomains="true">www.999doge.com</domain>
     <domain includeSubdomains="true">bugnode.info</domain>
+    <domain includeSubdomains="true">cameltoken.io</domain>
     <domain includeSubdomains="true">192.168.67.205</domain>
     <domain includeSubdomains="true">192.168.1.73</domain>
+    <domain includeSubdomains="true">10.0.2.2</domain>
   </domain-config>
 </network-security-config>

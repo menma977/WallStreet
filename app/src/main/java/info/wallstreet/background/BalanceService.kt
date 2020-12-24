@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import info.wallstreet.controller.CamelController
 import info.wallstreet.controller.DogeController
 import info.wallstreet.model.User
 import okhttp3.FormBody
@@ -46,6 +47,8 @@ class BalanceService : Service() {
                   user.setString("balance_ltc", "0")
                   user.setString("balance_eth", "0")
                   user.setString("balance_doge", "0")
+                  user.setString("balance_camel", "0")
+
                   val balances = json.getJSONObject("data").getJSONArray("Balances")
                   if (balances.length() > 0) {
                     for (i in 0 until balances.length()) {
@@ -54,6 +57,15 @@ class BalanceService : Service() {
                       user.setString("balance_$currency", balance.getString("Balance"))
                     }
                   }
+
+                  val camel = CamelController.getBalance(user.getString("wallet_camel"))
+                  if (camel.getInt("code") == 200) {
+                    user.setString(
+                      "balance_camel",
+                      camel.getJSONObject("data").getString("balance")
+                    )
+                  }
+
                   privateIntent.action = "doge.balances"
                   LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(privateIntent)
                 } else {
