@@ -1,11 +1,14 @@
 package info.wallstreet.model
 
+import android.util.Log
+
 object Url {
   /**
    * @param target String
    * @return String
    */
   fun web(target: String): String {
+    Log.i("url", "http://192.168.67.205/api/${target.replace(".", "/")}")
     return "http://192.168.67.205/api/${target.replace(".", "/")}"
   }
 
@@ -21,8 +24,8 @@ object Url {
    */
   fun camel(endpoint: String): String {
     var target = endpoint
-    if(endpoint.startsWith("/"))
-      target = target.substring(1)
+    if (endpoint.startsWith("/")) target = target.substring(1)
+    Log.i("url", "https://api.cameltoken.io/tronapi/$target")
     return "https://api.cameltoken.io/tronapi/$target"
   }
 

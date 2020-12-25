@@ -45,10 +45,13 @@ class HomeFragment : Fragment() {
   private lateinit var ethFake: TextView
   private lateinit var doge: TextView
   private lateinit var dogeFake: TextView
+  private lateinit var camel: TextView
+  private lateinit var camelFake: TextView
   private lateinit var toBTCWallet: ImageView
   private lateinit var toLTCWallet: ImageView
   private lateinit var toETHWallet: ImageView
   private lateinit var toDOGEWallet: ImageView
+  private lateinit var toCamelWallet: ImageView
   private lateinit var progressBar: ProgressBar
   private lateinit var progressValue: TextView
   private lateinit var targetValue: TextView
@@ -79,11 +82,14 @@ class HomeFragment : Fragment() {
     ethFake = view.findViewById(R.id.textViewEthereumBalanceFake)
     doge = view.findViewById(R.id.textViewDogeCoinBalance)
     dogeFake = view.findViewById(R.id.textViewDogeCoinBalanceFake)
+    camel = view.findViewById(R.id.textViewCamelBalance)
+    camelFake = view.findViewById(R.id.textViewCamelWallBalance)
 
     toBTCWallet = view.findViewById(R.id.toBtcWallet)
     toLTCWallet = view.findViewById(R.id.toLtcWallet)
     toETHWallet = view.findViewById(R.id.toEthWallet)
     toDOGEWallet = view.findViewById(R.id.toDogeWallet)
+    toCamelWallet = view.findViewById(R.id.toCamelWallet)
 
     upgradeBtn = view.findViewById(R.id.buttonUpgrade)
     historyUpgradeButton = view.findViewById(R.id.history_upgrades)
@@ -132,6 +138,10 @@ class HomeFragment : Fragment() {
       WalletQR.show(parentActivity, "doge", user)
     }
 
+    toCamelWallet.setOnClickListener {
+      WalletQR.show(parentActivity, "camel", user)
+    }
+
     loadHtml()
 
     progressValue.text = "$ ${CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()}"
@@ -169,6 +179,12 @@ class HomeFragment : Fragment() {
     } else {
       eth.text = "0"
     }
+
+    if (user.getString("balance_camel").isNotEmpty()) {
+      camel.text = CoinFormat.decimalToCoin(user.getString("balance_camel").toBigDecimal()).toPlainString()
+    } else {
+      camel.text = "0"
+    }
     /**
      * Fake Balance
      */
@@ -194,6 +210,12 @@ class HomeFragment : Fragment() {
       ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
     } else {
       ethFake.text = "0"
+    }
+
+    if (user.getString("fake_balance_camel").isNotEmpty()) {
+      camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
+    } else {
+      camelFake.text = "0"
     }
   }
 

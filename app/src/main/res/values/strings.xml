@@ -42,14 +42,13 @@
   <string name="ltc_wall">LTC Wall</string>
   <string name="doge_wall">Doge Wall</string>
   <string name="idr">IDR</string>
-  <string name="doge_wallet">Dogecoin Wallet</string>
+  <string name="doge_wallet">DogeCoin Wallet</string>
   <string name="btc_wallet">Bitcoin Wallet</string>
   <string name="eth_wallet">Ethereum Wallet</string>
-  <string name="ltc_wallet">Litecoin Wallet</string>
+  <string name="ltc_wallet">LiteCoin Wallet</string>
+  <string name="camel_wallet">Camel Wallet</string>
   <string name="ic_dollar">$</string>
   <string name="str_dollar">USD</string>
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="zero">0</string>
   <string name="top_up">Top Up</string>
   <string name="wallet">Enter Wallet</string>
@@ -60,6 +59,12 @@
   <string name="logout">Logout</string>
   <string name="edit">EDIT</string>
   <string name="add_user">Add User</string>
+  <string name="camel">Camel</string>
+  <string name="history_wall">History Wall</string>
+  <string name="history_coin">History Coin</string>
+  <string name="history_top_up">History TopUp</string>
+  <string name="camel_wall">Camel Wall</string>
+  <string name="tron">Tron</string>
 
   <string-array name="currency_choice">
     <item>BitCoin</item>

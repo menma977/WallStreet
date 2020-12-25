@@ -13,6 +13,9 @@ import info.wallstreet.view.coin.SendCoinActivity
 import java.util.*
 
 class ModalSendBalance constructor(context: Context) : AlertDialog(context) {
+  private var camel: Button
+  private var camelWall: Button
+  private var tron: Button
   private var btc: Button
   private var btcWall: Button
   private var eth: Button
@@ -30,6 +33,9 @@ class ModalSendBalance constructor(context: Context) : AlertDialog(context) {
     if (context is Activity) setOwnerActivity(context)
     setView(view)
 
+    camel = view.findViewById(R.id.buttonCamel)
+    camelWall = view.findViewById(R.id.buttonCamelWall)
+    tron = view.findViewById(R.id.buttonTron)
     btc = view.findViewById(R.id.buttonBTC)
     btcWall = view.findViewById(R.id.buttonBTCWall)
     eth = view.findViewById(R.id.buttonETH)
@@ -42,6 +48,18 @@ class ModalSendBalance constructor(context: Context) : AlertDialog(context) {
 
     close.setOnClickListener {
       dismiss()
+    }
+
+    camel.setOnClickListener {
+      sendCoin("camel", false)
+    }
+
+    camelWall.setOnClickListener {
+      sendCoin("camel", true)
+    }
+
+    tron.setOnClickListener {
+      sendCoin("tron", false)
     }
 
     btc.setOnClickListener {

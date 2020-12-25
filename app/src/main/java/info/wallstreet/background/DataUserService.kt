@@ -39,6 +39,7 @@ class DataUserService : Service() {
                 user.setString("email", result.getJSONObject("data").getString("email"))
                 user.setString("username", result.getJSONObject("data").getString("username"))
                 user.setString("phone", result.getJSONObject("data").getString("phone"))
+                user.setString("wallet_camel", result.getJSONObject("data").getString("wallet_camel"))
                 user.setString("wallet_btc", result.getJSONObject("data").getString("wallet_btc"))
                 user.setString("wallet_doge", result.getJSONObject("data").getString("wallet_doge"))
                 user.setString("wallet_ltc", result.getJSONObject("data").getString("wallet_ltc"))

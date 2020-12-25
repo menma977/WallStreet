@@ -25,6 +25,7 @@ class FakeBalanceActivity : AppCompatActivity() {
   private lateinit var buttonETH: Button
   private lateinit var buttonDoge: Button
   private lateinit var buttonLTC: Button
+  private lateinit var buttonCamel: Button
   private lateinit var buttonPreview: Button
   private lateinit var buttonNext: Button
   private lateinit var listView: RecyclerView
@@ -46,6 +47,7 @@ class FakeBalanceActivity : AppCompatActivity() {
     buttonETH = findViewById(R.id.buttonETH)
     buttonDoge = findViewById(R.id.buttonDoge)
     buttonLTC = findViewById(R.id.buttonLTC)
+    buttonCamel = findViewById(R.id.buttonCamel)
     buttonPreview = findViewById(R.id.buttonPreview)
     buttonNext = findViewById(R.id.buttonNext)
     title = findViewById(R.id.textViewTitle)
@@ -75,6 +77,11 @@ class FakeBalanceActivity : AppCompatActivity() {
     buttonLTC.setOnClickListener {
       loading.openDialog()
       getData("ltc")
+    }
+
+    buttonCamel.setOnClickListener {
+      loading.openDialog()
+      getData("camel")
     }
 
     buttonPreview.setOnClickListener {

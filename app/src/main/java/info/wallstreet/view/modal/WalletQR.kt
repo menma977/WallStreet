@@ -45,6 +45,10 @@ object WalletQR {
         title.text = context.resources.getText(R.string.doge_wallet)
         icon.setImageResource(R.drawable.ic_doge)
       }
+      "camel" -> {
+        title.text = context.resources.getText(R.string.camel_wallet)
+        icon.setImageResource(R.drawable.ic_camel)
+      }
     }
     imgWallet.setImageBitmap(bitmap)
     textWallet.text = wallet
@@ -52,7 +56,7 @@ object WalletQR {
       val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
       val clipData = ClipData.newPlainText("Wallet", wallet)
       clipboardManager.setPrimaryClip(clipData)
-      Toast.makeText(context, "Doge wallet has been copied", Toast.LENGTH_SHORT).show()
+      Toast.makeText(context, "Wallet has been copied", Toast.LENGTH_SHORT).show()
     }
     builder.setView(layoutWithdraw)
     builder.setPositiveButton("Copy", DialogInterface.OnClickListener(positiveButtonClick))

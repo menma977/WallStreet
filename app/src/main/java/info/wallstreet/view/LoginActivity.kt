@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
     containerRegister = findViewById(R.id.linearLayoutContainerRegister)
 
     username.setText("admin")
-    password.setText("123456")
+    password.setText("admin")
 
     version.text = BuildConfig.VERSION_NAME
 
@@ -131,6 +131,7 @@ class LoginActivity : AppCompatActivity() {
         user.setString("balance_eth", result.getJSONObject("data").getString("eth_balance"))
         user.setString("balance_btc", result.getJSONObject("data").getString("btc_balance"))
         user.setString("balance_camel", result.getJSONObject("data").getString("camel_balance"))
+        user.setString("balance_tron", result.getJSONObject("data").getString("tron_balance"))
 
         user.setString("fake_balance_doge", result.getJSONObject("data").getString("fake_doge_balance"))
         user.setString("fake_balance_ltc", result.getJSONObject("data").getString("fake_ltc_balance"))

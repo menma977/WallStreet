@@ -10,7 +10,8 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical">
+      android:orientation="vertical"
+      tools:ignore="UselessParent">
 
     <Space
         android:layout_width="match_parent"
@@ -68,7 +69,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History TopUp"
+            android:text="@string/history_top_up"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
             android:textSize="12sp"/>
@@ -93,7 +94,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History Wall"
+            android:text="@string/history_wall"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
             android:textSize="12sp"/>
@@ -118,7 +119,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History Coin"
+            android:text="@string/history_coin"
             android:textAlignment="center"
             android:textColor="@color/colorSecondaryDark"
             android:textSize="12sp"/>
@@ -199,6 +200,133 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/card2"
+            android:elevation="15dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center">
+
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+              <ImageView
+                  android:layout_width="20sp"
+                  android:layout_height="20sp"
+                  android:layout_marginEnd="10dp"
+                  android:contentDescription="@string/icon"
+                  app:srcCompat="@drawable/ic_camel"/>
+
+              <TextView
+                  android:layout_width="90sp"
+                  android:layout_height="wrap_content"
+                  android:text="@string/camel"
+                  android:textSize="16sp"
+                  android:textStyle="bold"/>
+
+              <TextView
+                  android:id="@+id/textViewCamelBalance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/zero"
+                  android:textColor="@color/colorSecondaryDark"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:gravity="end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+              <ImageView
+                  android:layout_width="20sp"
+                  android:layout_height="20sp"
+                  android:layout_marginEnd="10dp"
+                  android:contentDescription="@string/icon"
+                  app:srcCompat="@drawable/ic_camel_wall"/>
+
+              <TextView
+                  android:layout_width="90sp"
+                  android:layout_height="wrap_content"
+                  android:text="@string/camel_wall"
+                  android:textSize="16sp"
+                  android:textStyle="bold"/>
+
+              <TextView
+                  android:id="@+id/textViewCamelWallBalance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/zero"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:gravity="end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+              <ImageView
+                  android:layout_width="20sp"
+                  android:layout_height="20sp"
+                  android:layout_marginEnd="10dp"
+                  android:contentDescription="@string/icon"
+                  app:srcCompat="@drawable/ic_tron"/>
+
+              <TextView
+                  android:layout_width="90sp"
+                  android:layout_height="wrap_content"
+                  android:text="@string/tron"
+                  android:textSize="16sp"
+                  android:textStyle="bold"/>
+
+              <TextView
+                  android:id="@+id/textViewTronBalance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/zero"
+                  android:textColor="@color/colorSecondaryDark"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:gravity="end"/>
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+          <ImageView
+              android:id="@+id/toCamelWallet"
+              android:layout_width="50sp"
+              android:layout_height="50sp"
+              android:background="@color/background"
+              android:contentDescription="@string/icon"
+              android:src="@drawable/barcode"
+              app:srcCompat="@drawable/barcode"
+              android:layout_marginStart="10dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -537,7 +665,8 @@
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/icon"
-                    app:srcCompat="@drawable/ic_doge"/>
+                    app:srcCompat="@drawable/ic_doge"
+                    tools:ignore="TooManyViews"/>
 
                 <TextView
                     android:layout_width="45dp"
