@@ -16,7 +16,6 @@ class UpgradeService : Service() {
   private var startBackgroundService: Boolean = false
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    onHandleIntent()
     return START_STICKY
   }
 
@@ -62,6 +61,7 @@ class UpgradeService : Service() {
 
   override fun onCreate() {
     super.onCreate()
+    onHandleIntent()
     startBackgroundService = true
   }
 
