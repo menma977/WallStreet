@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 object CamelController {
   private fun failResponseHandler(content: JSONObject): JSONObject {
-    return JSONObject().put("code", 500).put("data", "ERROR MESSAGE: Change Me")
+    return JSONObject().put("code", 500).put("data", "Failed to process")
   }
 
   private fun get(url: String): JSONObject {
