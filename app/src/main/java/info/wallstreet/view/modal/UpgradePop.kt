@@ -50,9 +50,9 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
         val pkg = packagesJSON.getJSONObject(i)
         packages[pkg.getString("dollar")] = pkg.getInt("id")
       }
-      val keys = Array<String>(packages.size) { "" }
+      val keys = Array(packages.size) { "" }
       var i = 0
-      packages.forEach { (k, v) ->
+      packages.forEach { (k, _) ->
         keys[i++] = k
       }
       typePackages.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, keys)
@@ -66,10 +66,10 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
 
   private fun upgrade() {
     val type = when (typeCurrency.selectedItem) {
-      "Bitcoin" -> "btc"
-      "Litecoin" -> "ltc"
+      "BitCoin" -> "btc"
+      "LiteCoin" -> "ltc"
       "Ethereum" -> "eth"
-      "Dogecoin" -> "doge"
+      "DogeCoin" -> "doge"
       "Camel" -> "camel"
       else -> "btc"
     }
