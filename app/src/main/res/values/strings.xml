@@ -62,10 +62,10 @@
   <string name="add_user">Add User</string>
 
   <string-array name="currency_choice">
-    <item>Bitcoin</item>
-    <item>Litecoin</item>
+    <item>BitCoin</item>
+    <item>LiteCoin</item>
     <item>Ethereum</item>
-    <item>Dogecoin</item>
+    <item>DogeCoin</item>
     <item>Camel</item>
   </string-array>
 </resources>
