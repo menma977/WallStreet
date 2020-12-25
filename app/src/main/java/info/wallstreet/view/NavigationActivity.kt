@@ -1,5 +1,6 @@
 package info.wallstreet.view
 
+import android.app.job.JobScheduler
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -77,6 +78,9 @@ class NavigationActivity : AppCompatActivity() {
 
   override fun onStop() {
     super.onStop()
+    val runJob = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+    runJob.cancel(1)
+
     stopService(dataUser)
     stopService(receiverBalances)
     stopService(receiverUpgrade)
@@ -89,6 +93,9 @@ class NavigationActivity : AppCompatActivity() {
 
   override fun onBackPressed() {
     if (supportFragmentManager.backStackEntryCount == 1) {
+      val runJob = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+      runJob.cancel(1)
+
       stopService(dataUser)
       stopService(receiverBalances)
       stopService(receiverUpgrade)

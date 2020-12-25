@@ -47,6 +47,7 @@ class HomeFragment : Fragment() {
   private lateinit var dogeFake: TextView
   private lateinit var camel: TextView
   private lateinit var camelFake: TextView
+  private lateinit var tron: TextView
   private lateinit var toBTCWallet: ImageView
   private lateinit var toLTCWallet: ImageView
   private lateinit var toETHWallet: ImageView
@@ -84,6 +85,7 @@ class HomeFragment : Fragment() {
     dogeFake = view.findViewById(R.id.textViewDogeCoinBalanceFake)
     camel = view.findViewById(R.id.textViewCamelBalance)
     camelFake = view.findViewById(R.id.textViewCamelWallBalance)
+    tron = view.findViewById(R.id.textViewTronBalance)
 
     toBTCWallet = view.findViewById(R.id.toBtcWallet)
     toLTCWallet = view.findViewById(R.id.toLtcWallet)
@@ -308,6 +310,8 @@ class HomeFragment : Fragment() {
         ltc.text = CoinFormat.decimalToCoin(user.getString("balance_ltc").toBigDecimal()).toPlainString()
         eth.text = CoinFormat.decimalToCoin(user.getString("balance_eth").toBigDecimal()).toPlainString()
         doge.text = CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
+        camel.text = CoinFormat.decimalToCoin(user.getString("balance_camel").toBigDecimal()).toPlainString()
+        tron.text = CoinFormat.decimalToCoin(user.getString("balance_tron").toBigDecimal()).toPlainString()
       }
       upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }

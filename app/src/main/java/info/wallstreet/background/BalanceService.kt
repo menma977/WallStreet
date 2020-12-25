@@ -48,7 +48,7 @@ class BalanceService : Service() {
                   user.setString("balance_eth", "0")
                   user.setString("balance_doge", "0")
                   user.setString("balance_camel", "0")
-
+                  user.setString("balance_tron", "0")
                   val balances = json.getJSONObject("data").getJSONArray("Balances")
                   if (balances.length() > 0) {
                     for (i in 0 until balances.length()) {
@@ -57,13 +57,13 @@ class BalanceService : Service() {
                       user.setString("balance_$currency", balance.getString("Balance"))
                     }
                   }
-
                   val camel = CamelController.getBalance(user.getString("wallet_camel"))
                   if (camel.getInt("code") == 200) {
-                    user.setString(
-                      "balance_camel",
-                      camel.getJSONObject("data").getString("balance")
-                    )
+                    user.setString("balance_camel", camel.getJSONObject("data").getString("balance"))
+                  }
+                  val tron = CamelController.getTokenBalance(user.getString("wallet_camel"))
+                  if (tron.getInt("code") == 200) {
+                    user.setString("balance_tron", tron.getJSONObject("data").getString("balance"))
                   }
 
                   privateIntent.action = "doge.balances"

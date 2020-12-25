@@ -42,7 +42,6 @@ class BtcService : Service() {
                 } else {
                   user.setBoolean("on_queue", false)
                 }
-                sleep(1000)
               }
               json.getBoolean("logout") -> {
                 user.setBoolean("logout", true)
