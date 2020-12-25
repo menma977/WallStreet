@@ -26,18 +26,22 @@ object CamelController {
     request.header("Connection", "close")
     request.url(url)
     request.get()
-    val response: Response = client.build().newCall(request.build()).execute()
-    val inputReader = BufferedReader(InputStreamReader(response.body!!.byteStream()))
-    var rawContent = ""
-    var line = inputReader.readLine()
-    while (line != null) {
-      rawContent += line
-      line = inputReader.readLine()
-    }
-    val content = JSONObject(rawContent)
-    return when {
-      response.isSuccessful -> JSONObject().put("code", 200).put("data", content)
-      else -> failResponseHandler(content)
+    client.build().newCall(request.build()).execute().use { response ->
+      val inputReader = BufferedReader(InputStreamReader(response.body!!.byteStream()))
+      var rawContent = ""
+      var line = inputReader.readLine()
+      while (line != null) {
+        rawContent += line
+        line = inputReader.readLine()
+      }
+      val content = JSONObject(rawContent)
+      return when {
+        response.isSuccessful && content.getString("result") == "success" -> JSONObject().put(
+          "code",
+          200
+        ).put("data", content)
+        else -> failResponseHandler(content)
+      }
     }
   }
 
