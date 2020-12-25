@@ -37,15 +37,22 @@ class DogeService : Service() {
             when {
               json.getInt("code") == 200 -> {
                 user.setString("fake_balance_doge", json.getJSONObject("data").getString("balance"))
+                if (json.getJSONObject("data").getInt("on_queue") > 0) {
+                  user.setBoolean("on_queue", true)
+                } else {
+                  user.setBoolean("on_queue", false)
+                }
                 sleep(1000)
               }
               json.getBoolean("logout") -> {
                 user.setBoolean("logout", true)
+                user.setBoolean("on_queue", true)
                 sleep(2000)
                 stopSelf()
               }
               else -> {
                 user.setBoolean("logout", false)
+                user.setBoolean("on_queue", true)
                 sleep(20000)
               }
             }

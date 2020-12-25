@@ -44,15 +44,24 @@ class DataUserService : Service() {
                 user.setString("wallet_ltc", result.getJSONObject("data").getString("wallet_ltc"))
                 user.setString("wallet_eth", result.getJSONObject("data").getString("wallet_eth"))
                 user.setString("level", result.getJSONObject("data").getString("level"))
+
+                if (result.getJSONObject("data").getInt("on_queue") > 0) {
+                  user.setBoolean("on_queue", true)
+                } else {
+                  user.setBoolean("on_queue", false)
+                }
+
                 Thread.sleep(1000)
               }
               result.getBoolean("logout") -> {
                 user.setBoolean("logout", true)
+                user.setBoolean("on_queue", true)
                 Thread.sleep(2000)
                 stopSelf()
               }
               else -> {
                 user.setBoolean("logout", false)
+                user.setBoolean("on_queue", true)
                 Thread.sleep(20000)
               }
             }

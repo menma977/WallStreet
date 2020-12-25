@@ -66,6 +66,8 @@ class NavigationActivity : AppCompatActivity() {
     buttonSendBalance.setOnClickListener {
       ModalSendBalance(this).show()
     }
+
+    buttonSendBalance.isEnabled = !user.getBoolean("on_queue")
   }
 
   override fun onStart() {
@@ -150,6 +152,7 @@ class NavigationActivity : AppCompatActivity() {
         val text = user.getString("username") + " $ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
         username.text = text
       }
+      buttonSendBalance.isEnabled = !user.getBoolean("on_queue")
     }
   }
 

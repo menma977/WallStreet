@@ -137,6 +137,8 @@ class HomeFragment : Fragment() {
     progressValue.text = "$ ${CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()}"
     targetValue.text = "$ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()}"
 
+    upgradeBtn.isEnabled = !user.getBoolean("on_queue")
+
     return view
   }
 
@@ -269,6 +271,7 @@ class HomeFragment : Fragment() {
         progressValue.text = getProgressValue
         targetValue.text = getTargetValue
       }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
   private var broadcastReceiverBalances: BroadcastReceiver = object : BroadcastReceiver() {
@@ -284,6 +287,7 @@ class HomeFragment : Fragment() {
         eth.text = CoinFormat.decimalToCoin(user.getString("balance_eth").toBigDecimal()).toPlainString()
         doge.text = CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
       }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
   private var broadcastReceiverBtc: BroadcastReceiver = object : BroadcastReceiver() {
@@ -296,6 +300,7 @@ class HomeFragment : Fragment() {
       } else {
         btcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_btc").toBigDecimal()).toPlainString()
       }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
   private var broadcastReceiverDoge: BroadcastReceiver = object : BroadcastReceiver() {
@@ -308,6 +313,7 @@ class HomeFragment : Fragment() {
       } else {
         dogeFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_doge").toBigDecimal()).toPlainString()
       }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
   private var broadcastReceiverLtc: BroadcastReceiver = object : BroadcastReceiver() {
@@ -320,6 +326,7 @@ class HomeFragment : Fragment() {
       } else {
         ltcFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_ltc").toBigDecimal()).toPlainString()
       }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
   private var broadcastReceiverEth: BroadcastReceiver = object : BroadcastReceiver() {
@@ -332,6 +339,7 @@ class HomeFragment : Fragment() {
       } else {
         ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
       }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
 }

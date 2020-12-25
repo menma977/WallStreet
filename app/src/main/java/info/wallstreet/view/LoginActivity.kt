@@ -140,6 +140,11 @@ class LoginActivity : AppCompatActivity() {
 
         user.setString("targetValue", "0")
         user.setString("progressValue", "0")
+        if (result.getJSONObject("data").getInt("on_queue") > 0) {
+          user.setBoolean("on_queue", true)
+        } else {
+          user.setBoolean("on_queue", false)
+        }
 
         runOnUiThread {
           move = Intent(applicationContext, NavigationActivity::class.java)
