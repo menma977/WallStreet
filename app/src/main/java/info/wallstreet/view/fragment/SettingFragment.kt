@@ -12,6 +12,7 @@ import info.wallstreet.config.CoinFormat
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.user.EditPasswordActivity
+import java.math.BigDecimal
 
 class SettingFragment : Fragment() {
   private lateinit var parentActivity: NavigationActivity
@@ -43,7 +44,7 @@ class SettingFragment : Fragment() {
     username.text = user.getString("username")
     email.text = user.getString("email")
     phone.text = user.getString("phone")
-    level.text = "Current TopUp : $${CoinFormat.toDollar(user.getString("level").toBigDecimal())}"
+    level.text = "Current TopUp : $${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
 
     editPassword.setOnClickListener {
       move = Intent(parentActivity, EditPasswordActivity::class.java)
