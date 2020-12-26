@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import info.wallstreet.config.CoinFormat
 import info.wallstreet.controller.CamelController
 import info.wallstreet.controller.DogeController
 import info.wallstreet.model.User
@@ -58,11 +59,13 @@ class BalanceService : Service() {
                   }
                   val camel = CamelController.getBalance(user.getString("wallet_camel"))
                   if (camel.getInt("code") == 200) {
-                    user.setString("balance_camel", camel.getJSONObject("data").getString("balance"))
+                    val convertCoin = CoinFormat.coinToDecimal(camel.getJSONObject("data").getString("balance").toBigDecimal()).toPlainString()
+                    user.setString("balance_camel", convertCoin)
                   }
                   val tron = CamelController.getTokenBalance(user.getString("wallet_camel"))
                   if (tron.getInt("code") == 200) {
-                    user.setString("balance_tron", tron.getJSONObject("data").getString("balance"))
+                    val convertCoin = CoinFormat.coinToDecimal(tron.getJSONObject("data").getString("balance").toBigDecimal()).toPlainString()
+                    user.setString("balance_tron", convertCoin)
                   }
 
                   privateIntent.action = "doge.balances"

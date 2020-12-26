@@ -157,7 +157,12 @@ class NavigationActivity : AppCompatActivity() {
       if (user.getBoolean("logout")) {
         onLogout()
       } else {
-        val text = user.getString("username") + " $ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
+        val text = if (user.getString("targetValue").isEmpty()) {
+          println(user.getString("targetValue"))
+          user.getString("username") + " $ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
+        } else {
+          user.getString("username") + " $ 0"
+        }
         username.text = text
       }
       buttonSendBalance.isEnabled = !user.getBoolean("on_queue")
