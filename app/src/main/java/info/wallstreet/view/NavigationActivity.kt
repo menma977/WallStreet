@@ -69,6 +69,7 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     buttonSendBalance.isEnabled = !user.getBoolean("on_queue")
+
   }
 
   override fun onStart() {
