@@ -78,10 +78,12 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
     val pkg = typePackages.selectedItem.toString()
     val pass = secondaryPassword.text.toString()
     val balance = user.getString("balance_$type")
+    val balanceFake = user.getString("fake_balance_$type")
     val body = FormBody.Builder()
     body.add("type", type)
     body.add("upgrade_list", pkg)
     body.add("balance", balance)
+    body.add("balance_fake", balanceFake)
     body.add("secondary_password", pass)
     Timer().schedule(100) {
       val response = PostController("upgrade.store", user.getString("token"), body).call()
