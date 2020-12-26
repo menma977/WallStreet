@@ -29,6 +29,6 @@ object Url {
    * @return String
    */
   fun keyDoge(): String {
-    return "a8bbdad7d8174c29a0804c1d19023eba"
+    return "ec01af0702f3467a808ba52679e1ee61"
   }
 }
