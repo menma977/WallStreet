@@ -31,7 +31,7 @@ class BalanceService : Service() {
     Timer().schedule(5000) {
       while (true) {
         val delta = System.currentTimeMillis() - time
-        if (delta >= 15000) {
+        if (delta >= 10000) {
           time = System.currentTimeMillis()
           val privateIntent = Intent()
           if (startBackgroundService) {

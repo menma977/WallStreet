@@ -3,14 +3,13 @@ package info.wallstreet.controller
 import info.wallstreet.model.Url
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.concurrent.TimeUnit
 
 object CamelController {
-  private fun failResponseHandler(content: JSONObject): JSONObject {
+  private fun failResponseHandler(): JSONObject {
     return JSONObject().put("code", 500).put("data", "Failed to process")
   }
 
@@ -37,10 +36,9 @@ object CamelController {
       val content = JSONObject(rawContent)
       return when {
         response.isSuccessful && content.getString("result") == "success" -> JSONObject().put(
-          "code",
-          200
+          "code", 200
         ).put("data", content)
-        else -> failResponseHandler(content)
+        else -> failResponseHandler()
       }
     }
   }

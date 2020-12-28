@@ -75,13 +75,16 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
     }
     val softKey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     softKey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
-    val pkg = typePackages.selectedItem.toString()
     val pass = secondaryPassword.text.toString()
-    val balance = user.getString("balance_$type")
+    val balance = if (type == "camel") {
+      user.getString("balance_$type")
+    } else {
+      user.getString("balance_$type")
+    }
     val balanceFake = user.getString("fake_balance_$type")
     val body = FormBody.Builder()
     body.add("type", type)
-    body.add("upgrade_list", pkg)
+    body.add("upgrade_list", packages[typePackages.selectedItem].toString())
     body.add("balance", balance)
     body.add("balance_fake", balanceFake)
     body.add("secondary_password", pass)
@@ -89,6 +92,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       val response = PostController("upgrade.store", user.getString("token"), body).call()
       ownerActivity?.runOnUiThread {
         Toast.makeText(context, response.getString("data"), Toast.LENGTH_LONG).show()
+        user.setBoolean("on_queue", true)
         if (response.getInt("code") != 500) dismiss()
       }
     }

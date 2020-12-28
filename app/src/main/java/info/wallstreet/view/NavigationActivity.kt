@@ -1,6 +1,5 @@
 package info.wallstreet.view
 
-import android.app.job.JobScheduler
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -79,8 +78,7 @@ class NavigationActivity : AppCompatActivity() {
 
   override fun onStop() {
     super.onStop()
-    val runJob = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
-    runJob.cancel(1)
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverUpgrade)
 
     stopService(dataUser)
     stopService(receiverBalances)
@@ -94,8 +92,7 @@ class NavigationActivity : AppCompatActivity() {
 
   override fun onBackPressed() {
     if (supportFragmentManager.backStackEntryCount == 1) {
-      val runJob = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
-      runJob.cancel(1)
+      LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiverUpgrade)
 
       stopService(dataUser)
       stopService(receiverBalances)
@@ -157,8 +154,7 @@ class NavigationActivity : AppCompatActivity() {
       if (user.getBoolean("logout")) {
         onLogout()
       } else {
-        val text = if (user.getString("targetValue").isEmpty()) {
-          println(user.getString("targetValue"))
+        val text = if (user.getString("targetValue").isNotEmpty()) {
           user.getString("username") + " $ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
         } else {
           user.getString("username") + " $ 0"

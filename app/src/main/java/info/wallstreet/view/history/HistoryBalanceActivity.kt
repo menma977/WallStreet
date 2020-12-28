@@ -1,7 +1,6 @@
 package info.wallstreet.view.history
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -144,14 +143,19 @@ class HistoryBalanceActivity : AppCompatActivity() {
         for (i in 0 until listArray.length()) {
           val read = listArray.getJSONObject(i)
           val balanceFormat = "-" + CoinFormat.decimalToCoin(read.getString("Value").toBigDecimal()).toPlainString()
+          val date = try {
+            read.getString("Date")
+          } catch (e: Exception) {
+            read.getString("Completed")
+          }
           runOnUiThread {
             listAdapterInternal.addItem(
               HistoryInternalBalance(
                 typeList,
-                read.getString("Address"),
+                read.getString("Address").replace("XFER", "WALL"),
                 balanceFormat,
                 read.getString("Currency"),
-                read.getString("Date"),
+                date,
               )
             )
           }
@@ -198,15 +202,20 @@ class HistoryBalanceActivity : AppCompatActivity() {
         for (i in 0 until listArray.length()) {
           val read = listArray.getJSONObject(i)
           val balanceFormat = "+" + CoinFormat.decimalToCoin(read.getString("Value").toBigDecimal()).toPlainString()
+          val date = try {
+            read.getString("Date")
+          } catch (e: Exception) {
+            read.getString("Completed")
+          }
           runOnUiThread {
             listAdapterExternal.addItem(
               HistoryExternalBalance(
                 typeList,
-                read.getString("Address"),
+                read.getString("Address").replace("XFER", "WALL"),
                 read.getString("TransactionHash"),
                 balanceFormat,
                 read.getString("Currency"),
-                read.getString("Date"),
+                date,
               )
             )
           }

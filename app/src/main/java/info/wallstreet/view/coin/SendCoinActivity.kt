@@ -11,10 +11,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.zxing.Result
 import info.wallstreet.MainActivity
 import info.wallstreet.R
-import info.wallstreet.background.BtcService
-import info.wallstreet.background.LtcService
-import info.wallstreet.background.EthService
-import info.wallstreet.background.DogeService
+import info.wallstreet.background.*
 import info.wallstreet.config.CoinFormat
 import info.wallstreet.config.Loading
 import info.wallstreet.controller.GetController
@@ -122,11 +119,18 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
   private fun onSend() {
     val body = FormBody.Builder()
     body.addEncoded("wallet", walletText.text.toString())
-    body.addEncoded(
-      "value", CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()).toEngineeringString()
-    )
+    if (currency == "camel" || currency == "tron") {
+      body.addEncoded("value", balanceText.text.toString())
+    } else {
+      body.addEncoded("value", CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()).toEngineeringString())
+    }
     body.addEncoded("secondary_password", secondaryPasswordText.text.toString())
     body.addEncoded("fake", isFake.toString())
+    if (currency == "tron") {
+      body.addEncoded("tron", "true")
+    } else {
+      body.addEncoded("tron", "false")
+    }
     Timer().schedule(100) {
       json = PostController("$currency.store", user.getString("token"), body).call()
       when {
@@ -167,6 +171,9 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           }
           "doge" -> {
             receiver = Intent(applicationContext, DogeService::class.java)
+          }
+          "camel" -> {
+            receiver = Intent(applicationContext, CamelService::class.java)
           }
         }
         startService(receiver)
