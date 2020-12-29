@@ -249,6 +249,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverDoge, IntentFilter("web.doge"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverEth, IntentFilter("web.eth"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverLtc, IntentFilter("web.ltc"))
+    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverCamel, IntentFilter("web.camel"))
   }
 
   override fun onDestroy() {
@@ -259,6 +260,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverCamel)
   }
 
   override fun onStop() {
@@ -269,6 +271,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverCamel)
   }
 
   override fun onPause() {
@@ -279,6 +282,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverDoge)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverCamel)
   }
 
   private var broadcastReceiverUpgrade: BroadcastReceiver = object : BroadcastReceiver() {
@@ -364,6 +368,19 @@ class HomeFragment : Fragment() {
         }
       } else {
         ethFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_eth").toBigDecimal()).toPlainString()
+      }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
+    }
+  }
+  private var broadcastReceiverCamel: BroadcastReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+      if (user.getBoolean("logout")) {
+        if (!onLogoutReady) {
+          onLogoutReady = true
+          parentActivity.onLogout()
+        }
+      } else {
+        camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
       }
       upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }

@@ -119,7 +119,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
   private fun onSend() {
     val body = FormBody.Builder()
     body.addEncoded("wallet", walletText.text.toString())
-    if (currency == "camel" || currency == "tron") {
+    if ((currency == "camel" && !isFake) || currency == "tron") {
       body.addEncoded("value", balanceText.text.toString())
     } else {
       body.addEncoded("value", CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()).toEngineeringString())
