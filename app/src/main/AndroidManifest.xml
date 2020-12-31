@@ -68,7 +68,19 @@
     <activity
         android:name=".view.user.ForgotPasswordActivity"
         android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar"/>
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.LoginActivity"/>
+    </activity>
+    <activity
+        android:name=".view.EmailVerificationActivity"
+        android:configChanges="orientation|screenSize"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.LoginActivity"/>
+    </activity>
     <activity
         android:name=".view.RegistrationActivity"
         android:configChanges="orientation|screenSize"

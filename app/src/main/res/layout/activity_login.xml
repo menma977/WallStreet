@@ -119,6 +119,18 @@
           android:layout_marginTop="20dp"
           android:layout_marginBottom="5dp"/>
 
+      <TextView
+          android:text="@string/resend_email_verification"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textAlignment="textEnd"
+          android:textStyle="bold"
+          android:textColor="@color/White"
+          android:id="@+id/textViewSendEmailVerification"
+          android:layout_marginEnd="10dp"
+          android:layout_marginTop="5dp"
+          android:layout_marginBottom="5dp"/>
+
     </LinearLayout>
 
     <Space

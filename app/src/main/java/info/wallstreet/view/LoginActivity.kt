@@ -29,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
   private lateinit var version: TextView
   private lateinit var textViewRegister: TextView
   private lateinit var textViewForgotPassword: TextView
+  private lateinit var textViewSendEmailVerification: TextView
   private lateinit var username: EditText
   private lateinit var password: EditText
   private lateinit var loginButton: Button
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
     version = findViewById(R.id.textViewVersion)
     textViewRegister = findViewById(R.id.textViewRegister)
     textViewForgotPassword = findViewById(R.id.textViewForgotPassword)
+    textViewSendEmailVerification = findViewById(R.id.textViewSendEmailVerification)
     username = findViewById(R.id.editTextUsername)
     password = findViewById(R.id.editTextPassword)
     loginButton = findViewById(R.id.buttonLogin)
@@ -68,6 +70,11 @@ class LoginActivity : AppCompatActivity() {
 
     textViewForgotPassword.setOnClickListener {
       move = Intent(this, ForgotPasswordActivity::class.java)
+      startActivity(move)
+    }
+
+    textViewSendEmailVerification.setOnClickListener {
+      move = Intent(this, EmailVerificationActivity::class.java)
       startActivity(move)
     }
 
@@ -131,7 +138,6 @@ class LoginActivity : AppCompatActivity() {
         user.setString("balance_ltc", result.getJSONObject("data").getString("ltc_balance"))
         user.setString("balance_eth", result.getJSONObject("data").getString("eth_balance"))
         user.setString("balance_btc", result.getJSONObject("data").getString("btc_balance"))
-
         val convertCoinCamel = CoinFormat.coinToDecimal(result.getJSONObject("data").getString("camel_balance").toBigDecimal()).toPlainString()
         val convertCoinTron = CoinFormat.coinToDecimal(result.getJSONObject("data").getString("tron_balance").toBigDecimal()).toPlainString()
         user.setString("balance_camel", convertCoinCamel)
