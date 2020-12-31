@@ -177,6 +177,7 @@ class LoginActivity : AppCompatActivity() {
       intent.getBooleanExtra("update", false) -> {
         description.text = "Your app need update"
         textViewForgotPassword.visibility = TextView.GONE
+        textViewSendEmailVerification.visibility = TextView.GONE
         containerRegister.visibility = LinearLayout.GONE
         username.visibility = EditText.GONE
         password.visibility = EditText.GONE
@@ -187,6 +188,7 @@ class LoginActivity : AppCompatActivity() {
       intent.getBooleanExtra("mt", false) -> {
         description.text = "We are under maintenance"
         textViewForgotPassword.visibility = TextView.GONE
+        textViewSendEmailVerification.visibility = TextView.GONE
         containerRegister.visibility = LinearLayout.GONE
         username.visibility = EditText.GONE
         password.visibility = EditText.GONE
@@ -197,6 +199,7 @@ class LoginActivity : AppCompatActivity() {
       intent.getBooleanExtra("lock", false) -> {
         description.text = "Your connection is not stable"
         textViewForgotPassword.visibility = TextView.GONE
+        textViewSendEmailVerification.visibility = TextView.GONE
         containerRegister.visibility = LinearLayout.GONE
         username.visibility = EditText.GONE
         password.visibility = EditText.GONE
@@ -206,6 +209,7 @@ class LoginActivity : AppCompatActivity() {
       }
       else -> {
         textViewForgotPassword.visibility = TextView.VISIBLE
+        textViewSendEmailVerification.visibility = TextView.VISIBLE
         containerRegister.visibility = LinearLayout.VISIBLE
         username.visibility = EditText.VISIBLE
         password.visibility = EditText.VISIBLE
