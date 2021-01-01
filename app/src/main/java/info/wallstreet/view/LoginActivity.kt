@@ -56,9 +56,6 @@ class LoginActivity : AppCompatActivity() {
     reloadButton = findViewById(R.id.buttonReloaded)
     containerRegister = findViewById(R.id.linearLayoutContainerRegister)
 
-    username.setText("admin")
-    password.setText("admin")
-
     version.text = BuildConfig.VERSION_NAME
 
     intentResponseHandler()
