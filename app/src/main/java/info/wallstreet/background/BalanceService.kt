@@ -60,12 +60,12 @@ class BalanceService : Service() {
                   val camel = CamelController.getBalance(user.getString("wallet_camel"))
                   if (camel.getInt("code") == 200) {
                     val convertCoin = CoinFormat.coinToDecimal(camel.getJSONObject("data").getString("balance").toBigDecimal()).toPlainString()
-                    user.setString("balance_camel", convertCoin)
+                    user.setString("balance_tron", convertCoin)
                   }
                   val tron = CamelController.getTokenBalance(user.getString("wallet_camel"))
                   if (tron.getInt("code") == 200) {
                     val convertCoin = CoinFormat.coinToDecimal(tron.getJSONObject("data").getString("balance").toBigDecimal()).toPlainString()
-                    user.setString("balance_tron", convertCoin)
+                    user.setString("balance_camel", convertCoin)
                   }
 
                   privateIntent.action = "doge.balances"
