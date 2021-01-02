@@ -187,6 +187,12 @@ class HomeFragment : Fragment() {
     } else {
       camel.text = "0"
     }
+
+    if (user.getString("balance_tron").isNotEmpty()) {
+      tron.text = CoinFormat.decimalToCoin(user.getString("balance_tron").toBigDecimal()).toPlainString()
+    } else {
+      tron.text = "0"
+    }
     /**
      * Fake Balance
      */
