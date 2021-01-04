@@ -20,7 +20,6 @@ class UpgradeHistoryActivity : AppCompatActivity() {
   private lateinit var user: User
   private var page = 1
   private var _page = page
-
   private lateinit var type: String
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +31,7 @@ class UpgradeHistoryActivity : AppCompatActivity() {
     type = savedInstanceState?.getString("type") ?: "upgrade"
 
     title.text = "Upgrades History"
-    listAdapter = UpgradeListAdapter(applicationContext)
+    listAdapter = UpgradeListAdapter(this)
     listView = findViewById<RecyclerView>(R.id.lists_container).apply {
       layoutManager = LinearLayoutManager(applicationContext)
       adapter = listAdapter
@@ -40,29 +39,29 @@ class UpgradeHistoryActivity : AppCompatActivity() {
     rePopulate()
   }
 
-  private fun rePopulate(){
+  private fun rePopulate() {
     _page = page++
     Thread {
       val result = GetController("upgrade.show?page=$page", user.getString("token")).call()
-      if(result.getInt("code")==200){
+      if (result.getInt("code") == 200) {
         val newData = result.getJSONObject("data").getJSONObject("list").getJSONArray("data")
-        if(newData.length() > 0){
-          listAdapter.clear()
-          for(i in 0 until newData.length()){
-            val history = newData[i] as JSONObject
-            listAdapter.addItem(UpgradeHistory(
-              history.getString("debit"),
-              history.getString("description"),
-              history.getString("created_at")
-            ))
+        if (newData.length() > 0) {
+          runOnUiThread {
+            listAdapter.clear()
+            for (i in 0 until newData.length()) {
+              val history = newData[i] as JSONObject
+              listAdapter.addItem(
+                UpgradeHistory(history.getString("balance"), history.getString("description"), history.getString("date"), history.getString("color"))
+              )
+            }
           }
-        }else{
+        } else {
           page = _page
           runOnUiThread {
             Toast.makeText(applicationContext, "No more page to show", Toast.LENGTH_SHORT).show()
           }
         }
-      }else{
+      } else {
         page = _page
         runOnUiThread {
           Toast.makeText(applicationContext, result.getString("data"), Toast.LENGTH_SHORT).show()

@@ -29,7 +29,7 @@
         tools:ignore="ButtonStyle"/>
 
     <Button
-        android:text="@string/btc"
+        android:text="@string/eth"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:id="@+id/buttonETH"
@@ -126,7 +126,7 @@
 
 
     <Button
-        android:text="Preview"
+        android:text="@string/preview"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:id="@+id/buttonPreview"
@@ -140,7 +140,7 @@
         android:layout_weight="1"/>
 
     <Button
-        android:text="Next"
+        android:text="@string/next"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:id="@+id/buttonNext"

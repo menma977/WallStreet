@@ -67,6 +67,7 @@
   <string name="tron">Tron</string>
   <string name="verification_link_send_via_email">Verification link send via email</string>
   <string name="resend_email_verification">Resend Email Verification</string>
+  <string name="preview">Preview</string>
 
   <string-array name="currency_choice">
     <item>BitCoin</item>

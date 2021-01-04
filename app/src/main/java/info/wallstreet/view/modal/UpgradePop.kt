@@ -73,27 +73,34 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       "Camel" -> "camel"
       else -> "btc"
     }
-    val softKey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    softKey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
-    val pass = secondaryPassword.text.toString()
-    val balance = if (type == "camel") {
-      user.getString("balance_$type")
-    } else {
-      user.getString("balance_$type")
-    }
-    val balanceFake = user.getString("fake_balance_$type")
-    val body = FormBody.Builder()
-    body.add("type", type)
-    body.add("upgrade_list", packages[typePackages.selectedItem].toString())
-    body.add("balance", balance)
-    body.add("balance_fake", balanceFake)
-    body.add("secondary_password", pass)
-    Timer().schedule(100) {
-      val response = PostController("upgrade.store", user.getString("token"), body).call()
+
+    if ((type == "btc" && packages[typePackages.selectedItem].toString().toInt() <= 1000) || (type == "eth" && packages[typePackages.selectedItem].toString().toInt() <= 1000)) {
       ownerActivity?.runOnUiThread {
-        Toast.makeText(context, response.getString("data"), Toast.LENGTH_LONG).show()
-        user.setBoolean("on_queue", true)
-        if (response.getInt("code") != 500) dismiss()
+        Toast.makeText(context, "Upgrade with btc or eth minimum upgrade is $ 1000", Toast.LENGTH_LONG).show()
+      }
+    } else {
+      val softKey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+      softKey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
+      val pass = secondaryPassword.text.toString()
+      val balance = if (type == "camel") {
+        user.getString("balance_$type")
+      } else {
+        user.getString("balance_$type")
+      }
+      val balanceFake = user.getString("fake_balance_$type")
+      val body = FormBody.Builder()
+      body.add("type", type)
+      body.add("upgrade_list", packages[typePackages.selectedItem].toString())
+      body.add("balance", balance)
+      body.add("balance_fake", balanceFake)
+      body.add("secondary_password", pass)
+      Timer().schedule(100) {
+        val response = PostController("upgrade.store", user.getString("token"), body).call()
+        ownerActivity?.runOnUiThread {
+          Toast.makeText(context, response.getString("data"), Toast.LENGTH_LONG).show()
+          user.setBoolean("on_queue", true)
+          if (response.getInt("code") != 500) dismiss()
+        }
       }
     }
   }
