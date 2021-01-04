@@ -53,6 +53,17 @@ class DogeController(private var bodyValue: FormBody.Builder) : Callable<JSONObj
     }
   }
 
+  fun render(response: Response): String {
+    val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
+    var readInput = input.readLine()
+    var result = ""
+    while (readInput != null) {
+      result += readInput
+      readInput = input.readLine()
+    }
+    return result
+  }
+
   override fun call(): JSONObject {
     return try {
       val client = OkHttpClient.Builder()
@@ -68,9 +79,8 @@ class DogeController(private var bodyValue: FormBody.Builder) : Callable<JSONObj
       bodyValue.addEncoded("key", Url.keyDoge())
       request.post(bodyValue.build())
       val response: Response = client.build().newCall(request.build()).execute()
-      val input = BufferedReader(InputStreamReader(response.body!!.byteStream()))
-      val inputData: String = input.readLine()
-      val convertJSON = JSONObject(inputData)
+      val raw = render(response)
+      val convertJSON = JSONObject(raw)
       return when {
         response.isSuccessful -> {
           JSONObject().put("code", 200).put("data", convertJSON)
