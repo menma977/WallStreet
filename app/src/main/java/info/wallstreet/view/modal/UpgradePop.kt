@@ -90,11 +90,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       val softKey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
       softKey.hideSoftInputFromWindow(View(ownerActivity).windowToken, 0)
       val pass = secondaryPassword.text.toString()
-      val balance = if (type == "camel") {
-        user.getString("balance_$type")
-      } else {
-        user.getString("balance_$type")
-      }
+      val balance = user.getString("balance_$type")
       val balanceFake = user.getString("fake_balance_$type")
       val body = FormBody.Builder()
       body.add("type", type)
