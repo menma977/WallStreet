@@ -74,7 +74,15 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       else -> "btc"
     }
 
-    if ((type == "btc" && packages[typePackages.selectedItem].toString().toInt() <= 1000) || (type == "eth" && packages[typePackages.selectedItem].toString().toInt() <= 1000)) {
+    if (type == "btc" && packages[typePackages.selectedItem].toString().toInt() <= 1000) {
+      ownerActivity?.runOnUiThread {
+        Toast.makeText(context, "Upgrade with btc or eth minimum upgrade is $ 1000", Toast.LENGTH_LONG).show()
+      }
+    } else if (type == "eth" && packages[typePackages.selectedItem].toString().toInt() <= 1000) {
+      ownerActivity?.runOnUiThread {
+        Toast.makeText(context, "Upgrade with btc or eth minimum upgrade is $ 1000", Toast.LENGTH_LONG).show()
+      }
+    } else if (type == "ltc" && packages[typePackages.selectedItem].toString().toInt() <= 1000) {
       ownerActivity?.runOnUiThread {
         Toast.makeText(context, "Upgrade with btc or eth minimum upgrade is $ 1000", Toast.LENGTH_LONG).show()
       }
