@@ -1,137 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="info.wallstreet">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="info.wallstreet">
 
-  <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.CAMERA"/>
-  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-  <application
-      android:allowBackup="true"
-      android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
-      android:networkSecurityConfig="@xml/network_guard"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:supportsRtl="true"
-      android:theme="@style/AppTheme"
-      tools:ignore="AllowBackup"
-      tools:targetApi="n">
-    <activity
-        android:name=".view.history.HistoryBalanceActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.NavigationActivity"/>
-    </activity>
-    <activity
-        android:name=".view.history.FakeBalanceActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.NavigationActivity"/>
-    </activity>
-    <activity
-        android:name=".view.history.UpgradeHistoryActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.NavigationActivity"/>
-    </activity>
-    <activity
-        android:name=".view.user.EditPasswordActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.NavigationActivity"/>
-    </activity>
-    <activity
-        android:name=".view.coin.SendCoinActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.NavigationActivity"/>
-    </activity>
-    <activity
-        android:name=".view.user.RegisteredActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.NavigationActivity"/>
-    </activity>
-    <activity
-        android:name=".view.user.ForgotPasswordActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.LoginActivity"/>
-    </activity>
-    <activity
-        android:name=".view.EmailVerificationActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.LoginActivity"/>
-    </activity>
-    <activity
-        android:name=".view.RegistrationActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value=".view.LoginActivity"/>
-    </activity>
-    <activity
-        android:name=".view.NavigationActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar"/>
-    <activity
-        android:name=".view.LoginActivity"
-        android:configChanges="orientation|screenSize"
-        android:theme="@style/AppTheme.NoActionBar"/>
-    <activity
-        android:name=".MainActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_guard"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup"
+        tools:targetApi="n">
+        <activity android:name=".view.history.CamelHistoryActivity"></activity>
+        <activity
+            android:name=".view.history.HistoryBalanceActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".view.history.FakeBalanceActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".view.history.UpgradeHistoryActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".view.user.EditPasswordActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".view.coin.SendCoinActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".view.user.RegisteredActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".view.user.ForgotPasswordActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".view.EmailVerificationActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".view.RegistrationActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".view.NavigationActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <service
-        android:name=".background.BalanceService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.BtcService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.DogeService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.EthService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.CamelService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.LtcService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.UpgradeService"
-        android:enabled="true"/>
-    <service
-        android:name=".background.DataUserService"
-        android:enabled="true"/>
-  </application>
+        <service
+            android:name=".background.BalanceService"
+            android:enabled="true" />
+        <service
+            android:name=".background.BtcService"
+            android:enabled="true" />
+        <service
+            android:name=".background.DogeService"
+            android:enabled="true" />
+        <service
+            android:name=".background.EthService"
+            android:enabled="true" />
+        <service
+            android:name=".background.CamelService"
+            android:enabled="true" />
+        <service
+            android:name=".background.LtcService"
+            android:enabled="true" />
+        <service
+            android:name=".background.UpgradeService"
+            android:enabled="true" />
+        <service
+            android:name=".background.DataUserService"
+            android:enabled="true" />
+    </application>
 
 </manifest>

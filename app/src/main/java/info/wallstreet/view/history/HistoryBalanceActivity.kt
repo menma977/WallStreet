@@ -1,5 +1,6 @@
 package info.wallstreet.view.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -29,6 +30,7 @@ class HistoryBalanceActivity : AppCompatActivity() {
   private lateinit var buttonInternal: Button
   private lateinit var buttonExternal: Button
   private lateinit var buttonNext: Button
+  private lateinit var buttonCamelHistory: Button
   private lateinit var listView: RecyclerView
   private lateinit var title: TextView
   private lateinit var result: JSONObject
@@ -53,6 +55,7 @@ class HistoryBalanceActivity : AppCompatActivity() {
     buttonInternal = findViewById(R.id.buttonInternal)
     buttonExternal = findViewById(R.id.buttonExternal)
     buttonNext = findViewById(R.id.buttonNext)
+    buttonCamelHistory = findViewById(R.id.buttonCamelHistory)
     title = findViewById(R.id.textViewTitle)
 
     title.text = "-"
@@ -108,6 +111,11 @@ class HistoryBalanceActivity : AppCompatActivity() {
       } else {
         getDataExternal(typeExternal)
       }
+    }
+
+    buttonCamelHistory.setOnClickListener {
+      val move = Intent(this, CamelHistoryActivity::class.java)
+      startActivity(move)
     }
 
     listAdapterInternal.clear()
