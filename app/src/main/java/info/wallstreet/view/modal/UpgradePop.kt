@@ -73,7 +73,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       for (i in 0 until packagesJSON.length()) {
         val pkg = packagesJSON.getJSONObject(i)
         packages[pkg.getString("dollar")] = PackageCls(
-          pkg.getString("id").toDouble(),
+          pkg.getString("id").toInt(),
           pkg.getString("btc_usd"),
           pkg.getString("ltc_usd"),
           pkg.getString("eth_usd"),
