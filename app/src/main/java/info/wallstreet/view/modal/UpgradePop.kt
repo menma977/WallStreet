@@ -21,7 +21,6 @@ import java.util.*
 import kotlin.collections.LinkedHashMap
 import kotlin.concurrent.schedule
 
-
 class UpgradePop constructor(context: Context, private val user: User) : AlertDialog(context) {
   private val typeCurrency: Spinner
   private val typePackages: Spinner
@@ -42,28 +41,36 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
     packages = LinkedHashMap()
     populatePackages()
 
-    (view.findViewById<ImageView>(R.id.closeBtn)).setOnClickListener {
-      dismiss()
-    }
-    (view.findViewById<Button>(R.id.upgradeBtn)).setOnClickListener {
-      upgrade()
-    }
+    (view.findViewById<ImageView>(R.id.closeBtn)).setOnClickListener { dismiss() }
+    (view.findViewById<Button>(R.id.upgradeBtn)).setOnClickListener { upgrade() }
 
-    typeCurrency.onItemSelectedListener = object : OnItemSelectedListener {
-      override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-        updatePrice()
+    typeCurrency.onItemSelectedListener =
+      object : OnItemSelectedListener {
+        override fun onItemSelected(
+          parent: AdapterView<*>?,
+          view: View,
+          position: Int,
+          id: Long
+        ) {
+          updatePrice()
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
       }
 
-      override fun onNothingSelected(parent: AdapterView<*>?) {}
-    }
+    typePackages.onItemSelectedListener =
+      object : OnItemSelectedListener {
+        override fun onItemSelected(
+          parent: AdapterView<*>?,
+          view: View,
+          position: Int,
+          id: Long
+        ) {
+          updatePrice()
+        }
 
-    typePackages.onItemSelectedListener = object : OnItemSelectedListener {
-      override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-        updatePrice()
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
       }
-
-      override fun onNothingSelected(parent: AdapterView<*>?) {}
-    }
   }
 
   private fun populatePackages() {
@@ -72,20 +79,19 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       val packagesJSON = JSONArray(pref.getString("packages-json", "[]"))
       for (i in 0 until packagesJSON.length()) {
         val pkg = packagesJSON.getJSONObject(i)
-        packages[pkg.getString("dollar")] = PackageCls(
-          pkg.getString("id").toInt(),
-          pkg.getString("btc_usd"),
-          pkg.getString("ltc_usd"),
-          pkg.getString("eth_usd"),
-          pkg.getString("doge_usd"),
-          pkg.getString("camel_usd")
-        )
+        packages[pkg.getString("dollar")] =
+          PackageCls(
+            pkg.getString("id").toInt(),
+            pkg.getString("btc_usd"),
+            pkg.getString("ltc_usd"),
+            pkg.getString("eth_usd"),
+            pkg.getString("doge_usd"),
+            pkg.getString("camel_usd")
+          )
       }
       val keys = Array(packages.size) { "" }
       var i = 0
-      packages.forEach { (k, _) ->
-        keys[i++] = k
-      }
+      packages.forEach { (k, _) -> keys[i++] = k }
       typePackages.adapter =
         ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, keys)
       updatePrice()
@@ -93,50 +99,57 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       dismiss()
       Toast.makeText(
         context, "cannot find packages, please restart application", Toast.LENGTH_SHORT
-      ).show()
+      )
+        .show()
     }
   }
 
   private fun updatePrice() {
-    val type = when (typeCurrency.selectedItem) {
-      "BitCoin" -> "btc"
-      "LiteCoin" -> "ltc"
-      "Ethereum" -> "eth"
-      "DogeCoin" -> "doge"
-      "Camel" -> "camel"
-      else -> "btc"
-    }
+    val type =
+      when (typeCurrency.selectedItem) {
+        "BitCoin" -> "btc"
+        "LiteCoin" -> "ltc"
+        "Ethereum" -> "eth"
+        "DogeCoin" -> "doge"
+        "Camel" -> "camel"
+        else -> "btc"
+      }
     val pkg = packages[typePackages.selectedItem]
-    val formula = fun(dollar: Int, coin: String): Any {
-      return CoinFormat.decimalToCoin(BigDecimal(coin))
-    }
-    val tPrice = when (type) {
-      "btc" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.btc!!)
-      "ltc" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.ltc!!)
-      "eth" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.eth!!)
-      "doge" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.doge!!)
-      else -> formula(typePackages.selectedItem.toString().toInt(), pkg?.camel!!)
-    }.toString() + " " + type.toUpperCase(Locale.ROOT)
+    val formula =
+      fun(_: Int, coin: String): Any {
+        return CoinFormat.decimalToCoin(BigDecimal(coin))
+      }
+    val tPrice =
+      when (type) {
+        "btc" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.btc!!)
+        "ltc" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.ltc!!)
+        "eth" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.eth!!)
+        "doge" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.doge!!)
+        else ->
+          formula(
+            typePackages.selectedItem.toString().toInt(),
+            CoinFormat.coinToDecimal(BigDecimal(pkg?.camel!!)).toEngineeringString()
+          )
+      }.toString() + " " + type.toUpperCase(Locale.ROOT)
     price.setText(tPrice)
   }
 
   private fun upgrade() {
-    val type = when (typeCurrency.selectedItem) {
-      "BitCoin" -> "btc"
-      "LiteCoin" -> "ltc"
-      "Ethereum" -> "eth"
-      "DogeCoin" -> "doge"
-      "Camel" -> "camel"
-      else -> "btc"
-    }
+    val type =
+      when (typeCurrency.selectedItem) {
+        "BitCoin" -> "btc"
+        "LiteCoin" -> "ltc"
+        "Ethereum" -> "eth"
+        "DogeCoin" -> "doge"
+        "Camel" -> "camel"
+        else -> "btc"
+      }
 
-    if (type in arrayOf("btc", "ltc", "eth") && typePackages.selectedItem.toString().toInt() <= 1000) {
+    if (type in arrayOf("btc", "ltc", "eth") &&
+      typePackages.selectedItem.toString().toInt() <= 1000
+    ) {
       ownerActivity?.runOnUiThread {
-        Toast.makeText(
-          context,
-          "Minimum upgrade with $type is $ 1000",
-          Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(context, "Minimum upgrade with $type is $ 1000", Toast.LENGTH_LONG).show()
       }
     } else {
       val softKey = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
