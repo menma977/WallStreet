@@ -21,7 +21,6 @@ import java.util.*
 import kotlin.collections.LinkedHashMap
 import kotlin.concurrent.schedule
 
-
 class UpgradePop constructor(context: Context, private val user: User) : AlertDialog(context) {
   private val typeCurrency: Spinner
   private val typePackages: Spinner
@@ -30,8 +29,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
   private val packages: LinkedHashMap<String, PackageCls>
 
   init {
-    val layout: LayoutInflater =
-      context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    val layout: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = layout.inflate(R.layout.modal_upgrade_layout, LinearLayout(context), false)
     if (context is Activity) setOwnerActivity(context)
     setView(view)
@@ -73,12 +71,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       for (i in 0 until packagesJSON.length()) {
         val pkg = packagesJSON.getJSONObject(i)
         packages[pkg.getString("dollar")] = PackageCls(
-          pkg.getString("id").toDouble(),
-          pkg.getString("btc_usd"),
-          pkg.getString("ltc_usd"),
-          pkg.getString("eth_usd"),
-          pkg.getString("doge_usd"),
-          pkg.getString("camel_usd")
+          pkg.getString("id").toDouble(), pkg.getString("btc_usd"), pkg.getString("ltc_usd"), pkg.getString("eth_usd"), pkg.getString("doge_usd"), pkg.getString("camel_usd")
         )
       }
       val keys = Array(packages.size) { "" }
@@ -86,8 +79,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       packages.forEach { (k, _) ->
         keys[i++] = k
       }
-      typePackages.adapter =
-        ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, keys)
+      typePackages.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, keys)
       updatePrice()
     } else {
       dismiss()
@@ -107,7 +99,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       else -> "btc"
     }
     val pkg = packages[typePackages.selectedItem]
-    val formula = fun(dollar: Int, coin: String): Any {
+    val formula = fun(_: Int, coin: String): Any {
       return CoinFormat.decimalToCoin(BigDecimal(coin))
     }
     val tPrice = when (type) {
@@ -115,7 +107,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       "ltc" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.ltc!!)
       "eth" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.eth!!)
       "doge" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.doge!!)
-      else -> formula(typePackages.selectedItem.toString().toInt(), pkg?.camel!!)
+      else -> formula(typePackages.selectedItem.toString().toInt(), CoinFormat.coinToDecimal(BigDecimal(pkg?.camel!!)).toEngineeringString())
     }.toString() + " " + type.toUpperCase(Locale.ROOT)
     price.setText(tPrice)
   }
@@ -133,9 +125,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
     if (type in arrayOf("btc", "ltc", "eth") && typePackages.selectedItem.toString().toInt() <= 1000) {
       ownerActivity?.runOnUiThread {
         Toast.makeText(
-          context,
-          "Minimum upgrade with $type is $ 1000",
-          Toast.LENGTH_LONG
+          context, "Minimum upgrade with $type is $ 1000", Toast.LENGTH_LONG
         ).show()
       }
     } else {
