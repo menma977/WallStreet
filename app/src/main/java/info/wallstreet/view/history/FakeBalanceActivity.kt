@@ -148,7 +148,7 @@ class FakeBalanceActivity : AppCompatActivity() {
       }
     }
 
-    for (i in 0 until list.length()) {
+    for (i in list.length() - 1 downTo 0) {
       val read = list.getJSONObject(i)
       val balanceFormat = CoinFormat.decimalToCoin(read.getString("balance").toBigDecimal()).toPlainString()
       runOnUiThread {
