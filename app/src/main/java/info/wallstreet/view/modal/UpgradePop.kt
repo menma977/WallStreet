@@ -10,11 +10,13 @@ import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
 import info.wallstreet.R
+import info.wallstreet.config.CoinFormat
 import info.wallstreet.controller.PostController
 import info.wallstreet.model.PackageCls
 import info.wallstreet.model.User
 import okhttp3.FormBody
 import org.json.JSONArray
+import java.math.BigDecimal
 import java.util.*
 import kotlin.collections.LinkedHashMap
 import kotlin.concurrent.schedule
@@ -71,7 +73,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       for (i in 0 until packagesJSON.length()) {
         val pkg = packagesJSON.getJSONObject(i)
         packages[pkg.getString("dollar")] = PackageCls(
-          pkg.getInt("id"),
+          pkg.getString("id").toDouble(),
           pkg.getString("btc_usd"),
           pkg.getString("ltc_usd"),
           pkg.getString("eth_usd"),
@@ -106,7 +108,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
     }
     val pkg = packages[typePackages.selectedItem]
     val formula = fun(dollar: Int, coin: String): Any {
-      return coin
+      return CoinFormat.decimalToCoin(BigDecimal(coin))
     }
     val tPrice = when (type) {
       "btc" -> formula(typePackages.selectedItem.toString().toInt(), pkg?.btc!!)
@@ -128,27 +130,11 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
       else -> "btc"
     }
 
-    if (type == "btc" && packages[typePackages.selectedItem]?.id!! <= 1000) {
+    if (type in arrayOf("btc", "ltc", "eth") && typePackages.selectedItem.toString().toInt() <= 1000) {
       ownerActivity?.runOnUiThread {
         Toast.makeText(
           context,
-          "Upgrade with btc or eth minimum upgrade is $ 1000",
-          Toast.LENGTH_LONG
-        ).show()
-      }
-    } else if (type == "eth" && packages[typePackages.selectedItem]?.id!! <= 1000) {
-      ownerActivity?.runOnUiThread {
-        Toast.makeText(
-          context,
-          "Upgrade with btc or eth minimum upgrade is $ 1000",
-          Toast.LENGTH_LONG
-        ).show()
-      }
-    } else if (type == "ltc" && packages[typePackages.selectedItem]?.id!! <= 1000) {
-      ownerActivity?.runOnUiThread {
-        Toast.makeText(
-          context,
-          "Upgrade with btc or eth minimum upgrade is $ 1000",
+          "Minimum upgrade with $type is $ 1000",
           Toast.LENGTH_LONG
         ).show()
       }

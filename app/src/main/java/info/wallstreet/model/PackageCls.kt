@@ -1,7 +1,7 @@
 package info.wallstreet.model
 
 class PackageCls(
-  val id: Int,
+  val id: Double,
   val btc: String,
   val ltc: String,
   val eth: String,
