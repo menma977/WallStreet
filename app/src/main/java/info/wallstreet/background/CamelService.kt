@@ -6,10 +6,10 @@ import android.os.IBinder
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
-import org.json.JSONObject
 import java.lang.Thread.sleep
 import java.util.*
 import kotlin.concurrent.schedule
+import org.json.JSONObject
 
 class CamelService : Service() {
   private lateinit var json: JSONObject
@@ -34,7 +34,8 @@ class CamelService : Service() {
             json = GetController("camel", user.getString("token")).call()
             when {
               json.getInt("code") == 200 -> {
-                user.setString("fake_balance_camel", json.getJSONObject("data").getString("balance"))
+                user.setString(
+                    "fake_balance_camel", json.getJSONObject("data").getString("balance"))
                 if (json.getJSONObject("data").getInt("on_queue") > 0) {
                   user.setBoolean("on_queue", true)
                 } else {

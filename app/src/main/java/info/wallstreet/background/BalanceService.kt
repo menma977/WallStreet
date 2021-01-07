@@ -57,14 +57,14 @@ class BalanceService : Service() {
                       user.setString("balance_$currency", balance.getString("Balance"))
                     }
                   }
-                  val camel = CamelController.getBalance(user.getString("wallet_camel"))
-                  if (camel.getInt("code") == 200) {
-                    val convertCoin = CoinFormat.coinToDecimal(camel.getJSONObject("data").getString("balance").toBigDecimal()).toPlainString()
+                  val tron = CamelController.getBalance(user.getString("wallet_camel"))
+                  if (tron.getInt("code") == 200) {
+                    val convertCoin = tron.getJSONObject("data").getString("balance")
                     user.setString("balance_tron", convertCoin)
                   }
-                  val tron = CamelController.getTokenBalance(user.getString("wallet_camel"))
-                  if (tron.getInt("code") == 200) {
-                    val convertCoin = CoinFormat.coinToDecimal(tron.getJSONObject("data").getString("balance").toBigDecimal()).toPlainString()
+                  val camel = CamelController.getTokenBalance(user.getString("wallet_camel"))
+                  if (camel.getInt("code") == 200) {
+                    val convertCoin = camel.getJSONObject("data").getString("balance")
                     user.setString("balance_camel", convertCoin)
                   }
 
