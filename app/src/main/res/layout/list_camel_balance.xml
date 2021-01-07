@@ -17,6 +17,17 @@
       android:padding="2sp"
       android:text="wallet"
       android:textAlignment="center"
-      android:textColor="@color/textSecondary"/>
+      android:textColor="@color/textSecondary" />
+
+  <TextView
+      android:id="@+id/value"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:padding="2sp"
+      android:paddingStart="6sp"
+      android:text="nomimal"
+      android:textAlignment="textStart"
+      android:textColor="@color/textSecondary" />
 
 </TableRow>

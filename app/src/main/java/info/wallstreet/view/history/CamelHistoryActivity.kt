@@ -61,7 +61,7 @@ class CamelHistoryActivity : AppCompatActivity() {
             for (i in newData.length()-1 downTo 0) {
               val history = newData[i] as JSONObject
               listAdapter.addItem(
-                HistoryCamelBalance(history.getString("wallet"))
+                HistoryCamelBalance(history.getString("wallet"), history.getString("value"))
               )
             }
           }

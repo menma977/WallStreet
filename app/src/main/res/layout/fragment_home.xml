@@ -403,7 +403,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="end"
                 android:orientation="vertical">
 
@@ -411,20 +411,23 @@
                   android:id="@+id/textViewBitcoinBalance"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:hint="@string/zero"
                   android:textColor="@color/colorSecondaryDark"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/textViewBitcoinBalanceFake"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:gravity="end"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:text="@string/zero"
                   android:textColor="@color/colorSecondaryLight"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -502,7 +505,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="end"
                 android:orientation="vertical">
 
@@ -510,20 +513,23 @@
                   android:id="@+id/textViewEthereumBalance"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:hint="@string/zero"
                   android:textColor="@color/colorSecondaryDark"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/textViewEthereumBalanceFake"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:gravity="end"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:text="@string/zero"
                   android:textColor="@color/colorSecondaryLight"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -601,7 +607,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="end"
                 android:orientation="vertical">
 
@@ -609,20 +615,23 @@
                   android:id="@+id/textViewLiteCoinBalance"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:hint="@string/zero"
                   android:textColor="@color/colorSecondaryDark"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/textViewLiteCoinBalanceFake"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:gravity="end"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:text="@string/zero"
                   android:textColor="@color/colorSecondaryLight"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -702,7 +711,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="end"
                 android:orientation="vertical">
 
@@ -710,20 +719,23 @@
                   android:id="@+id/textViewDogeCoinBalance"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:hint="@string/zero"
                   android:textColor="@color/colorSecondaryDark"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/textViewDogeCoinBalanceFake"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:gravity="end"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
                   android:text="@string/zero"
                   android:textColor="@color/colorSecondaryLight"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
 
             </LinearLayout>
 
