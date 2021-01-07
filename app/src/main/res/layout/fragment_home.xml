@@ -276,7 +276,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/zero"
-                  android:textSize="16sp"
+                  android:textSize="12sp"
                   android:textStyle="bold"
                   android:gravity="end"/>
 
@@ -308,7 +308,7 @@
                   android:layout_height="wrap_content"
                   android:hint="@string/zero"
                   android:textColor="@color/colorSecondaryDark"
-                  android:textSize="16sp"
+                  android:textSize="12sp"
                   android:textStyle="bold"
                   android:gravity="end"/>
 
