@@ -31,10 +31,10 @@ class UpgradeListAdapter(private val context: Context) : RecyclerView.Adapter<Up
     holder.balance.text = myDataset[position].balance
     if (myDataset[position].color == "in" && position != 0) {
       holder.balance.setTextColor(ContextCompat.getColor(context, R.color.Success))
-      holder.balance.text = "+${myDataset[position].balance}"
+      holder.balance.text = "+$${myDataset[position].balance}"
     } else if (myDataset[position].color == "out" && position != 0) {
       holder.balance.setTextColor(ContextCompat.getColor(context, R.color.Danger))
-      holder.balance.text = "-${myDataset[position].balance}"
+      holder.balance.text = "-$${myDataset[position].balance}"
     } else {
       holder.balance.text = myDataset[position].balance
     }
