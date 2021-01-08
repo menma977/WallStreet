@@ -15,7 +15,7 @@ class HistoryCamelBalanceAdapter(private val context: Context) : RecyclerView.Ad
   private val myDataset = ArrayList<HistoryCamelBalance>()
 
   init {
-    myDataset.add(HistoryCamelBalance("Wallet", "Value"))
+    myDataset.add(HistoryCamelBalance("Wallet", "Value", "Date"))
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -42,7 +42,7 @@ class HistoryCamelBalanceAdapter(private val context: Context) : RecyclerView.Ad
 
   fun clear() {
     myDataset.clear()
-    myDataset.add(HistoryCamelBalance("Wallet", "Value"))
+    myDataset.add(HistoryCamelBalance("Wallet", "Value","Date"))
     this.notifyDataSetChanged()
     this.notifyItemRangeInserted(0, myDataset.size)
   }

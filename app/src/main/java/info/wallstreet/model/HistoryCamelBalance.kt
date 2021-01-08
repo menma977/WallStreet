@@ -1,3 +1,5 @@
 package info.wallstreet.model
 
-class HistoryCamelBalance(val wallet: String, val value: String)
+import java.util.Date
+
+class HistoryCamelBalance(val wallet: String, val value: String, val date: String)
