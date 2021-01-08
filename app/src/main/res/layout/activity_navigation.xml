@@ -116,6 +116,34 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayoutWebView"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+      <ImageView
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          app:srcCompat="@drawable/myteam"
+          android:scaleType="fitCenter"
+          android:background="@color/Link"
+          android:contentDescription="@string/icon"
+          android:backgroundTint="@color/Link"/>
+
+      <TextView
+          android:text="Network"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textAlignment="center"
+          android:textSize="12sp"
+          android:textColor="@color/colorAccent"
+          android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayoutAddUser"
         android:orientation="vertical"
         android:layout_width="0dp"

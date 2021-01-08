@@ -65,14 +65,14 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     currentBalance.text = if (isFake) {
       balanceValue = user.getString("fake_balance_$currency").toBigDecimal()
-      CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
-        Locale.getDefault()
-      )
+      CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
     } else {
       balanceValue = user.getString("balance_$currency").toBigDecimal()
-      CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
-        Locale.getDefault()
-      )
+      if (currency == "camel" || currency == "tron") {
+        user.getString("balance_$currency") + " " + currency.toUpperCase(Locale.getDefault())
+      } else {
+        CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
+      }
     }
 
     runService()
@@ -91,7 +91,15 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           Toast.makeText(this, "Amount required", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
-        CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()) > balanceValue -> {
+        CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()) > balanceValue && currency != "camel" && currency != "tron" -> {
+          Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
+          secondaryPasswordText.requestFocus()
+        }
+        balanceText.text.toString().toBigDecimal() > balanceValue && currency == "camel" -> {
+          Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
+          secondaryPasswordText.requestFocus()
+        }
+        balanceText.text.toString().toBigDecimal() > balanceValue && currency == "tron" -> {
           Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
@@ -175,6 +183,9 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           "camel" -> {
             receiver = Intent(applicationContext, CamelService::class.java)
           }
+          "tron" -> {
+            receiver = Intent(applicationContext, CamelService::class.java)
+          }
         }
         startService(receiver)
         LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiver, IntentFilter("web.$currency"))
@@ -204,13 +215,13 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         onLogout()
       } else {
         val balance = if (isFake) {
-          CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
-            Locale.getDefault()
-          )
+          CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
         } else {
-          CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(
-            Locale.getDefault()
-          )
+          if (currency == "camel" || currency == "tron") {
+            user.getString("balance_$currency") + " " + currency.toUpperCase(Locale.getDefault())
+          } else {
+            CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
+          }
         }
 
         currentBalance.text = balance

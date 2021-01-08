@@ -55,6 +55,15 @@ class MainActivity : AppCompatActivity() {
         if (user.getString("progressValue").isEmpty()) {
           user.setString("progressValue", "0")
         }
+        if (user.getString("totalMember").isEmpty()) {
+          user.setString("totalMember", "-")
+        }
+        if (user.getString("totalDollar").isEmpty()) {
+          user.setString("totalDollar", "-")
+        }
+        if (user.getString("topSponsor").isEmpty()) {
+          user.setString("topSponsor", "-")
+        }
       }
       update -> {
         user.clear()

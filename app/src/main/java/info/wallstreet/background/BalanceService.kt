@@ -43,12 +43,6 @@ class BalanceService : Service() {
                 body.addEncoded("s", user.getString("cookie"))
                 json = DogeController(body).call()
                 if (json.getInt("code") == 200) {
-                  user.setString("balance_btc", "0")
-                  user.setString("balance_ltc", "0")
-                  user.setString("balance_eth", "0")
-                  user.setString("balance_doge", "0")
-                  user.setString("balance_camel", "0")
-                  user.setString("balance_tron", "0")
                   val balances = json.getJSONObject("data").getJSONArray("Balances")
                   if (balances.length() > 0) {
                     for (i in 0 until balances.length()) {

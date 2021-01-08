@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import info.wallstreet.BuildConfig
 import info.wallstreet.MainActivity
 import info.wallstreet.R
-import info.wallstreet.config.CoinFormat
 import info.wallstreet.config.Loading
 import info.wallstreet.controller.PostController
 import info.wallstreet.model.Url
@@ -135,10 +134,9 @@ class LoginActivity : AppCompatActivity() {
         user.setString("balance_ltc", result.getJSONObject("data").getString("ltc_balance"))
         user.setString("balance_eth", result.getJSONObject("data").getString("eth_balance"))
         user.setString("balance_btc", result.getJSONObject("data").getString("btc_balance"))
-        val convertCoinCamel = CoinFormat.coinToDecimal(result.getJSONObject("data").getString("camel_balance").toBigDecimal()).toPlainString()
-        val convertCoinTron = CoinFormat.coinToDecimal(result.getJSONObject("data").getString("tron_balance").toBigDecimal()).toPlainString()
-        user.setString("balance_camel", convertCoinCamel)
-        user.setString("balance_tron", convertCoinTron)
+
+        user.setString("balance_camel", result.getJSONObject("data").getString("camel_balance"))
+        user.setString("balance_tron", result.getJSONObject("data").getString("tron_balance"))
 
         user.setString("fake_balance_doge", result.getJSONObject("data").getString("fake_doge_balance"))
         user.setString("fake_balance_ltc", result.getJSONObject("data").getString("fake_ltc_balance"))
@@ -148,6 +146,9 @@ class LoginActivity : AppCompatActivity() {
 
         user.setString("targetValue", "0")
         user.setString("progressValue", "0")
+        user.setString("totalMember", result.getJSONObject("data").getString("totalMember"))
+        user.setString("totalDollar", result.getJSONObject("data").getString("totalDollar"))
+        user.setString("topSponsor", result.getJSONObject("data").getString("topSponsor"))
         if (result.getJSONObject("data").getInt("on_queue") > 0) {
           user.setBoolean("on_queue", true)
         } else {
