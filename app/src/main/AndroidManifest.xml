@@ -18,6 +18,14 @@
       tools:ignore="AllowBackup"
       tools:targetApi="n">
     <activity
+        android:name=".view.BinaryActivity"
+        android:configChanges="orientation|screenSize"
+        android:label="Network">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".view.NavigationActivity"/>
+    </activity>
+    <activity
         android:name=".view.history.CamelHistoryActivity"
         android:configChanges="orientation|screenSize"
         android:theme="@style/AppTheme.NoActionBar">

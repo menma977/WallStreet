@@ -39,6 +39,7 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var receiverCamel: Intent
   private lateinit var username: TextView
   private lateinit var homeButton: LinearLayout
+  private lateinit var networkButton: LinearLayout
   private lateinit var addUserButton: LinearLayout
   private lateinit var settingButton: LinearLayout
   private lateinit var buttonSendBalance: ImageButton
@@ -52,6 +53,7 @@ class NavigationActivity : AppCompatActivity() {
 
     username = findViewById(R.id.textViewUsername)
     homeButton = findViewById(R.id.linearLayoutHome)
+    networkButton = findViewById(R.id.linearLayoutWebView)
     addUserButton = findViewById(R.id.linearLayoutAddUser)
     settingButton = findViewById(R.id.linearLayoutSetting)
     buttonSendBalance = findViewById(R.id.imageButtonSend)
@@ -112,6 +114,11 @@ class NavigationActivity : AppCompatActivity() {
     homeButton.setOnClickListener {
       val fragment = HomeFragment()
       addFragment(fragment)
+    }
+
+    networkButton.setOnClickListener {
+      val move = Intent(this, BinaryActivity::class.java)
+      startActivity(move)
     }
 
     addUserButton.setOnClickListener {

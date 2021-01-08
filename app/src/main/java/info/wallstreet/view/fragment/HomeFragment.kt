@@ -8,9 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -20,8 +17,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.R
 import info.wallstreet.config.CoinFormat
 import info.wallstreet.config.Loading
-import info.wallstreet.controller.WebViewController
-import info.wallstreet.model.Url
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.history.FakeBalanceActivity
@@ -29,9 +24,6 @@ import info.wallstreet.view.history.HistoryBalanceActivity
 import info.wallstreet.view.history.UpgradeHistoryActivity
 import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
-import org.json.JSONObject
-import java.util.*
-import kotlin.concurrent.schedule
 
 class HomeFragment : Fragment() {
   private lateinit var parentActivity: NavigationActivity
@@ -61,8 +53,6 @@ class HomeFragment : Fragment() {
   private lateinit var historyWall: LinearLayout
   private lateinit var history999: LinearLayout
   private lateinit var move: Intent
-  private lateinit var webView: WebView
-  private lateinit var result: JSONObject
   private var onLogoutReady = false
 
   override fun onCreateView(
@@ -101,7 +91,6 @@ class HomeFragment : Fragment() {
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
     targetValue = view.findViewById(R.id.textViewTarget)
-    webView = view.findViewById(R.id.webViewContent)
 
     defaultBalance()
 
@@ -143,8 +132,6 @@ class HomeFragment : Fragment() {
     toCamelWallet.setOnClickListener {
       WalletQR.show(parentActivity, "camel", user)
     }
-
-    loadHtml()
 
     progressValue.text = "$ ${CoinFormat.toDollar(user.getString("progressValue").toBigDecimal()).toPlainString()}"
     targetValue.text = "$ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()}"
@@ -224,26 +211,6 @@ class HomeFragment : Fragment() {
       camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
     } else {
       camelFake.text = "0"
-    }
-  }
-
-  private fun loadHtml() {
-    loading.openDialog()
-    Timer().schedule(100) {
-      result = WebViewController("binary", user.getString("token")).call()
-      if (result.getInt("code") == 200) {
-        parentActivity.runOnUiThread {
-          webView.removeAllViews()
-          webView.webViewClient = WebViewClient()
-          webView.webChromeClient = WebChromeClient()
-          webView.settings.javaScriptEnabled = true
-          webView.settings.domStorageEnabled = true
-          webView.settings.javaScriptCanOpenWindowsAutomatically = true
-          webView.loadData(result.getString("data"), "text/html", "UTF-8")
-          webView.loadDataWithBaseURL(Url.web("binary"), result.getString("data"), "text/html", "UTF-8", null)
-          loading.closeDialog()
-        }
-      }
     }
   }
 
