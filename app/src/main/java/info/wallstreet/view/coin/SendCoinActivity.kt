@@ -91,11 +91,15 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           Toast.makeText(this, "Amount required", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
-        CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()) > balanceValue && currency != "camel" -> {
+        CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()) > balanceValue && currency != "camel" && currency != "tron" -> {
           Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
         balanceText.text.toString().toBigDecimal() > balanceValue && currency == "camel" -> {
+          Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
+          secondaryPasswordText.requestFocus()
+        }
+        balanceText.text.toString().toBigDecimal() > balanceValue && currency == "tron" -> {
           Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
