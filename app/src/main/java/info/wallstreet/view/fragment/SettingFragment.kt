@@ -21,6 +21,9 @@ class SettingFragment : Fragment() {
   private lateinit var email: TextView
   private lateinit var phone: TextView
   private lateinit var level: TextView
+  private lateinit var totalMember: TextView
+  private lateinit var totalDollar: TextView
+  private lateinit var topSponsor: TextView
   private lateinit var editPassword: TextView
   private lateinit var editSecondaryPassword: TextView
   private lateinit var logout: TextView
@@ -37,6 +40,9 @@ class SettingFragment : Fragment() {
     email = view.findViewById(R.id.textViewEmail)
     phone = view.findViewById(R.id.textViewPhone)
     level = view.findViewById(R.id.textViewLevel)
+    totalMember = view.findViewById(R.id.textViewTotalMember)
+    totalDollar = view.findViewById(R.id.textViewTotalDollar)
+    topSponsor = view.findViewById(R.id.textViewTopSponsor)
     editPassword = view.findViewById(R.id.textViewEditPassword)
     editSecondaryPassword = view.findViewById(R.id.textViewEditSecondaryPassword)
     logout = view.findViewById(R.id.textViewLogout)
@@ -45,6 +51,9 @@ class SettingFragment : Fragment() {
     email.text = user.getString("email")
     phone.text = user.getString("phone")
     level.text = "Current TopUp : $${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
+    totalMember.text = user.getString("totalMember")
+    totalDollar.text = user.getString("totalDollar")
+    topSponsor.text = user.getString("topSponsor")
 
     editPassword.setOnClickListener {
       move = Intent(parentActivity, EditPasswordActivity::class.java)

@@ -146,6 +146,9 @@ class LoginActivity : AppCompatActivity() {
 
         user.setString("targetValue", "0")
         user.setString("progressValue", "0")
+        user.setString("totalMember", result.getJSONObject("data").getString("totalMember"))
+        user.setString("totalDollar", result.getJSONObject("data").getString("totalDollar"))
+        user.setString("topSponsor", result.getJSONObject("data").getString("topSponsor"))
         if (result.getJSONObject("data").getInt("on_queue") > 0) {
           user.setBoolean("on_queue", true)
         } else {

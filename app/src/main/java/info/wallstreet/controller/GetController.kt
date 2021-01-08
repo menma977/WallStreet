@@ -1,12 +1,11 @@
 package info.wallstreet.controller
 
-import android.util.Log
 import info.wallstreet.model.Url
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import org.json.*
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.concurrent.Callable
@@ -77,7 +76,6 @@ class GetController(private var targetUrl: String, private var token: String?, p
 
       return responseHandler(response, convertJSON)
     } catch (e: Exception) {
-      Log.e("json", e.stackTraceToString())
       JSONObject().put("code", 500).put("data", e.message).put("logout", false)
     }
   }

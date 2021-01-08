@@ -36,6 +36,9 @@ class UpgradeService : Service() {
                 user.setInteger("progress", json.getJSONObject("data").getInt("progress"))
                 user.setString("progressValue", json.getJSONObject("data").getString("progress_value"))
                 user.setString("targetValue", json.getJSONObject("data").getString("target"))
+                user.setString("totalMember", json.getJSONObject("data").getString("totalMember"))
+                user.setString("totalDollar", json.getJSONObject("data").getString("totalDollar"))
+                user.setString("topSponsor", json.getJSONObject("data").getString("topSponsor"))
                 Thread.sleep(1000)
               }
               json.getBoolean("logout") -> {
