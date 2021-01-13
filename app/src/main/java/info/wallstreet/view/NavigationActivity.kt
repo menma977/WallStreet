@@ -37,6 +37,7 @@ class NavigationActivity : AppCompatActivity() {
   private lateinit var receiverltc: Intent
   private lateinit var receiverEth: Intent
   private lateinit var receiverCamel: Intent
+  private lateinit var priceList: Intent
   private lateinit var username: TextView
   private lateinit var homeButton: LinearLayout
   private lateinit var networkButton: LinearLayout
@@ -90,6 +91,7 @@ class NavigationActivity : AppCompatActivity() {
     stopService(receiverltc)
     stopService(receiverEth)
     stopService(receiverCamel)
+    stopService(priceList)
   }
 
   override fun onBackPressed() {
@@ -104,6 +106,7 @@ class NavigationActivity : AppCompatActivity() {
       stopService(receiverltc)
       stopService(receiverEth)
       stopService(receiverCamel)
+      stopService(priceList)
       finishAffinity()
     } else {
       super.onBackPressed()
@@ -142,6 +145,7 @@ class NavigationActivity : AppCompatActivity() {
       receiverltc = Intent(applicationContext, LtcService::class.java)
       receiverEth = Intent(applicationContext, EthService::class.java)
       receiverCamel = Intent(applicationContext, CamelService::class.java)
+      priceList = Intent(applicationContext, PriceListService::class.java)
 
       startService(dataUser)
       startService(receiverBalances)
@@ -151,6 +155,7 @@ class NavigationActivity : AppCompatActivity() {
       startService(receiverltc)
       startService(receiverEth)
       startService(receiverCamel)
+      startService(priceList)
 
       LocalBroadcastManager.getInstance(applicationContext).registerReceiver(broadcastReceiverUpgrade, IntentFilter("web.upgrade"))
     }

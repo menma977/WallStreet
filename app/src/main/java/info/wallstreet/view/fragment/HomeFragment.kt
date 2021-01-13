@@ -8,15 +8,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.R
 import info.wallstreet.config.CoinFormat
 import info.wallstreet.config.Loading
+import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
 import info.wallstreet.view.NavigationActivity
 import info.wallstreet.view.history.FakeBalanceActivity
@@ -24,6 +22,8 @@ import info.wallstreet.view.history.HistoryBalanceActivity
 import info.wallstreet.view.history.UpgradeHistoryActivity
 import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
+import java.util.*
+import kotlin.concurrent.schedule
 
 class HomeFragment : Fragment() {
   private lateinit var parentActivity: NavigationActivity
@@ -52,6 +52,12 @@ class HomeFragment : Fragment() {
   private lateinit var historyUpgradeButton: LinearLayout
   private lateinit var historyWall: LinearLayout
   private lateinit var history999: LinearLayout
+  private lateinit var btcPrice: TextView
+  private lateinit var ltcPrice: TextView
+  private lateinit var ethPrice: TextView
+  private lateinit var dogePrice: TextView
+  private lateinit var camelPrice: TextView
+  private lateinit var tronPrice: TextView
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -91,6 +97,13 @@ class HomeFragment : Fragment() {
     progressBar = view.findViewById(R.id.progressBar)
     progressValue = view.findViewById(R.id.textViewProgressBar)
     targetValue = view.findViewById(R.id.textViewTarget)
+
+    btcPrice = view.findViewById(R.id.textViewBtcPrice)
+    ltcPrice = view.findViewById(R.id.textViewLtcPrice)
+    ethPrice = view.findViewById(R.id.textViewEthPrice)
+    dogePrice = view.findViewById(R.id.textViewDogePrice)
+    camelPrice = view.findViewById(R.id.textViewCamelPrice)
+    tronPrice = view.findViewById(R.id.textViewTronPrice)
 
     defaultBalance()
 
@@ -137,6 +150,8 @@ class HomeFragment : Fragment() {
     targetValue.text = "$ ${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal()).toPlainString()}"
 
     upgradeBtn.isEnabled = !user.getBoolean("on_queue")
+
+    renderPriceList()
 
     return view
   }
@@ -223,6 +238,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverEth, IntentFilter("web.eth"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverLtc, IntentFilter("web.ltc"))
     LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverCamel, IntentFilter("web.camel"))
+    LocalBroadcastManager.getInstance(parentActivity).registerReceiver(broadcastReceiverPriceList, IntentFilter("web.price.list"))
   }
 
   override fun onDestroy() {
@@ -234,6 +250,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverCamel)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverPriceList)
   }
 
   override fun onStop() {
@@ -245,6 +262,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverCamel)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverPriceList)
   }
 
   override fun onPause() {
@@ -256,6 +274,7 @@ class HomeFragment : Fragment() {
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverEth)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverLtc)
     LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverCamel)
+    LocalBroadcastManager.getInstance(parentActivity).unregisterReceiver(broadcastReceiverPriceList)
   }
 
   private var broadcastReceiverUpgrade: BroadcastReceiver = object : BroadcastReceiver() {
@@ -356,6 +375,49 @@ class HomeFragment : Fragment() {
         camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
       }
       upgradeBtn.isEnabled = !user.getBoolean("on_queue")
+    }
+  }
+  private var broadcastReceiverPriceList: BroadcastReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+      if (user.getBoolean("logout")) {
+        if (!onLogoutReady) {
+          onLogoutReady = true
+          parentActivity.onLogout()
+        }
+      } else {
+        camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
+
+        btcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("btc_price").toBigDecimal())).toPlainString()
+        ltcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("ltc_price").toBigDecimal())).toPlainString()
+        ethPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("eth_price").toBigDecimal())).toPlainString()
+        dogePrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("doge_price").toBigDecimal())).toPlainString()
+        camelPrice.text = user.getString("camel_price")
+        tronPrice.text = user.getString("tron_price")
+      }
+      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
+    }
+  }
+
+  private fun renderPriceList() {
+    Timer().schedule(100) {
+      val result = GetController("upgrade.price", user.getString("token")).call()
+      when {
+        result.getInt("code") == 200 -> {
+          parentActivity.runOnUiThread {
+            btcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("btc").toBigDecimal())).toPlainString()
+            ltcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("ltc").toBigDecimal())).toPlainString()
+            ethPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("eth").toBigDecimal())).toPlainString()
+            dogePrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("doge").toBigDecimal())).toPlainString()
+            camelPrice.text = result.getJSONObject("data").getString("camel")
+            tronPrice.text = result.getJSONObject("data").getString("tron")
+          }
+        }
+        else -> {
+          parentActivity.runOnUiThread {
+            Toast.makeText(parentActivity.applicationContext, result.getString("data"), Toast.LENGTH_LONG).show()
+          }
+        }
+      }
     }
   }
 }

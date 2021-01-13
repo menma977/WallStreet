@@ -10,7 +10,7 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.concurrent.schedule
 
-class DataUserService : Service() {
+class PriceListService : Service() {
   private lateinit var result: JSONObject
   private lateinit var user: User
   private var startBackgroundService: Boolean = false
@@ -26,48 +26,34 @@ class DataUserService : Service() {
     Timer().schedule(100) {
       while (true) {
         val delta = System.currentTimeMillis() - time
-        if (delta >= 20000) {
+        if (delta >= 60000) {
           time = System.currentTimeMillis()
           val privateIntent = Intent()
           if (startBackgroundService) {
-            result = GetController("user.show", user.getString("token")).call()
+            result = GetController("upgrade.price", user.getString("token")).call()
             when {
               result.getInt("code") == 200 -> {
-                user.setString("cookie", result.getJSONObject("data").getString("cookie"))
-                user.setString("email", result.getJSONObject("data").getString("email"))
-                user.setString("username", result.getJSONObject("data").getString("username"))
-                user.setString("phone", result.getJSONObject("data").getString("phone"))
-                user.setString("wallet_camel", result.getJSONObject("data").getString("wallet_camel"))
-                user.setString("wallet_btc", result.getJSONObject("data").getString("wallet_btc"))
-                user.setString("wallet_doge", result.getJSONObject("data").getString("wallet_doge"))
-                user.setString("wallet_ltc", result.getJSONObject("data").getString("wallet_ltc"))
-                user.setString("wallet_eth", result.getJSONObject("data").getString("wallet_eth"))
-                user.setString("level", result.getJSONObject("data").getString("level"))
-                user.setString("profit", result.getJSONObject("data").getString("profit"))
-                user.setString("profitDollar", result.getJSONObject("data").getString("profitDollar"))
-
-                if (result.getJSONObject("data").getInt("on_queue") > 0) {
-                  user.setBoolean("on_queue", true)
-                } else {
-                  user.setBoolean("on_queue", false)
-                }
+                user.setString("doge_price", result.getJSONObject("data").getString("doge"))
+                user.setString("btc_price", result.getJSONObject("data").getString("btc"))
+                user.setString("eth_price", result.getJSONObject("data").getString("eth"))
+                user.setString("ltc_price", result.getJSONObject("data").getString("ltc"))
+                user.setString("camel_price", result.getJSONObject("data").getString("camel"))
+                user.setString("tron_price", result.getJSONObject("data").getString("tron"))
 
                 Thread.sleep(1000)
               }
               result.getBoolean("logout") -> {
                 user.setBoolean("logout", true)
-                user.setBoolean("on_queue", true)
                 Thread.sleep(2000)
                 stopSelf()
               }
               else -> {
                 user.setBoolean("logout", false)
-                user.setBoolean("on_queue", true)
                 Thread.sleep(20000)
               }
             }
 
-            privateIntent.action = "web.user"
+            privateIntent.action = "web.price.list"
             LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(privateIntent)
           } else {
             stopSelf()
