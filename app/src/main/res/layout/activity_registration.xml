@@ -207,7 +207,6 @@
         android:layout_height="25dp"/>
 
     <LinearLayout
-        android:id="@+id/toLoginGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

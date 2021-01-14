@@ -35,7 +35,6 @@
           tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/upgradeImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
@@ -788,7 +787,7 @@
             android:paddingTop="10dp">
 
           <TextView
-              android:text="Price List"
+              android:text="@string/price_list"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:textStyle="bold"
@@ -801,7 +800,8 @@
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
 
             <ImageView
                 android:src="@drawable/ic_camel"
@@ -829,6 +829,14 @@
                 android:layout_weight="1"
                 android:textAlignment="textEnd"/>
 
+            <ImageView
+                android:id="@+id/iconCamel"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
           </LinearLayout>
 
           <Space
@@ -838,7 +846,8 @@
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
 
             <ImageView
                 android:src="@drawable/ic_tron"
@@ -866,6 +875,14 @@
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconTron"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
 
           </LinearLayout>
 
@@ -905,6 +922,15 @@
                 android:layout_weight="1"
                 android:textAlignment="textEnd"/>
 
+
+            <ImageView
+                android:id="@+id/iconBTC"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
           </LinearLayout>
 
           <Space
@@ -914,7 +940,8 @@
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
 
             <ImageView
                 android:src="@drawable/ic_eth"
@@ -943,6 +970,14 @@
                 android:layout_weight="1"
                 android:textAlignment="textEnd"/>
 
+            <ImageView
+                android:id="@+id/iconETH"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
           </LinearLayout>
 
           <Space
@@ -952,7 +987,8 @@
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
 
             <ImageView
                 android:src="@drawable/ic_ltc"
@@ -981,6 +1017,15 @@
                 android:layout_weight="1"
                 android:textAlignment="textEnd"/>
 
+
+            <ImageView
+                android:id="@+id/iconLTC"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
           </LinearLayout>
 
           <Space
@@ -990,7 +1035,8 @@
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
 
             <ImageView
                 android:src="@drawable/ic_doge"
@@ -1018,6 +1064,14 @@
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconDoge"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
 
           </LinearLayout>
 

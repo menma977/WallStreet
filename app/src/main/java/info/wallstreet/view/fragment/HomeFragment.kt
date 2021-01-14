@@ -1,5 +1,6 @@
 package info.wallstreet.view.fragment
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import info.wallstreet.R
@@ -58,6 +60,12 @@ class HomeFragment : Fragment() {
   private lateinit var dogePrice: TextView
   private lateinit var camelPrice: TextView
   private lateinit var tronPrice: TextView
+  private lateinit var btcIcon: ImageView
+  private lateinit var ltcIcon: ImageView
+  private lateinit var ethIcon: ImageView
+  private lateinit var dogeIcon: ImageView
+  private lateinit var camelIcon: ImageView
+  private lateinit var tronIcon: ImageView
   private lateinit var move: Intent
   private var onLogoutReady = false
 
@@ -104,6 +112,13 @@ class HomeFragment : Fragment() {
     dogePrice = view.findViewById(R.id.textViewDogePrice)
     camelPrice = view.findViewById(R.id.textViewCamelPrice)
     tronPrice = view.findViewById(R.id.textViewTronPrice)
+
+    btcIcon = view.findViewById(R.id.iconBTC)
+    ltcIcon = view.findViewById(R.id.iconLTC)
+    ethIcon = view.findViewById(R.id.iconETH)
+    dogeIcon = view.findViewById(R.id.iconDoge)
+    camelIcon = view.findViewById(R.id.iconCamel)
+    tronIcon = view.findViewById(R.id.iconTron)
 
     defaultBalance()
 
@@ -378,6 +393,7 @@ class HomeFragment : Fragment() {
     }
   }
   private var broadcastReceiverPriceList: BroadcastReceiver = object : BroadcastReceiver() {
+    @SuppressLint("SetTextI18n")
     override fun onReceive(context: Context, intent: Intent) {
       if (user.getBoolean("logout")) {
         if (!onLogoutReady) {
@@ -385,16 +401,139 @@ class HomeFragment : Fragment() {
           parentActivity.onLogout()
         }
       } else {
-        camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
+        val oldBTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_btc").toBigDecimal()))
+        val oldLTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_ltc").toBigDecimal()))
+        val oldETH = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_eth").toBigDecimal()))
+        val oldDOGE = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_doge").toBigDecimal()))
+        val oldCAMEL = user.getString("old_price_camel").toBigDecimal()
+        val oldTRON = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_tron").toBigDecimal()))
+        val newBTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("btc_price").toBigDecimal()))
+        val newLTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("ltc_price").toBigDecimal()))
+        val newETH = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("eth_price").toBigDecimal()))
+        val newDOGE = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("doge_price").toBigDecimal()))
+        val newCAMEL = user.getString("camel_price").toBigDecimal()
+        val newTRON = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("tron_price").toBigDecimal()))
 
-        btcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("btc_price").toBigDecimal())).toPlainString()
-        ltcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("ltc_price").toBigDecimal())).toPlainString()
-        ethPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("eth_price").toBigDecimal())).toPlainString()
-        dogePrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("doge_price").toBigDecimal())).toPlainString()
-        camelPrice.text = user.getString("camel_price")
-        tronPrice.text = user.getString("tron_price")
+        btcPrice.text = "$ " + newBTC.toPlainString()
+        user.setString("old_price_btc", user.getString("btc_price"))
+        when {
+          oldBTC > newBTC -> {
+            btcPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            btcIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            btcIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldBTC < newBTC -> {
+            btcPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            btcIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            btcIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            btcPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            btcIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            btcIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
+
+        ltcPrice.text = "$ " + newLTC.toPlainString()
+        user.setString("old_price_ltc", user.getString("ltc_price"))
+        when {
+          oldLTC > newLTC -> {
+            ltcPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            ltcIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            ltcIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldLTC < newLTC -> {
+            ltcPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            ltcIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            ltcIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            ltcPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            ltcIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            ltcIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
+
+        ethPrice.text = "$ " + newETH.toPlainString()
+        user.setString("old_price_eth", user.getString("eth_price"))
+        when {
+          oldETH > newETH -> {
+            ethPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            ethIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            ethIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldETH < newETH -> {
+            ethPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            ethIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            ethIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            ethPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            ethIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            ethIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
+
+        dogePrice.text = "$ " + newDOGE.toPlainString()
+        user.setString("old_price_doge", user.getString("doge_price"))
+        when {
+          oldDOGE > newDOGE -> {
+            dogePrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            dogeIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            dogeIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldDOGE < newDOGE -> {
+            dogePrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            dogeIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            dogeIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            dogePrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            dogeIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            dogeIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
+
+        camelPrice.text = "$ " + newCAMEL.toPlainString()
+        user.setString("old_price_camel", user.getString("camel_price"))
+        when {
+          oldCAMEL > newCAMEL -> {
+            camelPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            camelIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            camelIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldCAMEL < newCAMEL -> {
+            camelPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            camelIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            camelIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            camelPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            camelIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            camelIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
+
+        tronPrice.text = "$ " + newTRON.toPlainString()
+        user.setString("old_price_tron", user.getString("tron_price"))
+        when {
+          oldTRON > newTRON -> {
+            tronPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            tronIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            tronIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldTRON < newTRON -> {
+            tronPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            tronIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            tronIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            tronPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            tronIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            tronIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
       }
-      upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
   }
 
@@ -404,12 +543,19 @@ class HomeFragment : Fragment() {
       when {
         result.getInt("code") == 200 -> {
           parentActivity.runOnUiThread {
-            btcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("btc").toBigDecimal())).toPlainString()
-            ltcPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("ltc").toBigDecimal())).toPlainString()
-            ethPrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("eth").toBigDecimal())).toPlainString()
-            dogePrice.text = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("doge").toBigDecimal())).toPlainString()
-            camelPrice.text = result.getJSONObject("data").getString("camel")
-            tronPrice.text = result.getJSONObject("data").getString("tron")
+            btcPrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("btc").toBigDecimal())).toPlainString()
+            ltcPrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("ltc").toBigDecimal())).toPlainString()
+            ethPrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("eth").toBigDecimal())).toPlainString()
+            dogePrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("doge").toBigDecimal())).toPlainString()
+            camelPrice.text = "$ " + result.getJSONObject("data").getString("camel")
+            tronPrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("tron").toBigDecimal())).toPlainString()
+
+            user.setString("old_price_btc", result.getJSONObject("data").getString("btc"))
+            user.setString("old_price_ltc", result.getJSONObject("data").getString("ltc"))
+            user.setString("old_price_eth", result.getJSONObject("data").getString("eth"))
+            user.setString("old_price_doge", result.getJSONObject("data").getString("doge"))
+            user.setString("old_price_camel", result.getJSONObject("data").getString("camel"))
+            user.setString("old_price_tron", result.getJSONObject("data").getString("tron"))
           }
         }
         else -> {
