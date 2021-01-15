@@ -29,7 +29,7 @@ class CamelHistoryActivity : AppCompatActivity() {
   private lateinit var listAdapter: HistoryCamelBalanceAdapter
   private lateinit var user: User
   private lateinit var loading: Loading
-  private var page = 0;
+  private var page = 0
   private var _page = page
   private lateinit var type: String
   private lateinit var prev_btn: TextView
@@ -59,47 +59,44 @@ class CamelHistoryActivity : AppCompatActivity() {
     rePopulate()
   }
 
-  private fun rePopulate(nextPage:Int = 1) {
+  private fun rePopulate(nextPage: Int = 1) {
     loading.openDialog()
     _page = page;
     page += nextPage;
-    if(page <= 0){
+    if (page <= 0) {
       loading.closeDialog()
       return Toast.makeText(applicationContext, "No more page to show", Toast.LENGTH_SHORT).show()
     }
     Thread {
       val result = PostController(
-        "camel.history?page=$page",
-        user.getString("token"),
-        FormBody.Builder()
+        "camel.history?page=$page", user.getString("token"), FormBody.Builder()
       ).call()
       if (result.getInt("code") == 200) {
         val newData = result.getJSONObject("data").getJSONObject("list").getJSONArray("data")
         if (newData.length() > 0) {
           runOnUiThread {
             listAdapter.clear()
-            for (i in newData.length()-1 downTo 0) {
+            for (i in newData.length() - 1 downTo 0) {
               val history = newData[i] as JSONObject
               if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 listAdapter.addItem(
                   HistoryCamelBalance(
-                    history.getString("wallet"), '$'+history.getString("value"), LocalDateTime.parse(
-                      history.getString(
-                        "created_at"
-                      ).replace("T", " ").substring(0..18),
-                      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                    history.getString("wallet"), history.getString("value"), history.getString("type"), LocalDateTime.parse(
+                      history.getString("created_at").replace("T", " ").substring(0..18), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                     ).format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
                   )
                 )
-              }else{
+              } else {
                 val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT)
                 val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.ROOT)
                 listAdapter.addItem(
                   HistoryCamelBalance(
-                    history.getString("wallet"), history.getString("value"), formatter.format(parser.parse(
-                      history.getString(
-                        "created_at"
-                      )) ?: "-"
+                    history.getString("wallet"), history.getString("value"), history.getString("type"), formatter.format(
+                      parser.parse(
+                        history.getString(
+                          "created_at"
+                        )
+                      ) ?: "-"
                     )
                   )
                 )
