@@ -17,6 +17,8 @@
       android:theme="@style/AppTheme"
       tools:ignore="AllowBackup"
       tools:targetApi="n">
+    <activity android:name=".view.history.HistoryUpgradeListActivity">
+    </activity>
     <activity
         android:name=".view.BinaryActivity"
         android:configChanges="orientation|screenSize"
