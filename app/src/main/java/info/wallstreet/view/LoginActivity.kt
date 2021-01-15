@@ -161,10 +161,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         runOnUiThread {
+          loading.closeDialog()
           move = Intent(applicationContext, NavigationActivity::class.java)
           startActivity(move)
           finishAffinity()
-          loading.closeDialog()
         }
       } else {
         runOnUiThread {
