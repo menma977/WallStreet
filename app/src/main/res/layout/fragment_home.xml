@@ -35,7 +35,6 @@
           tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/upgradeImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon"
@@ -762,11 +761,325 @@
 
           </LinearLayout>
 
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+          </LinearLayout>
+
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/card2"
+            android:elevation="15dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:paddingTop="10dp">
+
+          <TextView
+              android:text="@string/price_list"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textStyle="bold"
+              android:textAlignment="center"/>
+
+          <Space
+              android:layout_width="wrap_content"
+              android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/ic_camel"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="@string/camel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewCamelPrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconCamel"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
+
+          <Space
+              android:layout_width="match_parent"
+              android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/ic_tron"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/ic_tron"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="@string/tron"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewTronPrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconTron"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
+
+          <Space
+              android:layout_width="match_parent"
+              android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+            <ImageView
+                android:src="@drawable/ic_btc"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/ic_btc"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="@string/btc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewBtcPrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+
+            <ImageView
+                android:id="@+id/iconBTC"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
+
+          <Space
+              android:layout_width="match_parent"
+              android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/ic_eth"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/ic_eth"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="@string/eth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewEthPrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconETH"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
+
+          <Space
+              android:layout_width="match_parent"
+              android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/ic_ltc"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/ic_ltc"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="@string/ltc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewLtcPrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+
+            <ImageView
+                android:id="@+id/iconLTC"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
+
+          <Space
+              android:layout_width="match_parent"
+              android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/ic_doge"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/ic_doge"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="@string/doge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewDogePrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconDoge"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
       </LinearLayout>
 

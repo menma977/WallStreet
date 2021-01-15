@@ -21,15 +21,11 @@
   <string name="confirmation_secondary_password">Confirmation Secondary Password</string>
   <string name="do_you_have_account">do you have account?</string>
   <string name="reset_password_will_send_link_to_email_address">Reset password will send link to email address</string>
-  <string name="add_new_user">Invite and extend your network for more profit!</string>
   <string name="balance">Balance</string>
   <string name="packages">Packages</string>
   <string name="upgrade">Top Up</string>
-  <string name="invite">Invite</string>
   <string name="send">Send</string>
-  <string name="currency">Currency</string>
   <string name="description">Description</string>
-  <string name="dollar_example">$ 100</string>
   <string name="icon">Icon</string>
   <string name="home">Home</string>
   <string name="setting">Setting</string>
@@ -41,14 +37,11 @@
   <string name="eth_wall">ETH Wall</string>
   <string name="ltc_wall">LTC Wall</string>
   <string name="doge_wall">Doge Wall</string>
-  <string name="idr">IDR</string>
   <string name="doge_wallet">DogeCoin Wallet</string>
   <string name="btc_wallet">Bitcoin Wallet</string>
   <string name="eth_wallet">Ethereum Wallet</string>
   <string name="ltc_wallet">LiteCoin Wallet</string>
   <string name="camel_wallet">Camel Wallet</string>
-  <string name="ic_dollar">$</string>
-  <string name="str_dollar">USD</string>
   <string name="zero">0</string>
   <string name="top_up">Top Up</string>
   <string name="wallet">Enter Wallet</string>
@@ -68,6 +61,7 @@
   <string name="verification_link_send_via_email">Verification link send via email</string>
   <string name="resend_email_verification">Resend Email Verification</string>
   <string name="preview">Preview</string>
+  <string name="price_list">Price List</string>
 
   <string-array name="currency_choice">
     <item>BitCoin</item>

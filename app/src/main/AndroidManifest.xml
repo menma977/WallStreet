@@ -148,6 +148,9 @@
     <service
         android:name=".background.DataUserService"
         android:enabled="true"/>
+    <service
+        android:name=".background.PriceListService"
+        android:enabled="true"/>
   </application>
 
 </manifest>

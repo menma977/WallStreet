@@ -21,6 +21,8 @@ class SettingFragment : Fragment() {
   private lateinit var email: TextView
   private lateinit var phone: TextView
   private lateinit var level: TextView
+  private lateinit var profit: TextView
+  private lateinit var profitDollar: TextView
   private lateinit var totalMember: TextView
   private lateinit var totalDollar: TextView
   private lateinit var topSponsor: TextView
@@ -40,6 +42,8 @@ class SettingFragment : Fragment() {
     email = view.findViewById(R.id.textViewEmail)
     phone = view.findViewById(R.id.textViewPhone)
     level = view.findViewById(R.id.textViewLevel)
+    profit = view.findViewById(R.id.textViewShare)
+    profitDollar = view.findViewById(R.id.textViewShareDollar)
     totalMember = view.findViewById(R.id.textViewTotalMember)
     totalDollar = view.findViewById(R.id.textViewTotalDollar)
     topSponsor = view.findViewById(R.id.textViewTopSponsor)
@@ -51,6 +55,8 @@ class SettingFragment : Fragment() {
     email.text = user.getString("email")
     phone.text = user.getString("phone")
     level.text = "Current TopUp : $${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
+    profit.text = "Random Share : ${CoinFormat.decimalToCoin(user.getString("profit").toBigDecimal()).toPlainString()}"
+    profitDollar.text = "Random Share Dollar : ${CoinFormat.toDollar(user.getString("profitDollar").toBigDecimal()).toPlainString()}"
     totalMember.text = user.getString("totalMember")
     totalDollar.text = user.getString("totalDollar")
     topSponsor.text = user.getString("topSponsor")
