@@ -151,6 +151,8 @@ class LoginActivity : AppCompatActivity() {
         user.setString("topSponsor", result.getJSONObject("data").getString("topSponsor"))
         user.setString("profit", result.getJSONObject("data").getString("profit"))
         user.setString("profitDollar", result.getJSONObject("data").getString("profitDollar"))
+        user.setString("firstUpgradeDate", result.getJSONObject("data").getString("first_upgrade_date"))
+        user.setString("firstUpgradeValue", result.getJSONObject("data").getString("first_upgrade_value"))
 
         if (result.getJSONObject("data").getInt("on_queue") > 0) {
           user.setBoolean("on_queue", true)
@@ -222,6 +224,8 @@ class LoginActivity : AppCompatActivity() {
   }
 
   private fun doRequestPermission() {
-    requestPermissions(arrayOf(Manifest.permission.CAMERA), 100)
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+      requestPermissions(arrayOf(Manifest.permission.CAMERA), 100)
+    }
   }
 }

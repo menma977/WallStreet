@@ -82,6 +82,13 @@
           android:id="@+id/textViewShareDollar"
           android:textColor="@color/textSecondary"/>
 
+      <TextView
+          android:hint="@string/app_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/textViewFirstUpgrade"
+          android:textColor="@color/textSecondary"/>
+
       <Space
           android:layout_width="match_parent"
           android:layout_height="5dp"/>

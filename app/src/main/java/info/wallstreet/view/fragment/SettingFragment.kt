@@ -26,6 +26,7 @@ class SettingFragment : Fragment() {
   private lateinit var totalMember: TextView
   private lateinit var totalDollar: TextView
   private lateinit var topSponsor: TextView
+  private lateinit var firstUpgrade: TextView
   private lateinit var editPassword: TextView
   private lateinit var editSecondaryPassword: TextView
   private lateinit var logout: TextView
@@ -47,6 +48,7 @@ class SettingFragment : Fragment() {
     totalMember = view.findViewById(R.id.textViewTotalMember)
     totalDollar = view.findViewById(R.id.textViewTotalDollar)
     topSponsor = view.findViewById(R.id.textViewTopSponsor)
+    firstUpgrade = view.findViewById(R.id.textViewFirstUpgrade)
     editPassword = view.findViewById(R.id.textViewEditPassword)
     editSecondaryPassword = view.findViewById(R.id.textViewEditSecondaryPassword)
     logout = view.findViewById(R.id.textViewLogout)
@@ -55,8 +57,9 @@ class SettingFragment : Fragment() {
     email.text = user.getString("email")
     phone.text = user.getString("phone")
     level.text = "Current TopUp : $${CoinFormat.toDollar(user.getString("targetValue").toBigDecimal() / BigDecimal(3)).toPlainString()}"
-    profit.text = "Random Share : ${CoinFormat.decimalToCoin(user.getString("profit").toBigDecimal()).toPlainString()}"
+    profit.text = "Random Share Camel : ${CoinFormat.decimalToCoin(user.getString("profit").toBigDecimal()).toPlainString()}"
     profitDollar.text = "Random Share Dollar : ${CoinFormat.toDollar(user.getString("profitDollar").toBigDecimal()).toPlainString()}"
+    firstUpgrade.text = "First Upgrade : \$${user.getString("firstUpgradeValue")} at ${user.getString("firstUpgradeDate")}";
     totalMember.text = user.getString("totalMember")
     totalDollar.text = user.getString("totalDollar")
     topSponsor.text = user.getString("topSponsor")
