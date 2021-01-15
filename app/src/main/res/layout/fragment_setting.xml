@@ -195,6 +195,22 @@
         android:padding="10dp">
 
       <TextView
+          android:text="History Upgrade"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:id="@+id/textViewHistoryUpgrade"
+          android:textColor="@color/textSecondary"
+          android:textStyle="bold"
+          android:textSize="16sp"
+          app:drawableTint="@color/textSecondary"
+          app:drawableRightCompat="@android:drawable/ic_menu_send"/>
+
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+      <TextView
           android:text="@string/edit_password"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

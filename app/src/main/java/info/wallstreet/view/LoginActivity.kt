@@ -187,7 +187,7 @@ class LoginActivity : AppCompatActivity() {
         updateButton.visibility = Button.VISIBLE
       }
       intent.getBooleanExtra("mt", false) -> {
-        description.text = "We are under maintenance"
+        description.text = "We are under maintenance. If there is a loss of assets, it is not the systems responsibility."
         textViewForgotPassword.visibility = TextView.GONE
         textViewSendEmailVerification.visibility = TextView.GONE
         containerRegister.visibility = LinearLayout.GONE
