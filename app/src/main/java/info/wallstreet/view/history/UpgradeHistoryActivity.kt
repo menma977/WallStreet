@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import info.wallstreet.R
+import info.wallstreet.config.Loading
 import info.wallstreet.controller.GetController
 import info.wallstreet.model.UpgradeHistory
 import info.wallstreet.model.User
@@ -18,14 +19,18 @@ class UpgradeHistoryActivity : AppCompatActivity() {
   private lateinit var title: TextView
   private lateinit var listAdapter: UpgradeListAdapter
   private lateinit var user: User
+  private lateinit var loading: Loading
   private var page = 1
   private var _page = page
   private lateinit var type: String
+  private lateinit var prev_btn: TextView
+  private lateinit var next_btn: TextView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_history)
     user = User(applicationContext)
+    loading = Loading(this)
 
     title = findViewById(R.id.textViewTitle)
     type = savedInstanceState?.getString("type") ?: "upgrade"
@@ -36,11 +41,19 @@ class UpgradeHistoryActivity : AppCompatActivity() {
       layoutManager = LinearLayoutManager(applicationContext)
       adapter = listAdapter
     }
+    prev_btn.setOnClickListener { rePopulate(-1) }
+    next_btn.setOnClickListener { rePopulate() }
     rePopulate()
   }
 
-  private fun rePopulate() {
-    _page = page++
+  private fun rePopulate(nextPage:Int = 1) {
+    loading.openDialog()
+    _page = page;
+    page += nextPage;
+    if(page <= 0){
+      loading.closeDialog()
+      return Toast.makeText(applicationContext, "No more page to show", Toast.LENGTH_SHORT).show()
+    }
     Thread {
       val result = GetController("upgrade.show?page=$page", user.getString("token")).call()
       if (result.getInt("code") == 200) {
@@ -54,16 +67,19 @@ class UpgradeHistoryActivity : AppCompatActivity() {
                 UpgradeHistory(history.getString("balance"), history.getString("description"), history.getString("date"), history.getString("color"))
               )
             }
+            loading.closeDialog()
           }
         } else {
           page = _page
           runOnUiThread {
+            loading.closeDialog()
             Toast.makeText(applicationContext, "No more page to show", Toast.LENGTH_SHORT).show()
           }
         }
       } else {
         page = _page
         runOnUiThread {
+          loading.closeDialog()
           Toast.makeText(applicationContext, result.getString("data"), Toast.LENGTH_SHORT).show()
         }
       }

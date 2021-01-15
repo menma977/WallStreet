@@ -27,7 +27,18 @@
       android:padding="2sp"
       android:paddingStart="6sp"
       android:text="nomimal"
-      android:textAlignment="textStart"
+      android:textAlignment="center"
+      android:textColor="@color/textSecondary" />
+
+  <TextView
+      android:id="@+id/date"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:padding="2sp"
+      android:paddingStart="6sp"
+      android:text="date"
+      android:textAlignment="center"
       android:textColor="@color/textSecondary" />
 
 </TableRow>

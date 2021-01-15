@@ -26,6 +26,7 @@ class HistoryCamelBalanceAdapter(private val context: Context) : RecyclerView.Ad
   override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
     holder.wallet.text = myDataset[position].wallet
     holder.value.text = myDataset[position].value
+    holder.date.text = myDataset[position].date
     holder.wallet.setOnClickListener {
       val move = Intent(Intent.ACTION_VIEW, Uri.parse("https://tronscan.io/#/address/" + myDataset[position].wallet))
       context.startActivity(move)
@@ -50,5 +51,6 @@ class HistoryCamelBalanceAdapter(private val context: Context) : RecyclerView.Ad
   class MyViewHolder(layout: View) : RecyclerView.ViewHolder(layout) {
     val wallet: TextView = layout.findViewById(R.id.wallet)
     val value: TextView = layout.findViewById(R.id.value)
+    val date: TextView = layout.findViewById(R.id.date)
   }
 }
