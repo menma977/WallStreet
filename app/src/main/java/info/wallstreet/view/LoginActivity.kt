@@ -13,7 +13,6 @@ import info.wallstreet.MainActivity
 import info.wallstreet.R
 import info.wallstreet.config.Loading
 import info.wallstreet.controller.PostController
-import info.wallstreet.model.Url
 import info.wallstreet.model.User
 import info.wallstreet.view.user.ForgotPasswordActivity
 import okhttp3.FormBody
@@ -76,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
     updateButton.setOnClickListener {
       user.clear()
-      move = Intent(Intent.ACTION_VIEW, Uri.parse(Url.web("").replace("api/", "")))
+      move = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=info.wallstreet"))
       startActivity(move)
     }
 
