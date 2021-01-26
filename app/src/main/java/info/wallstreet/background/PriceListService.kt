@@ -43,11 +43,13 @@ class PriceListService : Service() {
                 Thread.sleep(1000)
               }
               result.getBoolean("logout") -> {
+                defaultPrice()
                 user.setBoolean("logout", true)
                 Thread.sleep(2000)
                 stopSelf()
               }
               else -> {
+                defaultPrice()
                 user.setBoolean("logout", false)
                 Thread.sleep(20000)
               }
@@ -76,5 +78,14 @@ class PriceListService : Service() {
 
   override fun onBind(intent: Intent?): IBinder? {
     TODO("Not yet implemented")
+  }
+
+  private fun defaultPrice() {
+    user.setString("doge_price", "0")
+    user.setString("btc_price", "0")
+    user.setString("eth_price", "0")
+    user.setString("ltc_price", "0")
+    user.setString("camel_price", "0")
+    user.setString("tron_price", "0")
   }
 }
