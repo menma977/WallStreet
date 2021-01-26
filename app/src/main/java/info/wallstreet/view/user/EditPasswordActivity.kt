@@ -135,7 +135,7 @@ class EditPasswordActivity : AppCompatActivity() {
     body.addEncoded("secondary_password", secondaryPassword.text.toString())
     body.addEncoded("confirmation_secondary_password", confirmSecondaryPassword.text.toString())
     Timer().schedule(100) {
-      val result = PostController("user.update", user.getString("token"), body).call()
+      val result = PostController("user.update.secondary", user.getString("token"), body).call()
       when {
         result.getInt("code") == 200 -> {
           runOnUiThread {
