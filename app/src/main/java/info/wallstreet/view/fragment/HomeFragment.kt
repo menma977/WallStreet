@@ -556,6 +556,13 @@ class HomeFragment : Fragment() {
             user.setString("old_price_doge", result.getJSONObject("data").getString("doge"))
             user.setString("old_price_camel", result.getJSONObject("data").getString("camel"))
             user.setString("old_price_tron", result.getJSONObject("data").getString("tron"))
+
+            user.setString("price_btc", result.getJSONObject("data").getString("btc"))
+            user.setString("price_ltc", result.getJSONObject("data").getString("ltc"))
+            user.setString("price_eth", result.getJSONObject("data").getString("eth"))
+            user.setString("price_doge", result.getJSONObject("data").getString("doge"))
+            user.setString("price_camel", result.getJSONObject("data").getString("camel"))
+            user.setString("price_tron", result.getJSONObject("data").getString("tron"))
           }
         }
         else -> {
