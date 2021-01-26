@@ -24,7 +24,7 @@ object WalletQR {
     val layoutWithdraw = layout.inflate(R.layout.modal_qr_layout, null)
     val textWallet = layoutWithdraw.findViewById(R.id.wallet_text) as TextView
     val imgWallet = layoutWithdraw.findViewById(R.id.qrcode) as ImageView
-    val title = layoutWithdraw.findViewById(R.id.title) as TextView
+    val title = layoutWithdraw.findViewById(R.id.textViewTitle) as TextView
     val icon = layoutWithdraw.findViewById(R.id.ic_currency) as ImageView
     val barcodeEncoder = BarcodeEncoder()
     val bitmap = barcodeEncoder.encodeBitmap(wallet, BarcodeFormat.QR_CODE, 500, 500)
