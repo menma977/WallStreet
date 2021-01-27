@@ -201,13 +201,13 @@ class HomeFragment : Fragment() {
     }
 
     if (user.getString("balance_camel").isNotEmpty()) {
-      camel.text = CoinFormat.decimalToCoin(user.getString("balance_camel").toBigDecimal()).toPlainString()
+      camel.text = user.getString("balance_camel").toBigDecimal().toPlainString()
     } else {
       camel.text = "0"
     }
 
     if (user.getString("balance_tron").isNotEmpty()) {
-      tron.text = CoinFormat.decimalToCoin(user.getString("balance_tron").toBigDecimal()).toPlainString()
+      tron.text = user.getString("balance_tron").toBigDecimal().toPlainString()
     } else {
       tron.text = "0"
     }
@@ -322,8 +322,8 @@ class HomeFragment : Fragment() {
         ltc.text = CoinFormat.decimalToCoin(user.getString("balance_ltc").toBigDecimal()).toPlainString()
         eth.text = CoinFormat.decimalToCoin(user.getString("balance_eth").toBigDecimal()).toPlainString()
         doge.text = CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
-        camel.text = CoinFormat.decimalToCoin(user.getString("balance_camel").toBigDecimal()).toPlainString()
-        tron.text = CoinFormat.decimalToCoin(user.getString("balance_tron").toBigDecimal()).toPlainString()
+        camel.text = user.getString("balance_camel").toBigDecimal().toPlainString()
+        tron.text = user.getString("balance_tron").toBigDecimal().toPlainString()
       }
       upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
