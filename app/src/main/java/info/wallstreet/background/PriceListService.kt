@@ -26,11 +26,12 @@ class PriceListService : Service() {
     Timer().schedule(100) {
       while (true) {
         val delta = System.currentTimeMillis() - time
-        if (delta >= 15000) {
+        if (delta >= 60000) {
           time = System.currentTimeMillis()
           val privateIntent = Intent()
           if (startBackgroundService) {
             result = GetController("upgrade.price", user.getString("token")).call()
+            println(result)
             when {
               result.getInt("code") == 200 -> {
                 user.setString("doge_price", result.getJSONObject("data").getString("doge"))
@@ -81,11 +82,23 @@ class PriceListService : Service() {
   }
 
   private fun defaultPrice() {
-    user.setString("doge_price", "0")
-    user.setString("btc_price", "0")
-    user.setString("eth_price", "0")
-    user.setString("ltc_price", "0")
-    user.setString("camel_price", "0")
-    user.setString("tron_price", "0")
+    if (user.getString("btc_price").isEmpty()) {
+      user.setString("btc_price", "0")
+    }
+    if (user.getString("eth_price").isEmpty()) {
+      user.setString("eth_price", "0")
+    }
+    if (user.getString("doge_price").isEmpty()) {
+      user.setString("doge_price", "0")
+    }
+    if (user.getString("ltc_price").isEmpty()) {
+      user.setString("ltc_price", "0")
+    }
+    if (user.getString("camel_price").isEmpty()) {
+      user.setString("camel_price", "0")
+    }
+    if (user.getString("tron_price").isEmpty()) {
+      user.setString("tron_price", "0")
+    }
   }
 }

@@ -24,6 +24,7 @@ import info.wallstreet.view.history.HistoryBalanceActivity
 import info.wallstreet.view.history.UpgradeHistoryActivity
 import info.wallstreet.view.modal.UpgradePop
 import info.wallstreet.view.modal.WalletQR
+import java.math.BigDecimal
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -401,18 +402,18 @@ class HomeFragment : Fragment() {
           parentActivity.onLogout()
         }
       } else {
-        val oldBTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_btc").toBigDecimal()))
-        val oldLTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_ltc").toBigDecimal()))
-        val oldETH = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_eth").toBigDecimal()))
-        val oldDOGE = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_doge").toBigDecimal()))
-        val oldCAMEL = user.getString("old_price_camel").toBigDecimal()
-        val oldTRON = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_tron").toBigDecimal()))
-        val newBTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("btc_price").toBigDecimal()))
-        val newLTC = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("ltc_price").toBigDecimal()))
-        val newETH = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("eth_price").toBigDecimal()))
-        val newDOGE = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("doge_price").toBigDecimal()))
-        val newCAMEL = user.getString("camel_price").toBigDecimal()
-        val newTRON = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("tron_price").toBigDecimal()))
+        val oldBTC: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_btc").toBigDecimal()))
+        val oldLTC: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_ltc").toBigDecimal()))
+        val oldETH: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_eth").toBigDecimal()))
+        val oldDOGE: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_doge").toBigDecimal()))
+        val oldCAMEL: BigDecimal = user.getString("old_price_camel").toBigDecimal()
+        val oldTRON: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_tron").toBigDecimal()))
+        val newBTC: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("btc_price").toBigDecimal()))
+        val newLTC: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("ltc_price").toBigDecimal()))
+        val newETH: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("eth_price").toBigDecimal()))
+        val newDOGE: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("doge_price").toBigDecimal()))
+        val newCAMEL: BigDecimal = user.getString("camel_price").toBigDecimal()
+        val newTRON: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("tron_price").toBigDecimal()))
 
         btcPrice.text = "$ " + newBTC.toPlainString()
         user.setString("old_price_btc", user.getString("btc_price"))
