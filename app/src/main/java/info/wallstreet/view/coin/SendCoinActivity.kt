@@ -69,7 +69,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     } else {
       balanceValue = user.getString("balance_$currency").toBigDecimal()
       if (currency == "camel" || currency == "tron") {
-        user.getString("balance_$currency") + " " + currency.toUpperCase(Locale.getDefault())
+        user.getString("balance_$currency").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
       } else {
         CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
       }
@@ -218,7 +218,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
         } else {
           if (currency == "camel" || currency == "tron") {
-            user.getString("balance_$currency") + " " + currency.toUpperCase(Locale.getDefault())
+            user.getString("balance_$currency").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
           } else {
             CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
           }
