@@ -26,7 +26,7 @@ class PriceListService : Service() {
     Timer().schedule(100) {
       while (true) {
         val delta = System.currentTimeMillis() - time
-        if (delta >= 30000) {
+        if (delta >= 15000) {
           time = System.currentTimeMillis()
           val privateIntent = Intent()
           if (startBackgroundService) {
