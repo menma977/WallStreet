@@ -33,6 +33,8 @@ class UpgradeHistoryActivity : AppCompatActivity() {
     loading = Loading(this)
 
     title = findViewById(R.id.textViewTitle)
+    prev_btn = findViewById(R.id.prev_btn)
+    next_btn = findViewById(R.id.next_btn)
     type = savedInstanceState?.getString("type") ?: "upgrade"
 
     title.text = "Upgrades History"
@@ -46,11 +48,11 @@ class UpgradeHistoryActivity : AppCompatActivity() {
     rePopulate()
   }
 
-  private fun rePopulate(nextPage:Int = 1) {
+  private fun rePopulate(nextPage: Int = 1) {
     loading.openDialog()
     _page = page;
     page += nextPage;
-    if(page <= 0){
+    if (page <= 0) {
       loading.closeDialog()
       return Toast.makeText(applicationContext, "No more page to show", Toast.LENGTH_SHORT).show()
     }
