@@ -239,6 +239,109 @@
                     android:layout_height="20sp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/icon"
+                    app:srcCompat="@drawable/camelgold"/>
+
+                <TextView
+                    android:layout_width="90sp"
+                    android:layout_height="wrap_content"
+                    android:text="Camel Gold"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+              </LinearLayout>
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/icon"
+                    app:srcCompat="@drawable/camelgold"/>
+
+                <TextView
+                    android:layout_width="90sp"
+                    android:layout_height="wrap_content"
+                    android:text="Gold Wall"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+              </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/textViewCamelGoldBalance"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:hint="@string/zero"
+                  android:textColor="@color/colorSecondaryDark"
+                  android:textSize="12sp"
+                  android:textStyle="bold"/>
+
+              <TextView
+                  android:id="@+id/textViewCamelGoldBalanceFake"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:text="@string/zero"
+                  android:textColor="@color/colorSecondaryLight"
+                  android:textSize="12sp"
+                  android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/toGoldWallet"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:background="@color/background"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/barcode"
+                app:srcCompat="@drawable/barcode"/>
+
+          </LinearLayout>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:baselineAligned="true"
+              android:gravity="center"
+              android:orientation="horizontal"
+              android:padding="10dp"
+              tools:ignore="UseCompoundDrawables">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/icon"
                     app:srcCompat="@drawable/ic_camel"/>
 
                 <TextView
@@ -796,6 +899,48 @@
           <Space
               android:layout_width="wrap_content"
               android:layout_height="5dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/camelgold"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="Camel Gold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewCamelGoldPrice"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"/>
+
+            <ImageView
+                android:id="@+id/iconCamelGold"
+                android:src="@drawable/ic_baseline_arrow_left"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon"
+                android:backgroundTint="@color/Dark"/>
+
+          </LinearLayout>
 
           <LinearLayout
               android:layout_width="match_parent"

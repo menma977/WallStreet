@@ -42,12 +42,15 @@ class HomeFragment : Fragment() {
   private lateinit var dogeFake: TextView
   private lateinit var camel: TextView
   private lateinit var camelFake: TextView
+  private lateinit var camelGold: TextView
+  private lateinit var camelGoldFake: TextView
   private lateinit var tron: TextView
   private lateinit var toBTCWallet: ImageView
   private lateinit var toLTCWallet: ImageView
   private lateinit var toETHWallet: ImageView
   private lateinit var toDOGEWallet: ImageView
   private lateinit var toCamelWallet: ImageView
+  private lateinit var toCamelGoldWallet: ImageView
   private lateinit var progressBar: ProgressBar
   private lateinit var progressValue: TextView
   private lateinit var targetValue: TextView
@@ -60,12 +63,14 @@ class HomeFragment : Fragment() {
   private lateinit var ethPrice: TextView
   private lateinit var dogePrice: TextView
   private lateinit var camelPrice: TextView
+  private lateinit var camelGoldPrice: TextView
   private lateinit var tronPrice: TextView
   private lateinit var btcIcon: ImageView
   private lateinit var ltcIcon: ImageView
   private lateinit var ethIcon: ImageView
   private lateinit var dogeIcon: ImageView
   private lateinit var camelIcon: ImageView
+  private lateinit var goldIcon: ImageView
   private lateinit var tronIcon: ImageView
   private lateinit var move: Intent
   private var onLogoutReady = false
@@ -90,6 +95,8 @@ class HomeFragment : Fragment() {
     dogeFake = view.findViewById(R.id.textViewDogeCoinBalanceFake)
     camel = view.findViewById(R.id.textViewCamelBalance)
     camelFake = view.findViewById(R.id.textViewCamelWallBalance)
+    camelGold = view.findViewById(R.id.textViewCamelGoldBalance)
+    camelGoldFake = view.findViewById(R.id.textViewCamelGoldBalanceFake)
     tron = view.findViewById(R.id.textViewTronBalance)
 
     toBTCWallet = view.findViewById(R.id.toBtcWallet)
@@ -97,6 +104,7 @@ class HomeFragment : Fragment() {
     toETHWallet = view.findViewById(R.id.toEthWallet)
     toDOGEWallet = view.findViewById(R.id.toDogeWallet)
     toCamelWallet = view.findViewById(R.id.toCamelWallet)
+    toCamelGoldWallet = view.findViewById(R.id.toGoldWallet)
 
     upgradeBtn = view.findViewById(R.id.buttonUpgrade)
     historyUpgradeButton = view.findViewById(R.id.history_upgrades)
@@ -112,6 +120,7 @@ class HomeFragment : Fragment() {
     ethPrice = view.findViewById(R.id.textViewEthPrice)
     dogePrice = view.findViewById(R.id.textViewDogePrice)
     camelPrice = view.findViewById(R.id.textViewCamelPrice)
+    camelGoldPrice = view.findViewById(R.id.textViewCamelGoldPrice)
     tronPrice = view.findViewById(R.id.textViewTronPrice)
 
     btcIcon = view.findViewById(R.id.iconBTC)
@@ -119,6 +128,7 @@ class HomeFragment : Fragment() {
     ethIcon = view.findViewById(R.id.iconETH)
     dogeIcon = view.findViewById(R.id.iconDoge)
     camelIcon = view.findViewById(R.id.iconCamel)
+    goldIcon = view.findViewById(R.id.iconCamelGold)
     tronIcon = view.findViewById(R.id.iconTron)
 
     defaultBalance()
@@ -159,6 +169,10 @@ class HomeFragment : Fragment() {
     }
 
     toCamelWallet.setOnClickListener {
+      WalletQR.show(parentActivity, "camel", user)
+    }
+
+    toCamelGoldWallet.setOnClickListener {
       WalletQR.show(parentActivity, "camel", user)
     }
 
@@ -206,6 +220,12 @@ class HomeFragment : Fragment() {
       camel.text = "0"
     }
 
+    if (user.getString("balance_gold").isNotEmpty()) {
+      camelGold.text = user.getString("balance_gold").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString()
+    } else {
+      camelGold.text = "0"
+    }
+
     if (user.getString("balance_tron").isNotEmpty()) {
       tron.text = user.getString("balance_tron").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString()
     } else {
@@ -239,9 +259,15 @@ class HomeFragment : Fragment() {
     }
 
     if (user.getString("fake_balance_camel").isNotEmpty()) {
-      camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
+      camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_gold").toBigDecimal()).toPlainString()
     } else {
       camelFake.text = "0"
+    }
+
+    if (user.getString("fake_balance_gold").isNotEmpty()) {
+      camelGoldFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_gold").toBigDecimal()).toPlainString()
+    } else {
+      camelGoldFake.text = "0"
     }
   }
 
@@ -324,6 +350,7 @@ class HomeFragment : Fragment() {
         doge.text = CoinFormat.decimalToCoin(user.getString("balance_doge").toBigDecimal()).toPlainString()
 
         camel.text = user.getString("balance_camel").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString()
+        camelGold.text = user.getString("balance_gold").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString()
         tron.text = user.getString("balance_tron").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString()
       }
       upgradeBtn.isEnabled = !user.getBoolean("on_queue")
@@ -390,6 +417,7 @@ class HomeFragment : Fragment() {
         }
       } else {
         camelFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_camel").toBigDecimal()).toPlainString()
+        camelGoldFake.text = CoinFormat.decimalToCoin(user.getString("fake_balance_gold").toBigDecimal()).toPlainString()
       }
       upgradeBtn.isEnabled = !user.getBoolean("on_queue")
     }
@@ -408,12 +436,14 @@ class HomeFragment : Fragment() {
         val oldETH: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_eth").toBigDecimal()))
         val oldDOGE: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_doge").toBigDecimal()))
         val oldCAMEL: BigDecimal = user.getString("old_price_camel").toBigDecimal()
+        val oldGold: BigDecimal = user.getString("old_price_gold").toBigDecimal()
         val oldTRON: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("old_price_tron").toBigDecimal()))
         val newBTC: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("btc_price").toBigDecimal()))
         val newLTC: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("ltc_price").toBigDecimal()))
         val newETH: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("eth_price").toBigDecimal()))
         val newDOGE: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("doge_price").toBigDecimal()))
         val newCAMEL: BigDecimal = user.getString("camel_price").toBigDecimal()
+        val newGold: BigDecimal = user.getString("gold_price").toBigDecimal()
         val newTRON: BigDecimal = CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(user.getString("tron_price").toBigDecimal()))
 
         btcPrice.text = "$ " + newBTC.toPlainString()
@@ -516,6 +546,26 @@ class HomeFragment : Fragment() {
           }
         }
 
+        camelGoldPrice.text = "$ " + newGold.toPlainString()
+        user.setString("old_price_gold", user.getString("gold_price"))
+        when {
+          oldGold > newGold -> {
+            camelGoldPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger))
+            goldIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_down)
+            goldIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Danger), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          oldGold < newGold -> {
+            camelGoldPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success))
+            goldIcon.setImageResource(R.drawable.ic_baseline_arrow_drop_up)
+            goldIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Success), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+          else -> {
+            camelGoldPrice.setTextColor(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark))
+            goldIcon.setImageResource(R.drawable.ic_baseline_arrow_left)
+            goldIcon.setColorFilter(ContextCompat.getColor(parentActivity.applicationContext, R.color.Dark), android.graphics.PorterDuff.Mode.MULTIPLY)
+          }
+        }
+
         tronPrice.text = "$ " + newTRON.toPlainString()
         user.setString("old_price_tron", user.getString("tron_price"))
         when {
@@ -550,6 +600,7 @@ class HomeFragment : Fragment() {
             ethPrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("eth").toBigDecimal())).toPlainString()
             dogePrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("doge").toBigDecimal())).toPlainString()
             camelPrice.text = "$ " + result.getJSONObject("data").getString("camel")
+            camelGoldPrice.text = "$ " + result.getJSONObject("data").getString("gold")
             tronPrice.text = "$ " + CoinFormat.decimalToCoin(CoinFormat.coinToDecimal(result.getJSONObject("data").getString("tron").toBigDecimal())).toPlainString()
 
             user.setString("old_price_btc", result.getJSONObject("data").getString("btc"))
@@ -557,6 +608,7 @@ class HomeFragment : Fragment() {
             user.setString("old_price_eth", result.getJSONObject("data").getString("eth"))
             user.setString("old_price_doge", result.getJSONObject("data").getString("doge"))
             user.setString("old_price_camel", result.getJSONObject("data").getString("camel"))
+            user.setString("old_price_gold", result.getJSONObject("data").getString("gold"))
             user.setString("old_price_tron", result.getJSONObject("data").getString("tron"))
 
             user.setString("price_btc", result.getJSONObject("data").getString("btc"))
@@ -564,6 +616,7 @@ class HomeFragment : Fragment() {
             user.setString("price_eth", result.getJSONObject("data").getString("eth"))
             user.setString("price_doge", result.getJSONObject("data").getString("doge"))
             user.setString("price_camel", result.getJSONObject("data").getString("camel"))
+            user.setString("price_gold", result.getJSONObject("data").getString("gold"))
             user.setString("price_tron", result.getJSONObject("data").getString("tron"))
           }
         }

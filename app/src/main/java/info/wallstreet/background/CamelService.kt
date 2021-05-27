@@ -34,8 +34,8 @@ class CamelService : Service() {
             json = GetController("camel", user.getString("token")).call()
             when {
               json.getInt("code") == 200 -> {
-                user.setString(
-                    "fake_balance_camel", json.getJSONObject("data").getString("balance"))
+                user.setString("fake_balance_camel", json.getJSONObject("data").getString("balance"))
+                user.setString("fake_balance_gold", json.getJSONObject("data").getString("balance_gold"))
                 if (json.getJSONObject("data").getInt("on_queue") > 0) {
                   user.setBoolean("on_queue", true)
                 } else {

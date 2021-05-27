@@ -4,5 +4,6 @@
     <domain includeSubdomains="true">www.999doge.com</domain>
     <domain includeSubdomains="true">bugnode.info</domain>
     <domain includeSubdomains="true">cameltoken.io</domain>
+    <domain includeSubdomains="true">192.168.42.146</domain>
   </domain-config>
 </network-security-config>

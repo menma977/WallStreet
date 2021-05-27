@@ -54,6 +54,9 @@ class LoginActivity : AppCompatActivity() {
     reloadButton = findViewById(R.id.buttonReloaded)
     containerRegister = findViewById(R.id.linearLayoutContainerRegister)
 
+//    username.setText("Boboom168")
+//    password.setText("080602")
+
     version.text = BuildConfig.VERSION_NAME
 
     intentResponseHandler()
@@ -116,6 +119,8 @@ class LoginActivity : AppCompatActivity() {
     Timer().schedule(1000) {
       val result = PostController("login", body).call()
 
+      println(result)
+
       if (result.getInt("code") == 200) {
         user.setString("token", result.getJSONObject("data").getString("token"))
         user.setString("cookie", result.getJSONObject("data").getString("cookie"))
@@ -133,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
         user.setString("balance_ltc", result.getJSONObject("data").getString("ltc_balance"))
         user.setString("balance_eth", result.getJSONObject("data").getString("eth_balance"))
         user.setString("balance_btc", result.getJSONObject("data").getString("btc_balance"))
-
+        user.setString("balance_gold", result.getJSONObject("data").getString("gold_balance"))
         user.setString("balance_camel", result.getJSONObject("data").getString("camel_balance"))
         user.setString("balance_tron", result.getJSONObject("data").getString("tron_balance"))
 
@@ -142,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
         user.setString("fake_balance_eth", result.getJSONObject("data").getString("fake_eth_balance"))
         user.setString("fake_balance_btc", result.getJSONObject("data").getString("fake_btc_balance"))
         user.setString("fake_balance_camel", result.getJSONObject("data").getString("fake_camel_balance"))
+        user.setString("fake_balance_gold", result.getJSONObject("data").getString("fake_gold_balance"))
 
         user.setString("targetValue", "0")
         user.setString("progressValue", "0")

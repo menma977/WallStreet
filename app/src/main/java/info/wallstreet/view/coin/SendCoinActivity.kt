@@ -68,7 +68,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
       CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
     } else {
       balanceValue = user.getString("balance_$currency").toBigDecimal()
-      if (currency == "camel" || currency == "tron") {
+      if (currency == "camel" || currency == "gold" || currency == "tron") {
         user.getString("balance_$currency").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
       } else {
         CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
@@ -91,7 +91,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           Toast.makeText(this, "Amount required", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
-        CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()) > balanceValue && currency != "camel" && currency != "tron" -> {
+        CoinFormat.coinToDecimal(balanceText.text.toString().toBigDecimal()) > balanceValue && currency != "gold" && currency != "camel" && currency != "tron" -> {
           Toast.makeText(this, "Amount exceeds the maximum balance", Toast.LENGTH_SHORT).show()
           secondaryPasswordText.requestFocus()
         }
@@ -136,8 +136,16 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     body.addEncoded("fake", isFake.toString())
     if (currency == "tron") {
       body.addEncoded("tron", "true")
+      body.addEncoded("type", "tron")
     } else {
       body.addEncoded("tron", "false")
+    }
+
+    if (currency == "gold") {
+      currency = "camel"
+      body.addEncoded("type", "gold")
+    } else {
+      body.addEncoded("type", "camel")
     }
     Timer().schedule(100) {
       json = PostController("$currency.store", user.getString("token"), body).call()
@@ -183,6 +191,9 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
           "camel" -> {
             receiver = Intent(applicationContext, CamelService::class.java)
           }
+          "gold" -> {
+            receiver = Intent(applicationContext, CamelService::class.java)
+          }
           "tron" -> {
             receiver = Intent(applicationContext, CamelService::class.java)
           }
@@ -217,7 +228,7 @@ class SendCoinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         val balance = if (isFake) {
           CoinFormat.decimalToCoin(user.getString("fake_balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
         } else {
-          if (currency == "camel" || currency == "tron") {
+          if (currency == "camel" || currency == "gold" || currency == "tron") {
             user.getString("balance_$currency").toBigDecimal().setScale(8, BigDecimal.ROUND_HALF_DOWN).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())
           } else {
             CoinFormat.decimalToCoin(user.getString("balance_$currency").toBigDecimal()).toPlainString() + " " + currency.toUpperCase(Locale.getDefault())

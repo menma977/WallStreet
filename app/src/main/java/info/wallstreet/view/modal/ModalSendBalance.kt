@@ -13,6 +13,8 @@ import info.wallstreet.view.coin.SendCoinActivity
 import java.util.*
 
 class ModalSendBalance constructor(context: Context) : AlertDialog(context) {
+  private var camelGold: Button
+  private var camelWallGold: Button
   private var camel: Button
   private var camelWall: Button
   private var tron: Button
@@ -33,6 +35,8 @@ class ModalSendBalance constructor(context: Context) : AlertDialog(context) {
     if (context is Activity) setOwnerActivity(context)
     setView(view)
 
+    camelGold = view.findViewById(R.id.buttonCamelGold)
+    camelWallGold = view.findViewById(R.id.buttonCamelGoldWall)
     camel = view.findViewById(R.id.buttonCamel)
     camelWall = view.findViewById(R.id.buttonCamelWall)
     tron = view.findViewById(R.id.buttonTron)
@@ -48,6 +52,14 @@ class ModalSendBalance constructor(context: Context) : AlertDialog(context) {
 
     close.setOnClickListener {
       dismiss()
+    }
+
+    camelGold.setOnClickListener {
+      sendCoin("gold", false)
+    }
+
+    camelWallGold.setOnClickListener {
+      sendCoin("gold", true)
     }
 
     camel.setOnClickListener {

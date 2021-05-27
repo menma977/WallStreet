@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
   private fun get() {
     Timer().schedule(1000) {
       val result = GetController("version").call()
+      println(result)
 
       if (result.getInt("code") == 200) {
         setupPreference()

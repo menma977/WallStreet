@@ -31,8 +31,7 @@ class UpgradePop constructor(context: Context, private val user: User) : AlertDi
   private val packages: LinkedHashMap<String, PackageCls>
 
   init {
-    val layout: LayoutInflater =
-      context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    val layout: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = layout.inflate(R.layout.modal_upgrade_layout, LinearLayout(context), false)
     if (context is Activity) setOwnerActivity(context)
     setView(view)

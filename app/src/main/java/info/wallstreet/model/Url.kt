@@ -7,6 +7,7 @@ object Url {
    */
   fun web(target: String): String {
     return "https://bugnode.info/api/${target.replace(".", "/")}"
+    //return "http://192.168.42.146/api/${target.replace(".", "/")}"
   }
 
   /**

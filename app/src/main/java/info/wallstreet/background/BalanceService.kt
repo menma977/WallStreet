@@ -5,9 +5,8 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import info.wallstreet.config.CoinFormat
-import info.wallstreet.controller.CamelController
 import info.wallstreet.controller.DogeController
+import info.wallstreet.controller.GetController
 import info.wallstreet.model.User
 import okhttp3.FormBody
 import org.json.JSONObject
@@ -51,15 +50,12 @@ class BalanceService : Service() {
                       user.setString("balance_$currency", balance.getString("Balance"))
                     }
                   }
-                  val tron = CamelController.getBalance(user.getString("wallet_camel"))
-                  if (tron.getInt("code") == 200) {
-                    val convertCoin = tron.getJSONObject("data").getString("balance")
-                    user.setString("balance_tron", convertCoin)
-                  }
-                  val camel = CamelController.getTokenBalance(user.getString("wallet_camel"))
-                  if (camel.getInt("code") == 200) {
-                    val convertCoin = camel.getJSONObject("data").getString("balance")
-                    user.setString("balance_camel", convertCoin)
+
+                  val response = GetController("camel.balances", user.getString("token")).call()
+                  if (response.getInt("code") < 400) {
+                    user.setString("balance_tron", response.getJSONObject("data").getString("tron"))
+                    user.setString("balance_camel", response.getJSONObject("data").getString("camel"))
+                    user.setString("balance_gold", response.getJSONObject("data").getString("gold"))
                   }
 
                   privateIntent.action = "doge.balances"
@@ -68,7 +64,7 @@ class BalanceService : Service() {
                   trigger.wait(60000)
                 }
               } catch (e: Exception) {
-                Log.w("error", e.message.toString())
+                Log.w("error balance service", e.message.toString())
               }
             }
           } else {

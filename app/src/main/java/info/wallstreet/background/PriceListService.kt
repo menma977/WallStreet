@@ -39,6 +39,7 @@ class PriceListService : Service() {
                 user.setString("eth_price", result.getJSONObject("data").getString("eth"))
                 user.setString("ltc_price", result.getJSONObject("data").getString("ltc"))
                 user.setString("camel_price", result.getJSONObject("data").getString("camel"))
+                user.setString("gold_price", result.getJSONObject("data").getString("gold"))
                 user.setString("tron_price", result.getJSONObject("data").getString("tron"))
 
                 Thread.sleep(1000)
